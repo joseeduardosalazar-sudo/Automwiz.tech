@@ -1003,7 +1003,7 @@ footer {
       <h2 class="section-title" style="justify-content:center;" data-i18n="price_title">Invierte en <span>automatización,</span> no en nómina</h2>
       <p class="section-sub" style="margin:14px auto 0;" data-i18n="price_sub">Sin contratos anuales forzados. Sin setup fee oculto. Solo resultados desde el primer mes.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;">
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;max-width:800px;margin:0 auto;">
 
       <!-- Starter -->
       <div style="background:var(--surface);padding:48px 36px;display:flex;flex-direction:column;">
@@ -1039,24 +1039,13 @@ footer {
         <a href="#diagnostico" class="btn-primary" style="text-align:center;justify-content:center;" data-i18n="p_cta">Agendar diagnóstico</a>
       </div>
 
-      <!-- Sistema -->
-      <div style="background:var(--surface);padding:48px 36px;display:flex;flex-direction:column;">
-        <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;" data-i18n="p3_label">Sistema</div>
-        <div style="font-family:'Exo 2',sans-serif;font-size:48px;font-weight:800;line-height:1;color:var(--text);margin-bottom:6px;">$8,000</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:24px;" data-i18n="p_period">MXN / mes</div>
-        <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.6;" data-i18n="p3_desc">Solución completa con agente de texto más sistema personalizado para tu operación.</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px;flex:1;">
-          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p3_f1">Todo lo del plan Pro</span></li>
-          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p3_f2">Sistema personalizado (restaurante o industrial)</span></li>
-          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p3_f3">Panel de administración propio</span></li>
-          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p3_f4">Integraciones a medida</span></li>
-          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p3_f5">Consultoría mensual dedicada</span></li>
-        </ul>
-        <a href="#diagnostico" class="btn-outline" style="text-align:center;justify-content:center;" data-i18n="p_cta">Agendar diagnóstico</a>
-      </div>
-
     </div>
     <p class="reveal" style="text-align:center;font-size:13px;color:var(--muted);margin-top:24px;" data-i18n="price_note">Precios finales según tu operación. Sin contratos anuales forzados. Cancela cuando quieras.</p>
+    <div class="reveal" style="text-align:center;margin-top:32px;padding:32px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);max-width:600px;margin-left:auto;margin-right:auto;">
+      <p style="font-size:16px;color:var(--text);margin-bottom:8px;" data-i18n="sys_cta_title">¿Necesitas un sistema completo para tu operación?</p>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:20px;" data-i18n="sys_cta_sub">Restaurante, industrial, ganadería — lo construimos a medida. Cotización personalizada sin compromiso.</p>
+      <a href="#diagnostico" class="btn-primary" data-i18n="sys_cta_btn">Hablemos →</a>
+    </div>
   </div>
 </section>
 
@@ -1255,7 +1244,7 @@ const i18n = {
     p3_f1:"Todo lo del plan Pro", p3_f2:"Sistema custom (restaurante o industrial)",
     p3_f3:"CRM incluido — conversaciones y reportes centralizados", p3_f4:"Multicanal completo",
     p3_f5:"Consultoría mensual dedicada",
-    price_note:"Precios finales según tu operación. Sin contratos anuales forzados. Cancela cuando quieras.",
+    price_note:"Precios finales según tu operación. Sin contratos anuales forzados. Cancela cuando quieras.", sys_cta_title:"¿Necesitas un sistema completo para tu operación?", sys_cta_sub:"Restaurante, industrial, ganadería — lo construimos a medida. Cotización personalizada sin compromiso.", sys_cta_btn:"Hablemos →",
         form_tag:"Diagnóstico gratuito",
     form_title:"Descubre cuánto estás perdiendo hoy",
     form_sub:"Sin compromiso. En 30 minutos te decimos qué automatizar y cuánto costaría.",
@@ -1352,7 +1341,7 @@ const i18n = {
     p3_f1:"Everything in Pro plan", p3_f2:"Custom system (restaurant or industrial)",
     p3_f3:"CRM included — centralized conversations & reports", p3_f4:"Full multichannel",
     p3_f5:"Dedicated monthly consulting",
-    price_note:"Final pricing based on your operation. No forced annual contracts. Cancel anytime.",
+    price_note:"Final pricing based on your operation. No forced annual contracts. Cancel anytime.", sys_cta_title:"Need a complete system for your operation?", sys_cta_sub:"Restaurant, industrial, livestock — we build it custom. Personalized quote, no commitment.", sys_cta_btn:"Let's talk →",
         form_tag:"Free diagnosis",
     form_title:"Discover how much you're losing today",
     form_sub:"No commitment. In 30 minutes we tell you what to automate and what it would cost.",
