@@ -628,6 +628,10 @@ footer {
   .form-wrapper { grid-template-columns:1fr; gap:48px; }
   .footer-grid { grid-template-columns:1fr 1fr; }
 }
+@media (max-width:900px) {
+  #resultados .container > div:first-child { grid-template-columns:1fr !important; }
+  #resultados .container > div:last-child { grid-template-columns:1fr 1fr !important; }
+}
 @media (max-width:640px) {
   .hero-stats { gap:28px; }
   .pain-cards { grid-template-columns:1fr; }
@@ -672,6 +676,7 @@ footer {
     <ul class="nav-links">
       <li><a href="#services" data-i18n="nav_servicios">Servicios</a></li>
       <li><a href="#sistemas" data-i18n="nav_sistemas">Sistemas</a></li>
+      <li><a href="#resultados" data-i18n="nav_resultados">Resultados</a></li>
       <li><a href="#precios" data-i18n="nav_precios">Precios</a></li>
       <li><a href="#proceso" data-i18n="nav_proceso">Proceso</a></li>
       <li><a href="#diagnostico" data-i18n="nav_contacto">Contacto</a></li>
@@ -955,6 +960,75 @@ footer {
 </section>
 
 <!-- ─── PROCESO ─── -->
+<!-- ─── RESULTADOS ─── -->
+<section id="resultados" style="padding:100px 0;border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:64px;">
+      <div class="tag" data-i18n="res_tag">Resultados reales</div>
+      <h2 class="section-title" style="justify-content:center;" data-i18n="res_title">Números que <span>no mienten</span></h2>
+      <p class="section-sub" style="margin:14px auto 0;" data-i18n="res_sub">De clientes reales de AUTOMWIZ y promedios documentados de la industria.</p>
+    </div>
+
+    <!-- Casos reales -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:3px;">
+
+      <div class="reveal" style="background:var(--surface);padding:48px 40px;">
+        <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;" data-i18n="res_client">Cliente AUTOMWIZ</div>
+        <div style="font-family:'Exo 2',sans-serif;font-size:72px;font-weight:800;line-height:1;color:var(--text);margin-bottom:8px;">+700</div>
+        <div style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:12px;" data-i18n="res1_title">Conversaciones atendidas</div>
+        <p style="font-size:15px;color:var(--muted);line-height:1.65;" data-i18n="res1_desc">Clínica médica en La Laguna. El agente atiende, califica y agenda sin que el equipo tenga que estar disponible. Respuesta inmediata las 24 horas.</p>
+        <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);display:flex;align-items:center;gap:12px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(91,159,208,.15);display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--accent2);">C</div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);" data-i18n="res1_type">Clínica médica</div>
+            <div style="font-size:12px;color:var(--muted);">La Laguna, México</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal" style="background:var(--surface);padding:48px 40px;">
+        <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;" data-i18n="res_client">Cliente AUTOMWIZ</div>
+        <div style="font-family:'Exo 2',sans-serif;font-size:72px;font-weight:800;line-height:1;color:var(--text);margin-bottom:8px;">+20%</div>
+        <div style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:12px;" data-i18n="res2_title">Llamadas de venta agendadas</div>
+        <p style="font-size:15px;color:var(--muted);line-height:1.65;" data-i18n="res2_desc">Empresa financiera. El agente filtra, califica y agenda automáticamente — el equipo comercial solo habla con prospectos listos para comprar.</p>
+        <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);display:flex;align-items:center;gap:12px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:rgba(91,159,208,.15);display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--accent2);">F</div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:var(--text);" data-i18n="res2_type">Empresa financiera</div>
+            <div style="font-size:12px;color:var(--muted);">México</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Datos de industria -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;">
+      <div class="reveal" style="background:var(--surface2);padding:36px 28px;text-align:center;">
+        <div style="font-family:'Exo 2',sans-serif;font-size:42px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:10px;">78%</div>
+        <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:8px;" data-i18n="ind1_title">de leads perdidos</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5;" data-i18n="ind1_desc">cuando no hay respuesta en los primeros 5 minutos. — MIT / Harvard</div>
+      </div>
+      <div class="reveal" style="background:var(--surface2);padding:36px 28px;text-align:center;">
+        <div style="font-family:'Exo 2',sans-serif;font-size:42px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:10px;">3x</div>
+        <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:8px;" data-i18n="ind2_title">más conversiones</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5;" data-i18n="ind2_desc">en negocios que responden en menos de 1 minuto vs los que tardan horas. — Salesforce</div>
+      </div>
+      <div class="reveal" style="background:var(--surface2);padding:36px 28px;text-align:center;">
+        <div style="font-family:'Exo 2',sans-serif;font-size:42px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:10px;">67%</div>
+        <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:8px;" data-i18n="ind3_title">prefieren chatear</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5;" data-i18n="ind3_desc">antes de llamar. Si no tienes chat activo, ya perdiste a 2 de cada 3. — Drift</div>
+      </div>
+      <div class="reveal" style="background:var(--surface2);padding:36px 28px;text-align:center;">
+        <div style="font-family:'Exo 2',sans-serif;font-size:42px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:10px;">-65%</div>
+        <div style="font-size:13px;color:var(--text);font-weight:500;margin-bottom:8px;" data-i18n="ind4_title">costo operativo</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5;" data-i18n="ind4_desc">vs contratar un agente humano de atención al cliente de tiempo completo. — McKinsey</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <section id="proceso">
   <div class="container">
     <div class="proceso-header reveal">
@@ -1176,7 +1250,7 @@ footer {
 const i18n = {
   es: {
     nav_servicios:"Servicios", nav_sistemas:"Sistemas", nav_proceso:"Proceso",
-    nav_precios:"Precios", nav_contacto:"Contacto", nav_cta:"Diagnóstico gratis",
+    nav_resultados:"Resultados", nav_precios:"Precios", nav_contacto:"Contacto", nav_cta:"Diagnóstico gratis",
     hero_tag:"Automatización con Inteligencia Artificial",
     hero_title1:"Mientras no respondes,", hero_title2:"tu competencia sí.",
     hero_sub:"Agentes de IA que atienden, califican y convierten leads 24/7 para tu clínica, gym, restaurante o empresa. Sin sueldos extra. Sin errores humanos.",
@@ -1222,6 +1296,19 @@ const i18n = {
     sys2_f3:"Registro de pedidos y proveedores",
     sys2_f4:"Mapeo y documentación de procesos con IA",
     sys2_f5:"Reportes automáticos para dirección",
+    res_tag:"Resultados reales", res_title:"Números que no mienten",
+    res_sub:"De clientes reales de AUTOMWIZ y promedios documentados de la industria.",
+    res_client:"Cliente AUTOMWIZ",
+    res1_title:"Conversaciones atendidas",
+    res1_desc:"Clínica médica en La Laguna. El agente atiende, califica y agenda sin que el equipo tenga que estar disponible. Respuesta inmediata las 24 horas.",
+    res1_type:"Clínica médica",
+    res2_title:"Llamadas de venta agendadas",
+    res2_desc:"Empresa financiera. El agente filtra, califica y agenda automáticamente — el equipo comercial solo habla con prospectos listos para comprar.",
+    res2_type:"Empresa financiera",
+    ind1_title:"de leads perdidos", ind1_desc:"cuando no hay respuesta en los primeros 5 minutos. — MIT / Harvard",
+    ind2_title:"más conversiones", ind2_desc:"en negocios que responden en menos de 1 minuto vs los que tardan horas. — Salesforce",
+    ind3_title:"prefieren chatear", ind3_desc:"antes de llamar. Si no tienes chat activo, ya perdiste a 2 de cada 3. — Drift",
+    ind4_title:"costo operativo", ind4_desc:"vs contratar un agente humano de atención al cliente de tiempo completo. — McKinsey",
     proc_tag:"Proceso de implementación", proc_title:"De cero a resultados en 30 días",
     proc_sub:"Sin meses de espera ni integraciones complejas.",
     step1:"Diagnóstico",step1d:"Analizamos tu operación y definimos qué automatizar primero.",
@@ -1273,7 +1360,7 @@ const i18n = {
   },
   en: {
     nav_servicios:"Services", nav_sistemas:"Systems", nav_proceso:"Process",
-    nav_precios:"Pricing", nav_contacto:"Contact", nav_cta:"Free diagnosis",
+    nav_resultados:"Results", nav_precios:"Pricing", nav_contacto:"Contact", nav_cta:"Free diagnosis",
     hero_tag:"Automation with Artificial Intelligence",
     hero_title1:"While you don't reply,", hero_title2:"your competitor does.",
     hero_sub:"AI agents that attend, qualify and convert leads 24/7 for your clinic, gym, restaurant or company. No extra salaries. No human errors.",
@@ -1319,6 +1406,19 @@ const i18n = {
     sys2_f3:"Order and supplier registration",
     sys2_f4:"Process mapping and documentation with AI",
     sys2_f5:"Automatic reports for management",
+    res_tag:"Real results", res_title:"Numbers that don't lie",
+    res_sub:"From real AUTOMWIZ clients and documented industry averages.",
+    res_client:"AUTOMWIZ Client",
+    res1_title:"Conversations handled",
+    res1_desc:"Medical clinic in La Laguna. The agent attends, qualifies and schedules without the team needing to be available. Immediate response 24 hours.",
+    res1_type:"Medical clinic",
+    res2_title:"Sales calls scheduled",
+    res2_desc:"Financial company. The agent filters, qualifies and schedules automatically — the sales team only talks to prospects ready to buy.",
+    res2_type:"Financial company",
+    ind1_title:"of leads lost", ind1_desc:"when there's no response in the first 5 minutes. — MIT / Harvard",
+    ind2_title:"more conversions", ind2_desc:"in businesses that respond in under 1 minute vs those that take hours. — Salesforce",
+    ind3_title:"prefer to chat", ind3_desc:"before calling. No active chat = losing 2 out of 3 prospects. — Drift",
+    ind4_title:"operational cost", ind4_desc:"vs hiring a full-time human customer service agent. — McKinsey",
     proc_tag:"Implementation process", proc_title:"From zero to results in 30 days",
     proc_sub:"No months of waiting. No complex integrations.",
     step1:"Diagnosis",step1d:"We analyze your operation and define what to automate first.",
