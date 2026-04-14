@@ -602,6 +602,8 @@ footer {
 
 /* ─── RESPONSIVE ─── */
 @media (max-width:900px) {
+  #precios .container > div:nth-child(3) { grid-template-columns:1fr !important; }
+
   .nav-links { display:none; }
   .nav-menu-btn { display:flex; }
   .btn-primary.nav-cta { display:none; }
@@ -670,6 +672,7 @@ footer {
     <ul class="nav-links">
       <li><a href="#services" data-i18n="nav_servicios">Servicios</a></li>
       <li><a href="#sistemas" data-i18n="nav_sistemas">Sistemas</a></li>
+      <li><a href="#precios" data-i18n="nav_precios">Precios</a></li>
       <li><a href="#proceso" data-i18n="nav_proceso">Proceso</a></li>
       <li><a href="#diagnostico" data-i18n="nav_contacto">Contacto</a></li>
     </ul>
@@ -990,6 +993,73 @@ footer {
 </section>
 
 <!-- ─── LEAD FORM ─── -->
+<!-- ─── PRECIOS ─── -->
+<section id="precios" style="padding:100px 0;border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:16px;">
+      <div class="tag" data-i18n="price_tag">Planes y precios</div>
+    </div>
+    <div class="reveal" style="text-align:center;margin-bottom:64px;">
+      <h2 class="section-title" style="justify-content:center;" data-i18n="price_title">Invierte en <span>automatización,</span> no en nómina</h2>
+      <p class="section-sub" style="margin:14px auto 0;" data-i18n="price_sub">Sin contratos anuales forzados. Sin setup fee oculto. Solo resultados desde el primer mes.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;">
+
+      <!-- Starter -->
+      <div style="background:var(--surface);padding:48px 36px;display:flex;flex-direction:column;">
+        <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;" data-i18n="p1_label">Starter</div>
+        <div style="font-family:'Exo 2',sans-serif;font-size:48px;font-weight:800;line-height:1;color:var(--text);margin-bottom:6px;">$3,000</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:24px;" data-i18n="p_period">MXN / mes</div>
+        <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.6;" data-i18n="p1_desc">Ideal para negocios que quieren empezar a automatizar su atención al cliente con un agente inteligente.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px;flex:1;">
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p1_f1">1 agente de texto IA</span></li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p1_f2">1 canal (WhatsApp o Instagram)</span></li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p1_f3">Flujo conversacional personalizado</span></li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p1_f4">Reporte mensual básico</span></li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p1_f5">Soporte por WhatsApp</span></li>
+        </ul>
+        <a href="#diagnostico" class="btn-outline" style="text-align:center;justify-content:center;" data-i18n="p_cta">Agendar diagnóstico</a>
+      </div>
+
+      <!-- Pro -->
+      <div style="background:var(--surface2);padding:48px 36px;display:flex;flex-direction:column;position:relative;">
+        <div style="position:absolute;top:20px;right:20px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(200,170,128,.15);border:1px solid rgba(200,170,128,.3);color:var(--accent);padding:4px 12px;border-radius:100px;" data-i18n="p_popular">Más popular</div>
+        <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;">Pro</div>
+        <div style="font-family:'Exo 2',sans-serif;font-size:48px;font-weight:800;line-height:1;color:var(--text);margin-bottom:6px;">$5,500</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:24px;" data-i18n="p_period">MXN / mes</div>
+        <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.6;" data-i18n="p2_desc">Para negocios que quieren escalar con múltiples agentes y canales integrados.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px;flex:1;">
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p2_f1">2 agentes de texto IA</span></li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p2_f2">Multicanal (WhatsApp + Instagram + Web)</span></li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p2_f3">Integración con CRM</span></li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p2_f4">Reportes de conversión mensuales</span></li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p2_f5">Optimización continua</span></li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p2_f6">Soporte prioritario</span></li>
+        </ul>
+        <a href="#diagnostico" class="btn-primary" style="text-align:center;justify-content:center;" data-i18n="p_cta">Agendar diagnóstico</a>
+      </div>
+
+      <!-- Sistema -->
+      <div style="background:var(--surface);padding:48px 36px;display:flex;flex-direction:column;">
+        <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;" data-i18n="p3_label">Sistema</div>
+        <div style="font-family:'Exo 2',sans-serif;font-size:48px;font-weight:800;line-height:1;color:var(--text);margin-bottom:6px;">$8,000</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:24px;" data-i18n="p_period">MXN / mes</div>
+        <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.6;" data-i18n="p3_desc">Solución completa con agente de texto más sistema personalizado para tu operación.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px;flex:1;">
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p3_f1">Todo lo del plan Pro</span></li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p3_f2">Sistema personalizado (restaurante o industrial)</span></li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p3_f3">Panel de administración propio</span></li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p3_f4">Integraciones a medida</span></li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p3_f5">Consultoría mensual dedicada</span></li>
+        </ul>
+        <a href="#diagnostico" class="btn-outline" style="text-align:center;justify-content:center;" data-i18n="p_cta">Agendar diagnóstico</a>
+      </div>
+
+    </div>
+    <p class="reveal" style="text-align:center;font-size:13px;color:var(--muted);margin-top:24px;" data-i18n="price_note">Precios finales según tu operación. Sin contratos anuales forzados. Cancela cuando quieras.</p>
+  </div>
+</section>
+
 <section id="diagnostico">
   <div class="container">
     <div class="form-wrapper">
@@ -1117,7 +1187,7 @@ footer {
 const i18n = {
   es: {
     nav_servicios:"Servicios", nav_sistemas:"Sistemas", nav_proceso:"Proceso",
-    nav_contacto:"Contacto", nav_cta:"Diagnóstico gratis",
+    nav_precios:"Precios", nav_contacto:"Contacto", nav_cta:"Diagnóstico gratis",
     hero_tag:"Automatización con Inteligencia Artificial",
     hero_title1:"Mientras no respondes,", hero_title2:"tu competencia sí.",
     hero_sub:"Agentes de IA que atienden, califican y convierten leads 24/7 para tu clínica, gym, restaurante o empresa. Sin sueldos extra. Sin errores humanos.",
@@ -1170,7 +1240,22 @@ const i18n = {
     step3:"Implementación",step3d:"Configuramos e integramos el agente con tus canales.",
     step4:"Pruebas",step4d:"Probamos con escenarios reales antes de lanzar.",
     step5:"Optimización",step5d:"Monitoreamos y mejoramos con datos reales.",
-    form_tag:"Diagnóstico gratuito",
+    price_tag:"Planes y precios", price_title:"Invierte en automatización, no en nómina",
+    price_sub:"Sin contratos anuales forzados. Sin setup fee oculto. Solo resultados desde el primer mes.",
+    p1_label:"Starter", p_period:"MXN / mes", p_popular:"Más popular", p_cta:"Agendar diagnóstico",
+    p1_desc:"Ideal para negocios que quieren empezar a automatizar su atención al cliente.",
+    p1_f1:"1 agente de texto IA", p1_f2:"1 canal (WhatsApp o Instagram)",
+    p1_f3:"Flujo conversacional personalizado", p1_f4:"Reporte mensual básico", p1_f5:"Soporte por WhatsApp",
+    p2_desc:"Para negocios que quieren escalar con múltiples agentes y canales integrados.",
+    p2_f1:"2 agentes de texto IA", p2_f2:"Multicanal (WhatsApp + Instagram + Web)",
+    p2_f3:"Integración con CRM", p2_f4:"Reportes de conversión mensuales",
+    p2_f5:"Optimización continua", p2_f6:"Soporte prioritario",
+    p3_label:"Sistema",
+    p3_desc:"Solución completa con agente de texto más sistema personalizado para tu operación.",
+    p3_f1:"Todo lo del plan Pro", p3_f2:"Sistema personalizado (restaurante o industrial)",
+    p3_f3:"Panel de administración propio", p3_f4:"Integraciones a medida", p3_f5:"Consultoría mensual dedicada",
+    price_note:"Precios finales según tu operación. Sin contratos anuales forzados. Cancela cuando quieras.",
+        form_tag:"Diagnóstico gratuito",
     form_title:"Descubre cuánto estás perdiendo hoy",
     form_sub:"Sin compromiso. En 30 minutos te decimos qué automatizar y cuánto costaría.",
     perk1a:"Análisis de tu operación actual",
@@ -1198,7 +1283,7 @@ const i18n = {
   },
   en: {
     nav_servicios:"Services", nav_sistemas:"Systems", nav_proceso:"Process",
-    nav_contacto:"Contact", nav_cta:"Free diagnosis",
+    nav_precios:"Pricing", nav_contacto:"Contact", nav_cta:"Free diagnosis",
     hero_tag:"Automation with Artificial Intelligence",
     hero_title1:"While you don't reply,", hero_title2:"your competitor does.",
     hero_sub:"AI agents that attend, qualify and convert leads 24/7 for your clinic, gym, restaurant or company. No extra salaries. No human errors.",
@@ -1251,7 +1336,22 @@ const i18n = {
     step3:"Implementation",step3d:"We configure and integrate the agent with your channels.",
     step4:"Testing",step4d:"We test with real scenarios before going live.",
     step5:"Optimization",step5d:"We monitor and improve with real data.",
-    form_tag:"Free diagnosis",
+    price_tag:"Plans & pricing", price_title:"Invest in automation, not payroll",
+    price_sub:"No forced annual contracts. No hidden setup fee. Results from the first month.",
+    p1_label:"Starter", p_period:"MXN / month", p_popular:"Most popular", p_cta:"Schedule diagnosis",
+    p1_desc:"Ideal for businesses that want to start automating their customer service.",
+    p1_f1:"1 AI text agent", p1_f2:"1 channel (WhatsApp or Instagram)",
+    p1_f3:"Custom conversational flow", p1_f4:"Basic monthly report", p1_f5:"WhatsApp support",
+    p2_desc:"For businesses that want to scale with multiple agents and integrated channels.",
+    p2_f1:"2 AI text agents", p2_f2:"Multichannel (WhatsApp + Instagram + Web)",
+    p2_f3:"CRM integration", p2_f4:"Monthly conversion reports",
+    p2_f5:"Continuous optimization", p2_f6:"Priority support",
+    p3_label:"System",
+    p3_desc:"Complete solution with text agent plus custom system for your operation.",
+    p3_f1:"Everything in Pro plan", p3_f2:"Custom system (restaurant or industrial)",
+    p3_f3:"Own administration panel", p3_f4:"Custom integrations", p3_f5:"Dedicated monthly consulting",
+    price_note:"Final pricing based on your operation. No forced annual contracts. Cancel anytime.",
+        form_tag:"Free diagnosis",
     form_title:"Discover how much you're losing today",
     form_sub:"No commitment. In 30 minutes we tell you what to automate and what it would cost.",
     perk1a:"Analysis of your current operation",
