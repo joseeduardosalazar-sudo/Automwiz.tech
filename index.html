@@ -304,6 +304,14 @@ nav.scrolled {
   border:1px solid var(--border);
   border-radius:100px;
   padding:4px 14px;
+  transition:all .25s;
+  cursor:default;
+}
+.stag:hover {
+  background:rgba(91,159,208,.12);
+  border-color:rgba(91,159,208,.3);
+  color:rgba(160,210,240,.9);
+  transform:translateY(-2px);
 }
 .stag.active {
   background:rgba(91,159,208,.12);
@@ -1178,7 +1186,7 @@ footer {
     <div class="reveal" style="margin-top:56px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
       <div>
         <div style="font-size:13px;color:var(--muted);margin-bottom:4px;" data-i18n="total_label">Tiempo promedio total</div>
-        <div style="font-family:'Exo 2',sans-serif;font-size:28px;font-weight:800;color:var(--text);">30 – 40 días</div>
+        <div style="font-family:'Exo 2',sans-serif;font-size:28px;font-weight:800;color:var(--text);">10 – 14 días</div>
       </div>
       <div style="width:1px;height:40px;background:var(--border);"></div>
       <div>
@@ -1448,7 +1456,7 @@ const i18n = {
     ind2_title:"más conversiones", ind2_desc:"en negocios que responden en menos de 1 minuto vs los que tardan horas. — Salesforce",
     ind3_title:"prefieren chatear", ind3_desc:"antes de llamar. Si no tienes chat activo, ya perdiste a 2 de cada 3. — Drift",
     ind4_title:"costo operativo", ind4_desc:"vs contratar un agente humano de atención al cliente de tiempo completo. — McKinsey",
-    proc_tag:"Proceso de implementación", total_label:"Tiempo promedio total", total_sub:"De inicio a agente funcionando en producción", total_note:"Sin afectar tu operación actual", total_cta:"Empezar ahora →", proc_title:"De cero a resultados en 30 días",
+    proc_tag:"Proceso de implementación", total_label:"Tiempo promedio de entrega", total_sub:"De inicio a agente funcionando en producción", total_note:"Sin afectar tu operación actual", total_cta:"Empezar ahora →", proc_title:"De cero a resultados en 30 días",
     proc_sub:"Sin meses de espera ni integraciones complejas.",
     step1:"Diagnóstico",step1d:"Analizamos tu operación y definimos qué automatizar primero.",
     step2:"Diseño",step2d:"Construimos el flujo conversacional para tu negocio.",
@@ -1558,7 +1566,7 @@ const i18n = {
     ind2_title:"more conversions", ind2_desc:"in businesses that respond in under 1 minute vs those that take hours. — Salesforce",
     ind3_title:"prefer to chat", ind3_desc:"before calling. No active chat = losing 2 out of 3 prospects. — Drift",
     ind4_title:"operational cost", ind4_desc:"vs hiring a full-time human customer service agent. — McKinsey",
-    proc_tag:"Implementation process", total_label:"Average total time", total_sub:"From start to agent running in production", total_note:"Without affecting your current operation", total_cta:"Start now →", proc_title:"From zero to results in 30 days",
+    proc_tag:"Implementation process", total_label:"Average delivery time", total_sub:"From start to agent running in production", total_note:"Without affecting your current operation", total_cta:"Start now →", proc_title:"From zero to results in 30 days",
     proc_sub:"No months of waiting. No complex integrations.",
     step1:"Diagnosis",step1d:"We analyze your operation and define what to automate first.",
     step2:"Design",step2d:"We build the conversational flow for your business.",
