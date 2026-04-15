@@ -853,8 +853,8 @@ footer {
         <thead>
           <tr>
             <th style="padding:16px 20px;text-align:left;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);"></th>
-            <th style="padding:16px 20px;text-align:center;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);" data-i18n="why_col1">Empleado humano</th>
-            <th style="padding:16px 20px;text-align:center;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);" data-i18n="why_col2">Chatbot genérico</th>
+            <th style="padding:16px 20px;text-align:center;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);width:28%;" data-i18n="why_col1">Empleado humano</th>
+            <th style="padding:16px 20px;text-align:center;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);width:28%;" data-i18n="why_col2">Chatbot genérico</th>
             <th style="padding:16px 20px;text-align:center;background:rgba(200,170,128,.06);border-bottom:2px solid var(--accent);border-radius:8px 8px 0 0;" >
               <span style="font-family:'Exo 2',sans-serif;font-size:14px;font-weight:700;color:var(--accent);">AUTOMWIZ</span>
             </th>
@@ -925,20 +925,20 @@ footer {
 // Why table data
 const whyRows = {
   es: [
-    ["Disponibilidad", "Lunes a viernes 9–6pm", "24/7 pero respuestas genéricas", "24/7 con respuestas personalizadas ✅"],
-    ["Costo mensual", "~$8,000–15,000 MXN + prestaciones", "Gratis o muy barato (sin soporte)", "Desde $3,000 MXN con soporte real ✅"],
-    ["Tiempo de arranque", "2–4 semanas para contratar", "Inmediato pero sin personalización", "5 días con tu configuración ✅"],
-    ["Errores", "Humanos, cansancio, olvidos", "Flujos rotos, sin contexto", "Consistente, sin errores ✅"],
-    ["Escala", "1 persona = 1 conversación", "Escala pero sin calidad", "Miles de conversaciones en paralelo ✅"],
-    ["Personalización", "Alta pero costosa", "Baja o nula", "Alta, hecha para tu negocio ✅"],
+    ["⏰ Disponibilidad", "Lunes–Viernes 9–6pm ❌", "24/7 sin contexto ⚠️", "24/7 personalizado ✅"],
+    ["💰 Costo mensual", "$8,000–15,000 MXN + IMSS ❌", "Barato pero sin soporte ⚠️", "Desde $3,000 MXN ✅"],
+    ["🚀 Arranque", "2–4 semanas ❌", "Inmediato, sin config ⚠️", "5 días configurado ✅"],
+    ["🎯 Errores", "Humanos y olvidos ❌", "Flujos rotos ⚠️", "Consistente siempre ✅"],
+    ["📈 Escala", "1 persona = 1 chat ❌", "Escala sin calidad ⚠️", "Miles en paralelo ✅"],
+    ["🛠️ Personalización", "Alta pero cara ❌", "Baja o nula ⚠️", "Hecha para ti ✅"],
   ],
   en: [
-    ["Availability", "Mon–Fri 9am–6pm", "24/7 but generic responses", "24/7 with personalized responses ✅"],
-    ["Monthly cost", "~$8,000–15,000 MXN + benefits", "Free or cheap (no support)", "From $3,000 MXN with real support ✅"],
-    ["Setup time", "2–4 weeks to hire", "Immediate but no customization", "5 days with your configuration ✅"],
-    ["Errors", "Human, fatigue, forgetfulness", "Broken flows, no context", "Consistent, error-free ✅"],
-    ["Scale", "1 person = 1 conversation", "Scales but no quality", "Thousands of conversations in parallel ✅"],
-    ["Customization", "High but expensive", "Low or none", "High, built for your business ✅"],
+    ["⏰ Availability", "Mon–Fri 9–6pm ❌", "24/7 no context ⚠️", "24/7 personalized ✅"],
+    ["💰 Monthly cost", "$8,000–15,000 MXN + benefits ❌", "Cheap but no support ⚠️", "From $3,000 MXN ✅"],
+    ["🚀 Setup", "2–4 weeks ❌", "Instant, no config ⚠️", "5 days configured ✅"],
+    ["🎯 Errors", "Human & forgetfulness ❌", "Broken flows ⚠️", "Always consistent ✅"],
+    ["📈 Scale", "1 person = 1 chat ❌", "Scales no quality ⚠️", "Thousands in parallel ✅"],
+    ["🛠️ Customization", "High but expensive ❌", "Low or none ⚠️", "Built for you ✅"],
   ]
 };
 
@@ -952,7 +952,7 @@ function buildWhyTable() {
     tr.style.cssText = `background:${i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,.02)'};`;
     row.forEach((cell, j) => {
       const td = document.createElement('td');
-      td.style.cssText = `padding:14px 20px;border-bottom:1px solid var(--border);${j === 0 ? 'color:var(--text);font-weight:500;' : 'text-align:center;color:var(--muted);'}${j === 3 ? 'background:rgba(200,170,128,.04);color:var(--text);font-weight:500;' : ''}`;
+      const colors = ['','rgba(255,80,80,.04)','rgba(255,180,0,.04)','rgba(200,170,128,.04)']; td.style.cssText = `padding:14px 20px;border-bottom:1px solid var(--border);${j === 0 ? 'color:var(--text);font-weight:500;width:20%;font-size:13px;' : 'text-align:center;font-size:13px;'}background:${colors[j]||''};${j === 3 ? 'color:var(--text);font-weight:500;' : j===0?'':'color:var(--muted);'}`;
       td.textContent = cell;
       tr.appendChild(td);
     });
