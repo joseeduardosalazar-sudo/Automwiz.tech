@@ -851,10 +851,10 @@ footer {
     <div class="reveal" style="overflow-x:auto;margin-bottom:64px;">
       <table style="width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed;">
         <colgroup>
-          <col style="width:22%;">
-          <col style="width:26%;">
-          <col style="width:26%;">
-          <col style="width:26%;">
+          <col style="width:25%;">
+          <col style="width:25%;">
+          <col style="width:25%;">
+          <col style="width:25%;">
         </colgroup>
         <thead>
           <tr>
@@ -958,7 +958,7 @@ function buildWhyTable() {
     tr.style.cssText = `background:${i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,.02)'};`;
     row.forEach((cell, j) => {
       const td = document.createElement('td');
-      const colors = ['','rgba(255,80,80,.04)','rgba(255,180,0,.04)','rgba(200,170,128,.04)']; td.style.cssText = `padding:14px 20px;border-bottom:1px solid var(--border);${j === 0 ? 'color:var(--text);font-weight:500;width:20%;font-size:13px;' : 'text-align:center;font-size:13px;'}background:${colors[j]||''};${j === 3 ? 'color:var(--text);font-weight:500;' : j===0?'':'color:var(--muted);'}`;
+      const colors = ['transparent','rgba(255,80,80,.04)','rgba(255,180,0,.04)','rgba(200,170,128,.04)']; td.style.cssText = `padding:14px 20px;border-bottom:1px solid var(--border);text-align:center;font-size:13px;background:${colors[j]||'transparent'};${j === 0 ? 'text-align:left;color:var(--text);font-weight:600;' : ''}${j === 3 ? 'color:var(--text);font-weight:500;' : j===0?'':'color:var(--muted);'}`;
       td.textContent = cell;
       tr.appendChild(td);
     });
