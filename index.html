@@ -792,15 +792,15 @@ footer {
 
       <div class="hero-stats">
         <div>
-          <div class="hero-stat-num">78%</div>
+          <div class="hero-stat-num" id="stat-78">0%</div>
           <div class="hero-stat-label" data-i18n="stat1">leads perdidos sin<br>respuesta en 5 min</div>
         </div>
         <div>
-          <div class="hero-stat-num">24/7</div>
+          <div class="hero-stat-num" id="stat-247">24/7</div>
           <div class="hero-stat-label" data-i18n="stat2">disponibilidad real<br>sin horas extra</div>
         </div>
         <div>
-          <div class="hero-stat-num">-65%</div>
+          <div class="hero-stat-num" id="stat-65">0%</div>
           <div class="hero-stat-label" data-i18n="stat3">costo vs un<br>empleado nuevo</div>
         </div>
       </div>
@@ -1411,7 +1411,7 @@ diagObserver.observe(document.getElementById('diagnostico'));
 
       <div class="reveal" style="background:var(--surface);padding:48px 40px;">
         <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;" data-i18n="res_client">Cliente AUTOMWIZ</div>
-        <div style="font-family:'Exo 2',sans-serif;font-size:72px;font-weight:800;line-height:1;color:var(--text);margin-bottom:8px;">+700</div>
+        <div style="font-family:'Exo 2',sans-serif;font-size:72px;font-weight:800;line-height:1;color:var(--text);margin-bottom:8px;" id="stat-700">0</div>
         <div style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:12px;" data-i18n="res1_title">Conversaciones atendidas</div>
         <p style="font-size:15px;color:var(--muted);line-height:1.65;" data-i18n="res1_desc">Clínica médica en La Laguna. El agente atiende, califica y agenda sin que el equipo tenga que estar disponible. Respuesta inmediata las 24 horas.</p>
         <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);display:flex;align-items:center;gap:12px;">
@@ -1425,7 +1425,7 @@ diagObserver.observe(document.getElementById('diagnostico'));
 
       <div class="reveal" style="background:var(--surface);padding:48px 40px;">
         <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;" data-i18n="res_client">Cliente AUTOMWIZ</div>
-        <div style="font-family:'Exo 2',sans-serif;font-size:72px;font-weight:800;line-height:1;color:var(--text);margin-bottom:8px;">+20%</div>
+        <div style="font-family:'Exo 2',sans-serif;font-size:72px;font-weight:800;line-height:1;color:var(--text);margin-bottom:8px;" id="stat-20">0%</div>
         <div style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:12px;" data-i18n="res2_title">Llamadas de venta agendadas</div>
         <p style="font-size:15px;color:var(--muted);line-height:1.65;" data-i18n="res2_desc">Empresa financiera. El agente filtra, califica y agenda automáticamente — el equipo comercial solo habla con prospectos listos para comprar.</p>
         <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);display:flex;align-items:center;gap:12px;">
@@ -2098,6 +2098,71 @@ function rejectCookies() {
 const slideUpStyle = document.createElement('style');
 slideUpStyle.textContent = '@keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }';
 document.head.appendChild(slideUpStyle);
+
+// ─── COUNTER ANIMATIONS ───
+function animateCounter(el, target, prefix, suffix, duration) {
+  const start = performance.now();
+  const isFloat = target % 1 !== 0;
+  function update(time) {
+    const elapsed = time - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(eased * target);
+    el.textContent = prefix + current + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = prefix + target + suffix;
+  }
+  requestAnimationFrame(update);
+}
+
+function initCounters() {
+  const s78 = document.getElementById('stat-78');
+  const s65 = document.getElementById('stat-65');
+  const s700 = document.getElementById('stat-700');
+  const s20 = document.getElementById('stat-20');
+
+  if (s78) animateCounter(s78, 78, '', '%', 1800);
+  if (s65) animateCounter(s65, 65, '-', '%', 1800);
+  if (s700) animateCounter(s700, 700, '+', '', 2000);
+  if (s20) animateCounter(s20, 20, '+', '%', 1600);
+}
+
+// Hero stats are visible on load — trigger after short delay
+setTimeout(() => {
+  const s78 = document.getElementById('stat-78');
+  if (s78 && s78.textContent === '0%') initCounters();
+}, 800);
+
+// Also trigger if user scrolls to them later
+const statsObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const s78 = document.getElementById('stat-78');
+      if (s78 && s78.textContent === '0%') initCounters();
+      statsObserver.disconnect();
+    }
+  });
+}, { threshold: 0.1 });
+
+const heroStatsEl = document.querySelector('.hero-stats');
+if (heroStatsEl) statsObserver.observe(heroStatsEl);
+
+// Also animate result numbers when in view
+const resultsObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const s700 = document.getElementById('stat-700');
+      const s20 = document.getElementById('stat-20');
+      if (s700 && s700.textContent === '0') animateCounter(s700, 700, '+', '', 2000);
+      if (s20 && s20.textContent === '0%') animateCounter(s20, 20, '+', '%', 1600);
+      resultsObserver.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+
+const resultsEl = document.getElementById('resultados');
+if (resultsEl) resultsObserver.observe(resultsEl);
 
 // ─── INIT ───
 applyLang();
