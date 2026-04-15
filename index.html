@@ -898,12 +898,14 @@ footer {
               </div>
             </div>
             <!-- Progress dots -->
-            <div style="margin-left:auto;display:flex;gap:6px;align-items:center;" id="progDots">
-              <div class="prog-dot active" style="width:8px;height:8px;border-radius:50%;background:var(--accent);transition:all .3s;"></div>
-              <div class="prog-dot" style="width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s;"></div>
-              <div class="prog-dot" style="width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s;"></div>
-              <div class="prog-dot" style="width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s;"></div>
-              <div class="prog-dot" style="width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s;"></div>
+            <div style="margin-left:auto;display:flex;gap:5px;align-items:center;" id="progDots">
+              <div class="prog-dot active" style="width:7px;height:7px;border-radius:50%;background:var(--accent);transition:all .3s;"></div>
+              <div class="prog-dot" style="width:7px;height:7px;border-radius:50%;background:var(--border);transition:all .3s;"></div>
+              <div class="prog-dot" style="width:7px;height:7px;border-radius:50%;background:var(--border);transition:all .3s;"></div>
+              <div class="prog-dot" style="width:7px;height:7px;border-radius:50%;background:var(--border);transition:all .3s;"></div>
+              <div class="prog-dot" style="width:7px;height:7px;border-radius:50%;background:var(--border);transition:all .3s;"></div>
+              <div class="prog-dot" style="width:7px;height:7px;border-radius:50%;background:var(--border);transition:all .3s;"></div>
+              <div class="prog-dot" style="width:7px;height:7px;border-radius:50%;background:var(--border);transition:all .3s;"></div>
             </div>
           </div>
 
@@ -924,7 +926,7 @@ footer {
 // ─── DIAGNOSTIC STEPPER ───
 const diagSteps = [
   {
-    msg: { es: "¡Hola! Soy el asistente de AUTOMWIZ 👋 Voy a hacerte unas preguntas rápidas para entender tu negocio. ¿Cómo te llamas?", en: "Hi! I am the AUTOMWIZ assistant 👋 I will ask you a few quick questions to understand your business. What is your name?" },
+    msg: { es: "Hola 👋 Soy el asistente de AUTOMWIZ. Te hago unas preguntas rápidas para entender tu negocio. ¿Cómo te llamas?", en: "Hi 👋 I am the AUTOMWIZ assistant. I will ask you a few quick questions to understand your business. What is your name?" },
     type: 'text', placeholder: { es: "Tu nombre...", en: "Your name..." },
     field: 'nombre', validate: v => v.trim().length > 1
   },
@@ -949,7 +951,7 @@ const diagSteps = [
     field: 'industria'
   },
   {
-    msg: { es: "¿Cuántos mensajes o consultas recibes por día aproximadamente?", en: "How many messages or inquiries do you receive per day approximately?" },
+    msg: { es: "¿Cuántos mensajes o consultas recibes por día en {{empresa}}?", en: "How many messages or inquiries does {{empresa}} receive per day?" },
     type: 'options',
     options: [
       { es: "Menos de 10", en: "Less than 10", val: "menos10" },
@@ -960,7 +962,22 @@ const diagSteps = [
     field: 'volumen'
   },
   {
-    msg: { es: "¿Tu WhatsApp para el diagnóstico? Te contactaremos ahí 📲", en: "Your WhatsApp for the diagnosis? We will contact you there 📲" },
+    msg: { es: "¿Tienes WhatsApp Business activo en {{empresa}}?", en: "Do you have WhatsApp Business active for {{empresa}}?" },
+    type: 'options',
+    options: [
+      { es: "✅ Sí, ya lo tengo", en: "✅ Yes, I have it", val: "si" },
+      { es: "❌ No todavía", en: "❌ Not yet", val: "no" },
+      { es: "🤔 No sé cuál es", en: "🤔 I am not sure", val: "nosabe" }
+    ],
+    field: 'wa_business'
+  },
+  {
+    msg: { es: "¿Cuál es el mayor problema operativo que tienes ahorita en {{empresa}}?", en: "What is the biggest operational problem you have right now at {{empresa}}?" },
+    type: 'text', placeholder: { es: "Ej. No doy abasto respondiendo mensajes...", en: "Eg. I cannot keep up with all the messages..." },
+    field: 'problema', validate: v => v.trim().length > 2
+  },
+  {
+    msg: { es: "Perfecto, casi terminamos 🎯 ¿Tu número de WhatsApp? Te contactaremos ahí para el diagnóstico.", en: "Perfect, almost done 🎯 Your WhatsApp number? We will contact you there for the diagnosis." },
     type: 'tel', placeholder: { es: "+52 871 000 0000", en: "+52 871 000 0000" },
     field: 'whatsapp', validate: v => v.trim().length > 7
   }
@@ -1079,16 +1096,12 @@ async function submitDiag(displayVal, storeVal) {
         body: JSON.stringify({
           nombre: diagData.nombre, empresa: diagData.empresa,
           industria: diagData.industria, whatsapp: diagData.whatsapp,
-          mensaje: 'Volumen: ' + diagData.volumen,
+          mensaje: 'Volumen: ' + diagData.volumen + ' | WA Business: ' + diagData.wa_business + ' | Problema: ' + diagData.problema,
           idioma: lang, fecha: new Date().toISOString()
         })
       });
     } catch(e) {
-      const msg = encodeURIComponent('Hola AUTOMWIZ, quiero mi diagnostico.
-Nombre: ' + diagData.nombre + '
-Empresa: ' + diagData.empresa + '
-Sector: ' + diagData.industria + '
-WA: ' + diagData.whatsapp);
+      const msg = encodeURIComponent('Hola AUTOMWIZ, quiero mi diagnostico. Nombre: ' + diagData.nombre + ' Empresa: ' + diagData.empresa + ' Sector: ' + diagData.industria + ' WA: ' + diagData.whatsapp);
       window.open('https://wa.me/528717866322?text=' + msg, '_blank');
     }
   }
@@ -1107,16 +1120,32 @@ diagStyle.textContent = '@keyframes blink { 0%,80%,100%{opacity:.2} 40%{opacity:
 document.head.appendChild(diagStyle);
 
 let diagStarted = false;
+
+function tryStartDiag() {
+  const el = document.getElementById('chatMsgs');
+  if (el && !diagStarted) {
+    diagStarted = true;
+    initDiag();
+  }
+}
+
+// Try on intersection
 const diagObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) {
-    if (e.isIntersecting && !diagStarted) {
-      diagStarted = true;
-      initDiag();
-      diagObserver.disconnect();
-    }
+    if (e.isIntersecting) tryStartDiag();
   });
-}, { threshold: 0.2 });
-diagObserver.observe(document.getElementById('diagnostico'));
+}, { threshold: 0.05, rootMargin: '0px 0px 100px 0px' });
+
+const diagEl = document.getElementById('diagnostico');
+if (diagEl) diagObserver.observe(diagEl);
+
+// Also try after page load as fallback
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    const msgs = document.getElementById('chatMsgs');
+    if (msgs && msgs.children.length === 0) tryStartDiag();
+  }, 600);
+});
 </script>
 
 
