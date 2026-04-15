@@ -1270,9 +1270,11 @@ footer {
   </div>
 </section>
 
-<section id="diagnostico">
+<section id="diagnostico" style="padding:100px 0;border-top:1px solid var(--border);">
   <div class="container">
     <div class="form-wrapper">
+
+      <!-- Left side -->
       <div class="form-left reveal">
         <div class="tag" data-i18n="form_tag">Diagnóstico gratuito</div>
         <h2 class="section-title" data-i18n="form_title">Descubre cuánto <span>estás perdiendo</span> hoy</h2>
@@ -1301,49 +1303,261 @@ footer {
           </div>
         </div>
       </div>
-      <div class="form-right reveal">
-        <form id="leadForm">
-          <div class="form-group">
-            <label data-i18n="f_nombre">Nombre completo</label>
-            <input type="text" id="f_name" placeholder="Tu nombre" required>
+
+      <!-- Right side: AI Chat Stepper -->
+      <div class="form-right reveal" style="padding:0;background:none;border:none;">
+
+        <div id="chatDiag" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;min-height:480px;">
+
+          <!-- Chat header -->
+          <div style="background:var(--surface2);padding:16px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);">
+            <div style="width:38px;height:38px;border-radius:50%;background:rgba(200,170,128,.15);display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--accent);">AW</div>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:var(--text);">AUTOMWIZ</div>
+              <div style="font-size:11px;color:#4EC17A;display:flex;align-items:center;gap:4px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#4EC17A;display:inline-block;"></span>
+                Agente activo
+              </div>
+            </div>
+            <!-- Progress dots -->
+            <div style="margin-left:auto;display:flex;gap:6px;align-items:center;" id="progDots">
+              <div class="prog-dot active" style="width:8px;height:8px;border-radius:50%;background:var(--accent);transition:all .3s;"></div>
+              <div class="prog-dot" style="width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s;"></div>
+              <div class="prog-dot" style="width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s;"></div>
+              <div class="prog-dot" style="width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s;"></div>
+              <div class="prog-dot" style="width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s;"></div>
+            </div>
           </div>
-          <div class="form-group">
-            <label data-i18n="f_empresa">Empresa / Negocio</label>
-            <input type="text" id="f_empresa" placeholder="Nombre de tu negocio" required>
-          </div>
-          <div class="form-group">
-            <label data-i18n="f_industria">Industria</label>
-            <select id="f_industria" required>
-              <option value="" data-i18n="f_ind0">Selecciona tu sector</option>
-              <option value="clinica" data-i18n="f_ind1">Clínica / Consultorio</option>
-              <option value="gym" data-i18n="f_ind2">Gym / Centro Fitness</option>
-              <option value="restaurante" data-i18n="f_ind3">Restaurante</option>
-              <option value="industrial" data-i18n="f_ind4">Industrial / Manufactura</option>
-              <option value="ecommerce" data-i18n="f_ind5">E-commerce</option>
-              <option value="salon" data-i18n="f_ind6">Salón de belleza / Spa</option>
-              <option value="rrhh" data-i18n="f_ind7">RRHH / Reclutamiento</option>
-              <option value="otro" data-i18n="f_ind8">Otro</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label data-i18n="f_wa">WhatsApp</label>
-            <input type="tel" id="f_wa" placeholder="+52 871 000 0000" required>
-          </div>
-          <div class="form-group">
-            <label data-i18n="f_msg">¿Cuál es tu mayor problema operativo ahora? (opcional)</label>
-            <textarea id="f_msg" placeholder="Ej. No doy abasto respondiendo mensajes por las noches..."></textarea>
-          </div>
-          <button type="submit" class="form-btn" data-i18n="f_btn">Quiero mi diagnóstico gratuito →</button>
-        </form>
-        <div class="form-success" id="formSuccess">
-          <div class="success-icon">✅</div>
-          <h3 style="font-family:'Exo 2', sans-serif;font-size:22px;margin-bottom:8px;" data-i18n="success_title">¡Recibido!</h3>
-          <p data-i18n="success_msg">Nos ponemos en contacto contigo en las próximas horas. Revisa tu WhatsApp.</p>
+
+          <!-- Messages area -->
+          <div id="chatMsgs" style="flex:1;padding:20px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;min-height:280px;"></div>
+
+          <!-- Input area -->
+          <div id="chatInput" style="padding:16px 20px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:flex-end;"></div>
+
         </div>
+
       </div>
     </div>
   </div>
 </section>
+
+<script>
+// ─── AI DIAGNOSTIC STEPPER ───
+const diagSteps = [
+  {
+    msg: { es: "¡Hola! Soy el asistente de AUTOMWIZ 👋 Voy a hacerte unas preguntas rápidas para entender tu negocio. ¿Cómo te llamas?", en: "Hi! I'm the AUTOMWIZ assistant 👋 I'll ask you a few quick questions to understand your business. What's your name?" },
+    type: 'text',
+    placeholder: { es: "Tu nombre...", en: "Your name..." },
+    field: 'nombre',
+    validate: v => v.trim().length > 1
+  },
+  {
+    msg: { es: "Mucho gusto {{nombre}} 😊 ¿Cómo se llama tu negocio?", en: "Nice to meet you {{nombre}} 😊 What's your business name?" },
+    type: 'text',
+    placeholder: { es: "Nombre del negocio...", en: "Business name..." },
+    field: 'empresa',
+    validate: v => v.trim().length > 1
+  },
+  {
+    msg: { es: "¿A qué sector pertenece {{empresa}}?", en: "What sector does {{empresa}} belong to?" },
+    type: 'options',
+    options: [
+      { es: "🏥 Clínica / Consultorio", en: "🏥 Clinic / Medical office", val: "clinica" },
+      { es: "💪 Gym / Fitness", en: "💪 Gym / Fitness", val: "gym" },
+      { es: "🍽️ Restaurante", en: "🍽️ Restaurant", val: "restaurante" },
+      { es: "🏭 Industrial", en: "🏭 Industrial", val: "industrial" },
+      { es: "🛒 E-commerce", en: "🛒 E-commerce", val: "ecommerce" },
+      { es: "💄 Salón / Spa", en: "💄 Salon / Spa", val: "salon" },
+      { es: "👥 RRHH / Reclutamiento", en: "👥 HR / Recruitment", val: "rrhh" },
+      { es: "✳️ Otro", en: "✳️ Other", val: "otro" }
+    ],
+    field: 'industria'
+  },
+  {
+    msg: { es: "¿Cuántos mensajes o consultas recibes por día aproximadamente?", en: "How many messages or inquiries do you receive per day approximately?" },
+    type: 'options',
+    options: [
+      { es: "Menos de 10", en: "Less than 10", val: "menos10" },
+      { es: "10 – 30 mensajes", en: "10 – 30 messages", val: "10a30" },
+      { es: "30 – 100 mensajes", en: "30 – 100 messages", val: "30a100" },
+      { es: "Más de 100", en: "More than 100", val: "mas100" }
+    ],
+    field: 'volumen'
+  },
+  {
+    msg: { es: "¿Tu WhatsApp para el diagnóstico? Te contactaremos ahí 📲", en: "Your WhatsApp for the diagnosis? We'll contact you there 📲" },
+    type: 'tel',
+    placeholder: { es: "+52 871 000 0000", en: "+52 871 000 0000" },
+    field: 'whatsapp',
+    validate: v => v.trim().length > 7
+  }
+];
+
+const diagData = {};
+let diagStep = 0;
+let isTyping = false;
+
+function diagReplace(str) {
+  return str.replace(/\{\{(\w+)\}\}/g, (_, k) => diagData[k] || '');
+}
+
+function addBotMsg(text, delay = 0) {
+  return new Promise(resolve => {
+    const msgs = document.getElementById('chatMsgs');
+    // typing indicator
+    const typing = document.createElement('div');
+    typing.style.cssText = 'display:flex;gap:6px;align-items:center;padding:10px 14px;background:var(--surface2);border-radius:12px 12px 12px 2px;width:fit-content;';
+    typing.innerHTML = '<span style="width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink .8s infinite;"></span><span style="width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink .8s .2s infinite;"></span><span style="width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink .8s .4s infinite;"></span>';
+    msgs.appendChild(typing);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    setTimeout(() => {
+      typing.remove();
+      const msg = document.createElement('div');
+      msg.style.cssText = 'max-width:85%;padding:12px 16px;background:var(--surface2);border-radius:12px 12px 12px 2px;font-size:14px;line-height:1.55;color:var(--text);animation:fadeUp .3s ease;';
+      msg.textContent = text;
+      msgs.appendChild(msg);
+      msgs.scrollTop = msgs.scrollHeight;
+      resolve();
+    }, delay + 800);
+  });
+}
+
+function addUserMsg(text) {
+  const msgs = document.getElementById('chatMsgs');
+  const msg = document.createElement('div');
+  msg.style.cssText = 'max-width:85%;padding:12px 16px;background:rgba(200,170,128,.15);border-radius:12px 12px 2px 12px;font-size:14px;line-height:1.55;color:var(--text);align-self:flex-end;margin-left:auto;animation:fadeUp .3s ease;';
+  msg.textContent = text;
+  msgs.appendChild(msg);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function updateDots(step) {
+  document.querySelectorAll('.prog-dot').forEach((d, i) => {
+    d.style.background = i <= step ? 'var(--accent)' : 'var(--border)';
+    d.style.transform = i === step ? 'scale(1.3)' : 'scale(1)';
+  });
+}
+
+function renderInput(step) {
+  const area = document.getElementById('chatInput');
+  area.innerHTML = '';
+  const s = diagSteps[step];
+  if (!s) return;
+
+  if (s.type === 'text' || s.type === 'tel') {
+    const inp = document.createElement('input');
+    inp.type = s.type === 'tel' ? 'tel' : 'text';
+    inp.placeholder = s.placeholder[lang] || s.placeholder.es;
+    inp.style.cssText = 'flex:1;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:var(--text);font-family:"DM Sans",sans-serif;font-size:14px;outline:none;transition:border-color .2s;';
+    inp.addEventListener('focus', () => inp.style.borderColor = 'rgba(200,170,128,.4)');
+    inp.addEventListener('blur', () => inp.style.borderColor = 'var(--border)');
+
+    const btn = document.createElement('button');
+    btn.style.cssText = 'background:var(--accent);color:#0A1220;border:none;border-radius:8px;padding:12px 18px;cursor:pointer;font-size:18px;transition:opacity .2s;flex-shrink:0;';
+    btn.innerHTML = '→';
+    btn.onclick = () => submitDiag(inp.value);
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') submitDiag(inp.value); });
+
+    area.appendChild(inp);
+    area.appendChild(btn);
+    setTimeout(() => inp.focus(), 100);
+
+  } else if (s.type === 'options') {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:8px;width:100%;';
+    s.options.forEach(opt => {
+      const b = document.createElement('button');
+      b.textContent = opt[lang] || opt.es;
+      b.style.cssText = 'padding:8px 14px;border:1px solid var(--border);border-radius:100px;background:var(--bg);color:var(--muted);font-size:13px;cursor:pointer;transition:all .2s;font-family:"DM Sans",sans-serif;';
+      b.onmouseover = () => { b.style.borderColor = 'rgba(200,170,128,.4)'; b.style.color = 'var(--text)'; };
+      b.onmouseout = () => { b.style.borderColor = 'var(--border)'; b.style.color = 'var(--muted)'; };
+      b.onclick = () => submitDiag(opt[lang] || opt.es, opt.val);
+      wrap.appendChild(b);
+    });
+    area.appendChild(wrap);
+  }
+}
+
+async function submitDiag(displayVal, storeVal) {
+  if (isTyping || !displayVal || displayVal.trim() === '') return;
+  const s = diagSteps[diagStep];
+  if (s.validate && !s.validate(displayVal)) return;
+
+  isTyping = true;
+  diagData[s.field] = storeVal || displayVal;
+  addUserMsg(displayVal);
+  document.getElementById('chatInput').innerHTML = '';
+  diagStep++;
+  updateDots(diagStep);
+
+  if (diagStep < diagSteps.length) {
+    const nextMsg = diagReplace(diagSteps[diagStep].msg[lang] || diagSteps[diagStep].msg.es);
+    await addBotMsg(nextMsg, 200);
+    renderInput(diagStep);
+  } else {
+    // Done — save to Supabase
+    await addBotMsg(lang === 'es'
+      ? `Perfecto ${diagData.nombre} ✅ Ya tengo todo lo que necesito. Un asesor de AUTOMWIZ te contactará en las próximas horas por WhatsApp. ¡Prepárate para automatizar!`
+      : `Perfect ${diagData.nombre} ✅ I have everything I need. An AUTOMWIZ advisor will contact you within the next few hours on WhatsApp. Get ready to automate!`, 300);
+
+    document.getElementById('chatInput').innerHTML = '';
+
+    // Save lead
+    try {
+      await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          nombre: diagData.nombre,
+          empresa: diagData.empresa,
+          industria: diagData.industria,
+          whatsapp: diagData.whatsapp,
+          mensaje: `Volumen: ${diagData.volumen}`,
+          idioma: lang,
+          fecha: new Date().toISOString()
+        })
+      });
+    } catch(e) {
+      const msg = encodeURIComponent(`Hola AUTOMWIZ, quiero mi diagnóstico.\nNombre: ${diagData.nombre}\nEmpresa: ${diagData.empresa}\nSector: ${diagData.industria}\nWA: ${diagData.whatsapp}`);
+      window.open(`https://wa.me/528717866322?text=${msg}`, '_blank');
+    }
+  }
+  isTyping = false;
+}
+
+async function initDiag() {
+  updateDots(0);
+  const firstMsg = diagSteps[0].msg[lang] || diagSteps[0].msg.es;
+  await addBotMsg(firstMsg, 300);
+  renderInput(0);
+}
+
+// CSS animations
+const diagStyle = document.createElement('style');
+diagStyle.textContent = `
+@keyframes blink { 0%,80%,100%{opacity:.2} 40%{opacity:1} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+`;
+document.head.appendChild(diagStyle);
+
+// Init when in view
+const diagObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && diagStep === 0 && document.getElementById('chatMsgs').children.length === 0) {
+      initDiag();
+      diagObserver.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+diagObserver.observe(document.getElementById('diagnostico'));
+</script>
 
 <!-- ─── FOOTER ─── -->
 <footer>
