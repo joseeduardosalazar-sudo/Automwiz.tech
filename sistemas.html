@@ -237,10 +237,22 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
   <div class="container">
     <div class="demo-header reveal">
       <div class="tag">Sistema Restaurante</div>
-      <h2>Tu restaurante <span>vendiendo solo,</span> 24/7</h2>
-      <p>Menú digital, pedidos en línea y reservaciones automáticas. Sin que tu equipo toque el celular.</p>
+      <h2>Tu restaurante <span>completo,</span> digitalizado</h2>
+      <p>Dos módulos disponibles. Elige el que más te interesa explorar.</p>
     </div>
 
+    <!-- Sub-tabs -->
+    <div style="display:flex;gap:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:28px;" class="reveal">
+      <button class="rest-subtab active" onclick="showRestTab('ventas',this)" style="flex:1;padding:14px 20px;background:rgba(200,170,128,.1);border:none;border-right:1px solid var(--border);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-align:center;">
+        🍽️ Ventas — Menú, pedidos y reservas
+      </button>
+      <button class="rest-subtab" onclick="showRestTab('inventario',this)" style="flex:1;padding:14px 20px;background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;text-align:center;">
+        🧾 Inventario — Control de ingredientes
+      </button>
+    </div>
+
+    <!-- Ventas content -->
+    <div id="rest-ventas">
     <div class="rest-layout">
       <!-- Menu -->
       <div class="rest-menu reveal">
@@ -326,6 +338,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
 
       </div>
     </div>
+    </div><!-- end rest-ventas -->
+
+    <!-- Inventario content (hidden by default) -->
+    <div id="rest-inventario" style="display:none;"></div>
+
   </div>
 </section>
 
@@ -672,7 +689,168 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
   </div>
 </section>
 
-<!-- CTA -->
+<!-- ─── DEMO: INVENTARIO RESTAURANTE ─── -->
+<section id="demo-inventario" class="demo-section" style="display:none!important;">
+  <div class="container">
+    <div class="demo-header reveal">
+      <div class="tag">Sistema de Inventario</div>
+      <h2>Sabe exactamente <span>qué tienes y qué necesitas</span> en todo momento</h2>
+      <p>Control de ingredientes, alertas automáticas y costo real por platillo. Todo en tiempo real.</p>
+    </div>
+
+    <!-- Nav tabs del sistema -->
+    <div style="display:flex;gap:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;">
+      <button class="inv-panel-btn active" onclick="showInvPanel('dashboard',this)" style="flex:1;padding:13px;background:rgba(200,170,128,.1);border:none;border-right:1px solid var(--border);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">📊 Dashboard</button>
+      <button class="inv-panel-btn" onclick="showInvPanel('inventario',this)" style="flex:1;padding:13px;background:none;border:none;border-right:1px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">📦 Inventario</button>
+      <button class="inv-panel-btn" onclick="showInvPanel('movimientos',this)" style="flex:1;padding:13px;background:none;border:none;border-right:1px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">↕️ Movimientos</button>
+      <button class="inv-panel-btn" onclick="showInvPanel('platillos',this)" style="flex:1;padding:13px;background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">🍽️ Costo x Platillo</button>
+    </div>
+
+    <!-- DASHBOARD PANEL -->
+    <div id="inv-dashboard" class="inv-panel" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;">
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;">
+        <div style="background:var(--surface2);border-radius:8px;padding:16px;">
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Valor en inventario</div>
+          <div style="font-family:'Exo 2',sans-serif;font-size:24px;font-weight:800;color:var(--accent);">$12,480</div>
+          <div style="font-size:11px;color:var(--green);margin-top:4px;">↑ actualizado hoy</div>
+        </div>
+        <div style="background:var(--surface2);border-radius:8px;padding:16px;">
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Alertas críticas</div>
+          <div style="font-family:'Exo 2',sans-serif;font-size:24px;font-weight:800;color:#E24B4A;">3</div>
+          <div style="font-size:11px;color:#E24B4A;margin-top:4px;">⚠ Stock bajo mínimo</div>
+        </div>
+        <div style="background:var(--surface2);border-radius:8px;padding:16px;">
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Consumo hoy</div>
+          <div style="font-family:'Exo 2',sans-serif;font-size:24px;font-weight:800;color:var(--accent2);">$1,240</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;">47 platillos servidos</div>
+        </div>
+        <div style="background:var(--surface2);border-radius:8px;padding:16px;">
+          <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Ingredientes totales</div>
+          <div style="font-family:'Exo 2',sans-serif;font-size:24px;font-weight:800;color:var(--text);">28</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;">4 por ordenar</div>
+        </div>
+      </div>
+
+      <h4 style="font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">⚠ Alertas que requieren atención</h4>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(226,75,74,.06);border:1px solid rgba(226,75,74,.15);border-radius:8px;padding:14px 16px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">🍅</span>
+            <div><div style="font-size:14px;font-weight:500;">Jitomate</div><div style="font-size:12px;color:var(--muted);">Stock: 2 kg — Mínimo: 5 kg</div></div>
+          </div>
+          <span style="font-size:12px;background:rgba(226,75,74,.15);color:#E24B4A;padding:4px 12px;border-radius:100px;font-weight:600;">CRÍTICO</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(226,75,74,.06);border:1px solid rgba(226,75,74,.15);border-radius:8px;padding:14px 16px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">🧀</span>
+            <div><div style="font-size:14px;font-weight:500;">Queso Oaxaca</div><div style="font-size:12px;color:var(--muted);">Stock: 500 g — Mínimo: 2 kg</div></div>
+          </div>
+          <span style="font-size:12px;background:rgba(226,75,74,.15);color:#E24B4A;padding:4px 12px;border-radius:100px;font-weight:600;">CRÍTICO</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(239,159,39,.06);border:1px solid rgba(239,159,39,.15);border-radius:8px;padding:14px 16px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:18px;">🌿</span>
+            <div><div style="font-size:14px;font-weight:500;">Cilantro</div><div style="font-size:12px;color:var(--muted);">Stock: 100 g — Mínimo: 300 g</div></div>
+          </div>
+          <span style="font-size:12px;background:rgba(239,159,39,.15);color:#EF9F27;padding:4px 12px;border-radius:100px;font-weight:600;">BAJO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- INVENTARIO PANEL -->
+    <div id="inv-inventario" class="inv-panel" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+        <h4 style="font-family:'Exo 2',sans-serif;font-size:16px;font-weight:700;">Stock actual de ingredientes</h4>
+        <button onclick="openEntrada()" style="background:var(--accent);color:#0A1220;border:none;border-radius:100px;padding:8px 18px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">+ Registrar entrada</button>
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <thead><tr>
+          <th style="padding:10px 14px;text-align:left;color:var(--muted);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);">Ingrediente</th>
+          <th style="padding:10px 14px;text-align:center;color:var(--muted);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);">Stock</th>
+          <th style="padding:10px 14px;text-align:center;color:var(--muted);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);">Mínimo</th>
+          <th style="padding:10px 14px;text-align:center;color:var(--muted);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);">Costo/u</th>
+          <th style="padding:10px 14px;text-align:center;color:var(--muted);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);">Estado</th>
+        </tr></thead>
+        <tbody id="invTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- MOVIMIENTOS PANEL -->
+    <div id="inv-movimientos" class="inv-panel" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+        <h4 style="font-family:'Exo 2',sans-serif;font-size:16px;font-weight:700;">Registro de entradas y salidas</h4>
+        <div style="display:flex;gap:8px;">
+          <button onclick="filterMov('todos',this)" class="mov-filter-btn active" style="padding:6px 14px;border-radius:100px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid rgba(200,170,128,.3);background:rgba(200,170,128,.1);color:var(--accent);font-family:'DM Sans',sans-serif;">Todos</button>
+          <button onclick="filterMov('entrada',this)" class="mov-filter-btn" style="padding:6px 14px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:none;color:var(--muted);font-family:'DM Sans',sans-serif;">Entradas</button>
+          <button onclick="filterMov('salida',this)" class="mov-filter-btn" style="padding:6px 14px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:none;color:var(--muted);font-family:'DM Sans',sans-serif;">Salidas</button>
+        </div>
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <thead><tr>
+          <th style="padding:10px 14px;text-align:left;color:var(--muted);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);">Fecha / Hora</th>
+          <th style="padding:10px 14px;text-align:left;color:var(--muted);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);">Ingrediente</th>
+          <th style="padding:10px 14px;text-align:center;color:var(--muted);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);">Cantidad</th>
+          <th style="padding:10px 14px;text-align:left;color:var(--muted);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);">Responsable</th>
+          <th style="padding:10px 14px;text-align:center;color:var(--muted);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);">Tipo</th>
+        </tr></thead>
+        <tbody id="movTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- PLATILLOS PANEL -->
+    <div id="inv-platillos" class="inv-panel" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;">
+      <h4 style="font-family:'Exo 2',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px;">Costo real por platillo</h4>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Basado en el inventario actual. Se actualiza automático cuando cambian los precios de ingredientes.</p>
+      <div id="platillosGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ENTRADA MODAL -->
+<div class="modal-overlay" id="entradaModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeEntrada()">×</button>
+    <h3>📦 Registrar entrada</h3>
+    <div id="entradaForm">
+      <div class="form-group">
+        <label>Ingrediente</label>
+        <select id="entIng" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;">
+          <option>Jitomate</option><option>Pollo</option><option>Queso Oaxaca</option>
+          <option>Cebolla</option><option>Cilantro</option><option>Aceite</option>
+          <option>Tortillas</option><option>Aguacate</option>
+        </select>
+      </div>
+      <div class="form-group" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label>Cantidad</label>
+          <input type="number" id="entCantidad" placeholder="Ej. 5" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;">
+        </div>
+        <div>
+          <label>Unidad</label>
+          <select id="entUnidad" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;">
+            <option>kg</option><option>g</option><option>L</option><option>ml</option><option>piezas</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Costo total ($)</label>
+        <input type="number" id="entCosto" placeholder="Ej. 120" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;">
+      </div>
+      <div class="form-group">
+        <label>Proveedor</label>
+        <input type="text" id="entProveedor" placeholder="Nombre del proveedor" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;">
+      </div>
+      <button onclick="confirmarEntrada()" class="modal-confirm">Registrar entrada →</button>
+    </div>
+    <div class="modal-success" id="entradaSuccess" style="display:none;">
+      <div class="check">✅</div>
+      <h3 style="margin-bottom:8px;">¡Entrada registrada!</h3>
+      <p style="color:var(--muted);font-size:14px;">El inventario se actualizó automáticamente.</p>
+    </div>
+  </div>
+</div>
 <section id="cta-sistemas">
   <div class="container">
     <div class="tag">¿Listo para tu sistema?</div>
@@ -892,6 +1070,167 @@ document.getElementById('indChatInput')?.addEventListener('keydown', e => {
   if (e.key === 'Enter') sendIndMsg();
 });
 
+// ─── INVENTARIO DATA ───
+const invData = [
+  {id:1,nombre:'Jitomate',emoji:'🍅',stock:2,min:5,unidad:'kg',costo:18,estado:'critico'},
+  {id:2,nombre:'Pollo',emoji:'🍗',stock:8,min:5,unidad:'kg',costo:95,estado:'ok'},
+  {id:3,nombre:'Queso Oaxaca',emoji:'🧀',stock:0.5,min:2,unidad:'kg',costo:180,estado:'critico'},
+  {id:4,nombre:'Cebolla',emoji:'🧅',stock:6,min:3,unidad:'kg',costo:12,estado:'ok'},
+  {id:5,nombre:'Cilantro',emoji:'🌿',stock:0.1,min:0.3,unidad:'kg',costo:25,estado:'bajo'},
+  {id:6,nombre:'Aceite',emoji:'🫙',stock:4,min:2,unidad:'L',costo:35,estado:'ok'},
+  {id:7,nombre:'Tortillas',emoji:'🫓',stock:200,min:100,unidad:'pzas',costo:0.8,estado:'ok'},
+  {id:8,nombre:'Aguacate',emoji:'🥑',stock:12,min:8,unidad:'pzas',costo:15,estado:'ok'},
+  {id:9,nombre:'Chile serrano',emoji:'🌶️',stock:0.3,min:0.5,unidad:'kg',costo:30,estado:'bajo'},
+  {id:10,nombre:'Crema',emoji:'🥛',stock:3,min:2,unidad:'L',costo:45,estado:'ok'},
+  {id:11,nombre:'Arroz',emoji:'🍚',stock:10,min:5,unidad:'kg',costo:22,estado:'ok'},
+  {id:12,nombre:'Frijol',emoji:'🫘',stock:8,min:4,unidad:'kg',costo:28,estado:'ok'},
+];
+
+let movimientos = [
+  {fecha:'15 Abr 08:12',ingrediente:'Pollo',cantidad:'+5 kg',responsable:'Chef Marco',tipo:'entrada'},
+  {fecha:'15 Abr 07:45',ingrediente:'Tortillas',cantidad:'-50 pzas',responsable:'Sistema',tipo:'salida'},
+  {fecha:'15 Abr 07:30',ingrediente:'Jitomate',cantidad:'-3 kg',responsable:'Sistema',tipo:'salida'},
+  {fecha:'14 Abr 18:00',ingrediente:'Aceite',cantidad:'+4 L',responsable:'Almacén',tipo:'entrada'},
+  {fecha:'14 Abr 13:20',ingrediente:'Aguacate',cantidad:'-6 pzas',responsable:'Sistema',tipo:'salida'},
+  {fecha:'14 Abr 09:00',ingrediente:'Queso Oaxaca',cantidad:'-1.5 kg',responsable:'Sistema',tipo:'salida'},
+  {fecha:'13 Abr 16:30',ingrediente:'Cebolla',cantidad:'+8 kg',responsable:'Chef Marco',tipo:'entrada'},
+  {fecha:'13 Abr 12:00',ingrediente:'Arroz',cantidad:'-2 kg',responsable:'Sistema',tipo:'salida'},
+];
+
+const platillos = [
+  {nombre:'Tacos de pollo',precio:85,ingredientes:['Pollo: 120g','Tortillas: 3 pzas','Cebolla: 20g','Cilantro: 5g'],costo:18.4},
+  {nombre:'Quesadilla',precio:65,ingredientes:['Tortillas: 2 pzas','Queso Oaxaca: 80g','Aceite: 5ml'],costo:16.8},
+  {nombre:'Guacamole',precio:55,ingredientes:['Aguacate: 1 pza','Jitomate: 50g','Cebolla: 20g','Cilantro: 5g'],costo:20.1},
+  {nombre:'Arroz con pollo',precio:120,ingredientes:['Pollo: 200g','Arroz: 150g','Jitomate: 80g','Cebolla: 30g'],costo:32.5},
+  {nombre:'Enchiladas',precio:95,ingredientes:['Tortillas: 3 pzas','Pollo: 150g','Crema: 30ml','Queso Oaxaca: 60g'],costo:28.7},
+  {nombre:'Frijoles de olla',precio:35,ingredientes:['Frijol: 150g','Cebolla: 20g','Chile serrano: 5g'],costo:6.2},
+];
+
+let currentMovFilter = 'todos';
+
+function renderInvTable() {
+  const tbody = document.getElementById('invTableBody');
+  if (!tbody) return;
+  const estadoStyle = {
+    ok: 'background:rgba(78,193,122,.12);color:var(--green);',
+    bajo: 'background:rgba(239,159,39,.12);color:#EF9F27;',
+    critico: 'background:rgba(226,75,74,.12);color:#E24B4A;'
+  };
+  tbody.innerHTML = invData.map(i => `
+    <tr>
+      <td style="padding:12px 14px;border-bottom:1px solid var(--border);">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">${i.emoji}</span>
+          <span style="font-weight:500;">${i.nombre}</span>
+        </div>
+      </td>
+      <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;font-weight:600;font-family:'Exo 2',sans-serif;">${i.stock} ${i.unidad}</td>
+      <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;color:var(--muted);">${i.min} ${i.unidad}</td>
+      <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;color:var(--accent);">$${i.costo}/${i.unidad}</td>
+      <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">
+        <span style="font-size:11px;padding:3px 10px;border-radius:100px;font-weight:600;${estadoStyle[i.estado]}">${i.estado.toUpperCase()}</span>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderMovimientos(filter) {
+  const tbody = document.getElementById('movTableBody');
+  if (!tbody) return;
+  const items = filter === 'todos' ? movimientos : movimientos.filter(m => m.tipo === filter);
+  tbody.innerHTML = items.map(m => `
+    <tr>
+      <td style="padding:12px 14px;border-bottom:1px solid var(--border);color:var(--muted);font-size:12px;">${m.fecha}</td>
+      <td style="padding:12px 14px;border-bottom:1px solid var(--border);font-weight:500;">${m.ingrediente}</td>
+      <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;font-family:'Exo 2',sans-serif;font-weight:700;color:${m.tipo==='entrada'?'var(--green)':'#E24B4A'}">${m.cantidad}</td>
+      <td style="padding:12px 14px;border-bottom:1px solid var(--border);color:var(--muted);">${m.responsable}</td>
+      <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">
+        <span style="font-size:11px;padding:3px 10px;border-radius:100px;font-weight:600;${m.tipo==='entrada'?'background:rgba(78,193,122,.12);color:var(--green);':'background:rgba(226,75,74,.12);color:#E24B4A;'}">${m.tipo}</span>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function filterMov(filter, el) {
+  currentMovFilter = filter;
+  document.querySelectorAll('.mov-filter-btn').forEach(b => {
+    b.style.background = 'none';
+    b.style.color = 'var(--muted)';
+    b.style.borderColor = 'var(--border)';
+  });
+  el.style.background = 'rgba(200,170,128,.1)';
+  el.style.color = 'var(--accent)';
+  el.style.borderColor = 'rgba(200,170,128,.3)';
+  renderMovimientos(filter);
+}
+
+function renderPlatillos() {
+  const grid = document.getElementById('platillosGrid');
+  if (!grid) return;
+  grid.innerHTML = platillos.map(p => {
+    const margen = ((p.precio - p.costo) / p.precio * 100).toFixed(0);
+    return `
+    <div style="background:var(--surface2);border-radius:10px;padding:20px;border:1px solid var(--border);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <div style="font-size:14px;font-weight:600;">${p.nombre}</div>
+        <div style="font-family:'Exo 2',sans-serif;font-size:16px;font-weight:800;color:var(--accent);">$${p.precio}</div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">${p.ingredientes.join(' · ')}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border);">
+        <div><div style="font-size:11px;color:var(--muted);">Costo ingredientes</div><div style="font-size:14px;font-weight:600;color:#E24B4A;">$${p.costo}</div></div>
+        <div style="text-align:right;"><div style="font-size:11px;color:var(--muted);">Margen bruto</div><div style="font-size:14px;font-weight:600;color:var(--green);">${margen}%</div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function showInvPanel(panel, el) {
+  document.querySelectorAll('.inv-panel').forEach(p => p.style.display = 'none');
+  document.getElementById('inv-'+panel).style.display = 'block';
+  document.querySelectorAll('.inv-panel-btn').forEach(b => {
+    b.style.background = 'none';
+    b.style.color = 'var(--muted)';
+  });
+  el.style.background = 'rgba(200,170,128,.1)';
+  el.style.color = 'var(--accent)';
+  if (panel === 'inventario') renderInvTable();
+  if (panel === 'movimientos') renderMovimientos(currentMovFilter);
+  if (panel === 'platillos') renderPlatillos();
+}
+
+function openEntrada() {
+  document.getElementById('entradaModal').classList.add('open');
+  document.getElementById('entradaForm').style.display = 'block';
+  document.getElementById('entradaSuccess').style.display = 'none';
+}
+
+function closeEntrada() {
+  document.getElementById('entradaModal').classList.remove('open');
+}
+
+function confirmarEntrada() {
+  const ing = document.getElementById('entIng').value;
+  const cantidad = document.getElementById('entCantidad').value;
+  const unidad = document.getElementById('entUnidad').value;
+  const proveedor = document.getElementById('entProveedor').value || 'Proveedor';
+  if (!cantidad) return;
+
+  // Add to movimientos
+  const now = new Date();
+  movimientos.unshift({
+    fecha: `${now.getDate()} Abr ${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}`,
+    ingrediente: ing,
+    cantidad: `+${cantidad} ${unidad}`,
+    responsable: proveedor,
+    tipo: 'entrada'
+  });
+
+  document.getElementById('entradaForm').style.display = 'none';
+  document.getElementById('entradaSuccess').style.display = 'block';
+  renderMovimientos(currentMovFilter);
+  setTimeout(closeEntrada, 2000);
+}
+
 // ─── CLÍNICA DATA ───
 const citasData = [
   {id:1,paciente:'María González',doctor:'garcia',hora:'9:00 AM',motivo:'Consulta general',estado:'confirmada'},
@@ -1018,6 +1357,29 @@ function registrarSocio() {
   }, 2500);
 }
 
+// ─── RESTAURANTE SUB-TABS ───
+function showRestTab(tab, el) {
+  document.getElementById('rest-ventas').style.display = tab === 'ventas' ? 'block' : 'none';
+  const invContainer = document.getElementById('rest-inventario');
+  if (tab === 'inventario') {
+    if (!invContainer.children.length) {
+      // Move inventario content here on first click
+      const invSection = document.getElementById('demo-inventario');
+      invContainer.innerHTML = invSection.innerHTML;
+      renderInvTable();
+    }
+    invContainer.style.display = 'block';
+  } else {
+    invContainer.style.display = 'none';
+  }
+  document.querySelectorAll('.rest-subtab').forEach(b => {
+    b.style.background = 'none';
+    b.style.color = 'var(--muted)';
+  });
+  el.style.background = 'rgba(200,170,128,.1)';
+  el.style.color = 'var(--accent)';
+}
+
 // ─── DEMO SWITCHER ───
 function showDemo(id) {
   document.querySelectorAll('.demo-section').forEach(s => s.classList.remove('active'));
@@ -1040,6 +1402,7 @@ renderMenu('todo');
 renderCart();
 renderCitas('todos');
 renderSocios('todos');
+renderInvTable();
 </script>
 
 </body>
