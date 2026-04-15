@@ -891,7 +891,7 @@ footer {
           <div style="background:var(--surface2);padding:16px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);">
             <div style="width:38px;height:38px;border-radius:50%;background:rgba(200,170,128,.15);display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--accent);">AW</div>
             <div>
-              <div style="font-size:14px;font-weight:600;color:var(--text);">AUTOM</div>
+              <div style="font-size:14px;font-weight:600;color:var(--text);">AUTOMWIZ</div>
               <div style="font-size:11px;color:#4EC17A;display:flex;align-items:center;gap:4px;">
                 <span style="width:6px;height:6px;border-radius:50%;background:#4EC17A;display:inline-block;"></span>
                 Agente activo
@@ -918,222 +918,204 @@ footer {
       </div>
     </div>
   </div>
-</section>
-
-<script>
-// ─── AUTOM — CLAUDE AI AGENT ───
-
-const SUPABASE_URL = 'https://qeqesoyzngyzlgecohpl.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFlcWVzb3l6bmd5emxnZWNvaHBsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1Mzk4MDEsImV4cCI6MjA5MDExNTgwMX0.1M3RNWU8Gc-xVlfYXpNcH1ud7gQd6y2mEBkku2Q-k6s';
-
-const AUTOM_SYSTEM = `Eres AUTOM, el asistente de ventas de AUTOMWIZ. Tu único objetivo es entender el negocio del cliente, resolver sus dudas y agendar un diagnóstico gratuito.
-
-SOBRE AUTOMWIZ:
-- Creamos agentes de texto con IA (vía WhatsApp, Instagram o web) para clínicas, gyms, restaurantes, empresas financieras, salones y más
-- El agente atiende, califica y agenda leads automáticamente 24/7
-- También construimos sistemas digitales completos: restaurante (menú, pedidos, reservas) e industrial (control de procesos, inventario, capacitación)
-- Precios desde $3,000 MXN/mes dependiendo de las necesidades y alcances
-- El agente se entrega listo en 5 días hábiles
-- Incluye CRM con conversaciones y leads centralizados
-- Sin contratos anuales, mes a mes
-
-LO QUE PUEDES DECIR CON CERTEZA:
-- El agente responde mensajes automáticamente 24/7
-- Agenda citas y califica leads según criterios definidos
-- Se conecta a WhatsApp Business, Instagram y chat web
-- Los clientes ven sus conversaciones y leads en un panel centralizado
-- Se personaliza para el negocio específico del cliente
-- Se entrega en 5 días
-
-LO QUE NO DEBES PROMETER:
-- No garantices números exactos de conversión sin conocer el negocio
-- No digas que se integra con cualquier software sin confirmarlo
-- No prometas funciones avanzadas de IA fuera del alcance de agentes de texto
-
-DATOS QUE DEBES RECOLECTAR (de forma natural, no como formulario):
-1. nombre
-2. empresa/negocio
-3. sector
-4. mensajes que recibe por día aproximadamente
-5. si tiene WhatsApp Business activo
-6. mayor problema operativo actual
-7. WhatsApp de contacto
-
-CUANDO TENGAS TODOS LOS DATOS:
-- Confirma que los registraste
-- Di que un asesor los contactará pronto
-- Incluye en tu respuesta este JSON al final (oculto para el usuario, en un comentario HTML): <!--LEAD:{"nombre":"X","empresa":"X","sector":"X","mensajes":"X","wa_business":"X","problema":"X","whatsapp":"X"}-->
-
-TONO Y ESTILO:
-- Mensajes cortos — máximo 3 líneas
-- Directo y amigable, nada de tecnicismos
-- Sin listas largas, sin emojis excesivos
-- Si el cliente pregunta el precio: "Arranca desde $3,000 MXN/mes según lo que necesites. Para darte un precio exacto necesito entender tu operación — ¿me cuentas un poco de tu negocio?"
-- Si el cliente dice "está caro": "Entiendo. Considera que reemplaza el costo de un empleado de atención que ronda los $8,000-15,000/mes — y trabaja 24/7 sin descanso."
-- Si el cliente dice "ya tengo chatbot": "¿Cómo te está funcionando? Muchos clientes que llegan con nosotros tenían chatbots genéricos que no convertían. La diferencia está en la personalización."`;
-
-let chatHistory = [];
-let collectedData = {};
-let chatStarted = false;
-
-const CSS_ANIM = document.createElement('style');
-CSS_ANIM.textContent = `
-@keyframes blink { 0%,80%,100%{opacity:.2} 40%{opacity:1} }
-@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-`;
-document.head.appendChild(CSS_ANIM);
-
-function addMsg(text, role) {
-  const msgs = document.getElementById('chatMsgs');
-  const div = document.createElement('div');
-  const isBot = role === 'bot';
-  div.style.cssText = `max-width:85%;padding:12px 16px;font-size:14px;line-height:1.55;color:var(--text);animation:fadeUp .3s ease;${
-    isBot
-      ? 'background:var(--surface2);border-radius:12px 12px 12px 2px;'
-      : 'background:rgba(200,170,128,.15);border-radius:12px 12px 2px 12px;align-self:flex-end;margin-left:auto;'
-  }`;
-  div.textContent = text;
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-}
-
-function showTyping() {
-  const msgs = document.getElementById('chatMsgs');
-  const div = document.createElement('div');
-  div.id = 'typingIndicator';
-  div.style.cssText = 'display:flex;gap:6px;align-items:center;padding:12px 16px;background:var(--surface2);border-radius:12px 12px 12px 2px;width:fit-content;';
-  div.innerHTML = '<span style="width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink .8s infinite;"></span><span style="width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink .8s .2s infinite;"></span><span style="width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink .8s .4s infinite;"></span>';
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-}
-
-function hideTyping() {
-  const t = document.getElementById('typingIndicator');
-  if (t) t.remove();
-}
-
-function setInputEnabled(enabled) {
-  const inp = document.getElementById('autom_input');
-  const btn = document.getElementById('autom_send');
-  if (inp) inp.disabled = !enabled;
-  if (btn) btn.disabled = !enabled;
-}
-
-async function sendToAutom(userMsg) {
-  if (userMsg.trim() === '') return;
-  setInputEnabled(false);
-
-  addMsg(userMsg, 'user');
-  chatHistory.push({ role: 'user', content: userMsg });
-  document.getElementById('autom_input').value = '';
-
-  showTyping();
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: AUTOM_SYSTEM,
-        messages: chatHistory
-      })
-    });
-
-    const data = await res.json();
-    const raw = data.content?.[0]?.text || '';
-
-    // Extract and parse lead JSON if present
-    const leadMatch = raw.match(/<!--LEAD:(.*?)-->/s);
-    if (leadMatch) {
-      try {
-        const lead = JSON.parse(leadMatch[1]);
-        await saveLead(lead);
-      } catch(e) {}
-    }
-
-    // Clean response - remove HTML comments
-    const clean = raw.replace(/<!--.*?-->/gs, '').trim();
-
-    hideTyping();
-    addMsg(clean, 'bot');
-    chatHistory.push({ role: 'assistant', content: raw });
-
-  } catch(err) {
-    hideTyping();
-    addMsg('Hubo un error de conexión. Escríbenos directo al WhatsApp 📲', 'bot');
+</section<script>
+// ─── DIAGNOSTIC STEPPER ───
+const diagSteps = [
+  {
+    msg: { es: "¡Hola! Soy el asistente de AUTOMWIZ 👋 Voy a hacerte unas preguntas rápidas para entender tu negocio. ¿Cómo te llamas?", en: "Hi! I am the AUTOMWIZ assistant 👋 I will ask you a few quick questions to understand your business. What is your name?" },
+    type: 'text', placeholder: { es: "Tu nombre...", en: "Your name..." },
+    field: 'nombre', validate: v => v.trim().length > 1
+  },
+  {
+    msg: { es: "Mucho gusto {{nombre}} 😊 ¿Cómo se llama tu negocio?", en: "Nice to meet you {{nombre}} 😊 What is your business name?" },
+    type: 'text', placeholder: { es: "Nombre del negocio...", en: "Business name..." },
+    field: 'empresa', validate: v => v.trim().length > 1
+  },
+  {
+    msg: { es: "¿A qué sector pertenece {{empresa}}?", en: "What sector does {{empresa}} belong to?" },
+    type: 'options',
+    options: [
+      { es: "🏥 Clínica / Consultorio", en: "🏥 Clinic / Medical office", val: "clinica" },
+      { es: "💪 Gym / Fitness", en: "💪 Gym / Fitness", val: "gym" },
+      { es: "🍽️ Restaurante", en: "🍽️ Restaurant", val: "restaurante" },
+      { es: "🏭 Industrial", en: "🏭 Industrial", val: "industrial" },
+      { es: "🛒 E-commerce", en: "🛒 E-commerce", val: "ecommerce" },
+      { es: "💄 Salón / Spa", en: "💄 Salon / Spa", val: "salon" },
+      { es: "👥 RRHH / Reclutamiento", en: "👥 HR / Recruitment", val: "rrhh" },
+      { es: "✳️ Otro", en: "✳️ Other", val: "otro" }
+    ],
+    field: 'industria'
+  },
+  {
+    msg: { es: "¿Cuántos mensajes o consultas recibes por día aproximadamente?", en: "How many messages or inquiries do you receive per day approximately?" },
+    type: 'options',
+    options: [
+      { es: "Menos de 10", en: "Less than 10", val: "menos10" },
+      { es: "10 – 30 mensajes", en: "10 – 30 messages", val: "10a30" },
+      { es: "30 – 100 mensajes", en: "30 – 100 messages", val: "30a100" },
+      { es: "Más de 100", en: "More than 100", val: "mas100" }
+    ],
+    field: 'volumen'
+  },
+  {
+    msg: { es: "¿Tu WhatsApp para el diagnóstico? Te contactaremos ahí 📲", en: "Your WhatsApp for the diagnosis? We will contact you there 📲" },
+    type: 'tel', placeholder: { es: "+52 871 000 0000", en: "+52 871 000 0000" },
+    field: 'whatsapp', validate: v => v.trim().length > 7
   }
+];
 
-  setInputEnabled(true);
-  document.getElementById('autom_input').focus();
+const diagData = {};
+let diagStep = 0;
+let isTyping = false;
+
+function diagReplace(str) {
+  return str.replace(/\{\{(\w+)\}\}/g, (_, k) => diagData[k] || '');
 }
 
-async function saveLead(lead) {
-  try {
-    await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify({
-        nombre: lead.nombre || '',
-        empresa: lead.empresa || '',
-        industria: lead.sector || '',
-        whatsapp: lead.whatsapp || '',
-        mensaje: `Mensajes/día: ${lead.mensajes || ''} | WA Business: ${lead.wa_business || ''} | Problema: ${lead.problema || ''}`,
-        idioma: lang,
-        fecha: new Date().toISOString()
-      })
-    });
-  } catch(e) {}
+function addBotMsg(text, delay) {
+  delay = delay || 0;
+  return new Promise(function(resolve) {
+    const msgs = document.getElementById('chatMsgs');
+    const typing = document.createElement('div');
+    typing.style.cssText = 'display:flex;gap:6px;align-items:center;padding:10px 14px;background:var(--surface2);border-radius:12px 12px 12px 2px;width:fit-content;';
+    typing.innerHTML = '<span style="width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink .8s infinite;"></span><span style="width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink .8s .2s infinite;"></span><span style="width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink .8s .4s infinite;"></span>';
+    msgs.appendChild(typing);
+    msgs.scrollTop = msgs.scrollHeight;
+    setTimeout(function() {
+      typing.remove();
+      const msg = document.createElement('div');
+      msg.style.cssText = 'max-width:85%;padding:12px 16px;background:var(--surface2);border-radius:12px 12px 12px 2px;font-size:14px;line-height:1.55;color:var(--text);animation:fadeUp .3s ease;';
+      msg.textContent = text;
+      msgs.appendChild(msg);
+      msgs.scrollTop = msgs.scrollHeight;
+      resolve();
+    }, delay + 800);
+  });
 }
 
-async function initAutom() {
-  if (chatStarted) return;
-  chatStarted = true;
-
-  const greeting = lang === 'es'
-    ? '¡Hola! Soy AUTOM 👋 ¿En qué tipo de negocio puedo ayudarte hoy?'
-    : "Hi! I'm AUTOM 👋 What type of business can I help you with today?";
-
-  showTyping();
-  await new Promise(r => setTimeout(r, 900));
-  hideTyping();
-  addMsg(greeting, 'bot');
-  chatHistory.push({ role: 'assistant', content: greeting });
+function addUserMsg(text) {
+  const msgs = document.getElementById('chatMsgs');
+  const msg = document.createElement('div');
+  msg.style.cssText = 'max-width:85%;padding:12px 16px;background:rgba(200,170,128,.15);border-radius:12px 12px 2px 12px;font-size:14px;line-height:1.55;color:var(--text);align-self:flex-end;margin-left:auto;animation:fadeUp .3s ease;';
+  msg.textContent = text;
+  msgs.appendChild(msg);
+  msgs.scrollTop = msgs.scrollHeight;
 }
 
-// Build input UI
-function buildChatInput() {
+function updateDots(step) {
+  document.querySelectorAll('.prog-dot').forEach(function(d, i) {
+    d.style.background = i <= step ? 'var(--accent)' : 'var(--border)';
+    d.style.transform = i === step ? 'scale(1.3)' : 'scale(1)';
+  });
+}
+
+function renderInput(step) {
   const area = document.getElementById('chatInput');
-  area.innerHTML = `
-    <input id="autom_input" type="text" placeholder="${lang === 'es' ? 'Escribe tu mensaje...' : 'Type your message...'}"
-      style="flex:1;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s;"
-      onfocus="this.style.borderColor='rgba(200,170,128,.4)'"
-      onblur="this.style.borderColor='var(--border)'"
-      onkeydown="if(event.key==='Enter')sendToAutom(this.value)">
-    <button id="autom_send"
-      style="background:var(--accent);color:#0A1220;border:none;border-radius:8px;padding:12px 18px;cursor:pointer;font-size:18px;font-weight:700;transition:opacity .2s;flex-shrink:0;"
-      onclick="sendToAutom(document.getElementById('autom_input').value)">→</button>
-  `;
+  area.innerHTML = '';
+  const s = diagSteps[step];
+  if (!s) return;
+  if (s.type === 'text' || s.type === 'tel') {
+    const inp = document.createElement('input');
+    inp.type = s.type === 'tel' ? 'tel' : 'text';
+    inp.placeholder = s.placeholder[lang] || s.placeholder.es;
+    inp.style.cssText = 'flex:1;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:var(--text);font-family:"DM Sans",sans-serif;font-size:14px;outline:none;transition:border-color .2s;';
+    inp.addEventListener('focus', function() { inp.style.borderColor = 'rgba(200,170,128,.4)'; });
+    inp.addEventListener('blur', function() { inp.style.borderColor = 'var(--border)'; });
+    const btn = document.createElement('button');
+    btn.style.cssText = 'background:var(--accent);color:#0A1220;border:none;border-radius:8px;padding:12px 18px;cursor:pointer;font-size:18px;transition:opacity .2s;flex-shrink:0;';
+    btn.innerHTML = '→';
+    btn.onclick = function() { submitDiag(inp.value); };
+    inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') submitDiag(inp.value); });
+    area.appendChild(inp);
+    area.appendChild(btn);
+    setTimeout(function() { inp.focus(); }, 100);
+  } else if (s.type === 'options') {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:8px;width:100%;';
+    s.options.forEach(function(opt) {
+      const b = document.createElement('button');
+      b.textContent = opt[lang] || opt.es;
+      b.style.cssText = 'padding:8px 14px;border:1px solid var(--border);border-radius:100px;background:var(--bg);color:var(--muted);font-size:13px;cursor:pointer;transition:all .2s;font-family:"DM Sans",sans-serif;';
+      b.onmouseover = function() { b.style.borderColor = 'rgba(200,170,128,.4)'; b.style.color = 'var(--text)'; };
+      b.onmouseout = function() { b.style.borderColor = 'var(--border)'; b.style.color = 'var(--muted)'; };
+      b.onclick = function() { submitDiag(opt[lang] || opt.es, opt.val); };
+      wrap.appendChild(b);
+    });
+    area.appendChild(wrap);
+  }
 }
 
-// Init on view
-const diagObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      buildChatInput();
-      initAutom();
+async function submitDiag(displayVal, storeVal) {
+  if (isTyping || !displayVal || displayVal.trim() === '') return;
+  const s = diagSteps[diagStep];
+  if (s.validate && !s.validate(displayVal)) return;
+  isTyping = true;
+  diagData[s.field] = storeVal || displayVal;
+  addUserMsg(displayVal);
+  document.getElementById('chatInput').innerHTML = '';
+  diagStep++;
+  updateDots(diagStep);
+  if (diagStep < diagSteps.length) {
+    const nextMsg = diagReplace(diagSteps[diagStep].msg[lang] || diagSteps[diagStep].msg.es);
+    await addBotMsg(nextMsg, 200);
+    renderInput(diagStep);
+  } else {
+    const doneMsg = lang === 'es'
+      ? 'Perfecto ' + diagData.nombre + ' ✅ Ya tengo todo lo que necesito. Un asesor de AUTOMWIZ te contactara en las proximas horas por WhatsApp.'
+      : 'Perfect ' + diagData.nombre + ' ✅ I have everything I need. An AUTOMWIZ advisor will contact you within the next few hours on WhatsApp.';
+    await addBotMsg(doneMsg, 300);
+    document.getElementById('chatInput').innerHTML = '';
+    try {
+      await fetch(SUPABASE_URL + '/rest/v1/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          nombre: diagData.nombre, empresa: diagData.empresa,
+          industria: diagData.industria, whatsapp: diagData.whatsapp,
+          mensaje: 'Volumen: ' + diagData.volumen,
+          idioma: lang, fecha: new Date().toISOString()
+        })
+      });
+    } catch(e) {
+      const msg = encodeURIComponent('Hola AUTOMWIZ, quiero mi diagnostico.
+Nombre: ' + diagData.nombre + '
+Empresa: ' + diagData.empresa + '
+Sector: ' + diagData.industria + '
+WA: ' + diagData.whatsapp);
+      window.open('https://wa.me/528717866322?text=' + msg, '_blank');
+    }
+  }
+  isTyping = false;
+}
+
+async function initDiag() {
+  updateDots(0);
+  const firstMsg = diagSteps[0].msg[lang] || diagSteps[0].msg.es;
+  await addBotMsg(firstMsg, 300);
+  renderInput(0);
+}
+
+const diagStyle = document.createElement('style');
+diagStyle.textContent = '@keyframes blink { 0%,80%,100%{opacity:.2} 40%{opacity:1} } @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }';
+document.head.appendChild(diagStyle);
+
+let diagStarted = false;
+const diagObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting && !diagStarted) {
+      diagStarted = true;
+      initDiag();
       diagObserver.disconnect();
     }
   });
 }, { threshold: 0.2 });
 diagObserver.observe(document.getElementById('diagnostico'));
-</script>
+</script>pt>
 
 
 <!-- ─── POR QUÉ AUTOMWIZ ─── -->
