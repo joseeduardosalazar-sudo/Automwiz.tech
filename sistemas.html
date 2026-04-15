@@ -2128,15 +2128,22 @@ function initCounters() {
   if (s20) animateCounter(s20, 20, '+', '%', 1600);
 }
 
-// Trigger when hero stats come into view
+// Hero stats are visible on load — trigger after short delay
+setTimeout(() => {
+  const s78 = document.getElementById('stat-78');
+  if (s78 && s78.textContent === '0%') initCounters();
+}, 800);
+
+// Also trigger if user scrolls to them later
 const statsObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      initCounters();
+      const s78 = document.getElementById('stat-78');
+      if (s78 && s78.textContent === '0%') initCounters();
       statsObserver.disconnect();
     }
   });
-}, { threshold: 0.5 });
+}, { threshold: 0.1 });
 
 const heroStatsEl = document.querySelector('.hero-stats');
 if (heroStatsEl) statsObserver.observe(heroStatsEl);
