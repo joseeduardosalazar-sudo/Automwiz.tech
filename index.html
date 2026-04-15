@@ -1598,7 +1598,7 @@ diagObserver.observe(document.getElementById('diagnostico'));
       <div class="tag" data-i18n="faq_tag">Preguntas frecuentes</div>
       <h2 class="section-title" style="justify-content:center;" data-i18n="faq_title">Lo que todos <span>preguntan</span> antes de contratar</h2>
     </div>
-    <div id="faqList" style="max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:0;"></div>
+    <div id="faqList" style="display:grid;grid-template-columns:1fr 1fr;gap:0 48px;"></div>
   </div>
 </section>
 
@@ -1623,6 +1623,7 @@ diagObserver.observe(document.getElementById('diagnostico'));
 .faq-item.open .faq-a { max-height:200px;padding-bottom:20px; }
 .faq-item.open .faq-icon { transform:rotate(45deg);color:var(--accent); }
 .faq-item.open .faq-q { color:var(--accent); }
+@media(max-width:768px){#faqList{grid-template-columns:1fr!important;}}
 </style>
 
 <script>
@@ -1717,16 +1718,20 @@ function buildFAQ() {
   const list = document.getElementById('faqList');
   if (!list) return;
   const items = faqData[lang] || faqData.es;
-  list.innerHTML = items.map((item, i) => `
-    <div class="faq-item reveal" onclick="toggleFAQ(${i})">
-      <div class="faq-q">
-        <span>${item.q}</span>
-        <span class="faq-icon">+</span>
-      </div>
-      <div class="faq-a">${item.a}</div>
-    </div>
-  `).join('');
-  // Re-observe new reveal elements
+  const half = Math.ceil(items.length / 2);
+
+  function renderItem(item, idx) {
+    return '<div class="faq-item reveal" onclick="toggleFAQ(' + idx + ')">' +
+      '<div class="faq-q"><span>' + item.q + '</span><span class="faq-icon">+</span></div>' +
+      '<div class="faq-a">' + item.a + '</div></div>';
+  }
+
+  const col1HTML = items.slice(0, half).map((item, i) => renderItem(item, i)).join('');
+  const col2HTML = items.slice(half).map((item, i) => renderItem(item, i + half)).join('');
+
+  list.innerHTML = '<div style="display:flex;flex-direction:column;">' + col1HTML + '</div>' +
+                   '<div style="display:flex;flex-direction:column;">' + col2HTML + '</div>';
+
   list.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 }
 
