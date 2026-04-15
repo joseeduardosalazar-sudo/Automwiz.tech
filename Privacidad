@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidad — AUTOMWIZ</title>
+<meta name="description" content="Política de privacidad y tratamiento de datos personales de AUTOMWIZ conforme a la LFPDPPP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#070D16; --surface:#0C1622; --border:rgba(160,210,255,0.08);
+  --accent:#C8AA80; --text:#EDE7DC; --muted:#6A8499; --radius:12px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.7; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+nav {
+  background:rgba(7,13,22,.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:18px 0;
+  position:sticky; top:0; z-index:100;
+}
+.nav-inner { max-width:860px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; }
+.logo { font-family:'Exo 2',sans-serif; font-size:22px; font-weight:800; letter-spacing:.04em; color:var(--text); }
+.back-link { font-size:14px; color:var(--muted); display:flex; align-items:center; gap:6px; transition:color .2s; }
+.back-link:hover { color:var(--text); text-decoration:none; }
+
+.container { max-width:860px; margin:0 auto; padding:60px 24px 100px; }
+
+h1 { font-family:'Exo 2',sans-serif; font-size:clamp(28px,5vw,42px); font-weight:800; line-height:1.1; margin-bottom:12px; }
+h1 span { color:var(--accent); }
+.meta { font-size:13px; color:var(--muted); margin-bottom:48px; padding-bottom:24px; border-bottom:1px solid var(--border); }
+
+h2 { font-family:'Exo 2',sans-serif; font-size:20px; font-weight:700; color:var(--text); margin:40px 0 12px; padding-left:16px; border-left:3px solid var(--accent); }
+p { color:var(--muted); margin-bottom:14px; }
+p strong { color:var(--text); }
+ul { list-style:none; margin:0 0 14px 0; display:flex; flex-direction:column; gap:8px; }
+ul li { color:var(--muted); padding-left:20px; position:relative; }
+ul li::before { content:'—'; position:absolute; left:0; color:var(--accent); }
+
+.highlight {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px 28px;
+  margin:24px 0;
+}
+.highlight p { margin:0; }
+
+footer-note {
+  display:block;
+  margin-top:60px;
+  padding-top:24px;
+  border-top:1px solid var(--border);
+  font-size:13px;
+  color:var(--muted);
+  text-align:center;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">AUTOMWIZ</div>
+    <a href="/" class="back-link">← Regresar al sitio</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Política de <span>Privacidad</span></h1>
+  <p class="meta">
+    Última actualización: Abril 2025 &nbsp;·&nbsp; AUTOMWIZ &nbsp;·&nbsp; Torreón, Coahuila, México &nbsp;·&nbsp;
+    <a href="mailto:info@automwiz.com">info@automwiz.com</a>
+  </p>
+
+  <p>En <strong>AUTOMWIZ</strong> ("nosotros", "la empresa") nos comprometemos a proteger la privacidad de quienes visitan nuestro sitio web y utilizan nuestros servicios. La presente Política de Privacidad describe cómo recopilamos, usamos, almacenamos y protegemos sus datos personales, de conformidad con la <strong>Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)</strong> y su Reglamento.</p>
+
+  <h2>1. Responsable del tratamiento</h2>
+  <p><strong>AUTOMWIZ</strong><br>
+  Torreón, Coahuila, México<br>
+  Correo: <a href="mailto:info@automwiz.com">info@automwiz.com</a><br>
+  WhatsApp: <a href="https://wa.me/528717866322">+52 871 786 6322</a></p>
+
+  <h2>2. Datos personales que recopilamos</h2>
+  <p>A través del formulario de diagnóstico en nuestro sitio web podemos recopilar los siguientes datos:</p>
+  <ul>
+    <li>Nombre completo</li>
+    <li>Nombre de la empresa o negocio</li>
+    <li>Sector o industria</li>
+    <li>Número de WhatsApp</li>
+    <li>Información adicional que el usuario proporcione voluntariamente</li>
+  </ul>
+
+  <h2>3. Finalidad del tratamiento</h2>
+  <p>Los datos personales recopilados serán utilizados exclusivamente para:</p>
+  <ul>
+    <li>Contactar al usuario para proporcionar información sobre nuestros servicios</li>
+    <li>Realizar el diagnóstico gratuito solicitado</li>
+    <li>Enviar propuestas comerciales relacionadas con automatización con IA</li>
+    <li>Dar seguimiento a la relación comercial si aplica</li>
+  </ul>
+  <p><strong>No compartimos, vendemos ni cedemos sus datos personales a terceros</strong> sin su consentimiento expreso, salvo obligación legal.</p>
+
+  <h2>4. Transferencia de datos</h2>
+  <p>Sus datos son almacenados en <strong>Supabase</strong> (plataforma de base de datos en la nube con servidores en Estados Unidos), bajo estándares de seguridad internacionales. Esta transferencia es necesaria para la operación del formulario de contacto. Al enviar sus datos, usted consiente esta transferencia.</p>
+
+  <h2>5. Tiempo de conservación</h2>
+  <p>Conservamos sus datos personales por el tiempo necesario para cumplir con las finalidades descritas o hasta que usted ejerza su derecho de cancelación. En ningún caso por más de <strong>3 años</strong> sin renovación de consentimiento.</p>
+
+  <h2>6. Derechos ARCO</h2>
+  <p>Usted tiene derecho a <strong>Acceder, Rectificar, Cancelar u Oponerse</strong> al tratamiento de sus datos personales (Derechos ARCO). Para ejercerlos:</p>
+  <div class="highlight">
+    <p>Envíe un correo a <a href="mailto:info@automwiz.com">info@automwiz.com</a> con el asunto <strong>"Derechos ARCO"</strong> indicando: su nombre completo, los datos que desea ejercer y una copia de identificación oficial. Daremos respuesta en un plazo máximo de <strong>20 días hábiles</strong>.</p>
+  </div>
+
+  <h2>7. Cookies y tecnologías de rastreo</h2>
+  <p>Nuestro sitio utiliza <strong>Google Analytics</strong> para analizar el tráfico web de forma agregada y anónima. Esta herramienta puede usar cookies propias de Google. Usted puede desactivar el rastreo en la configuración de su navegador o mediante la extensión <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">Google Analytics Opt-out</a>.</p>
+
+  <h2>8. Seguridad</h2>
+  <p>Implementamos medidas técnicas y organizativas razonables para proteger sus datos contra acceso no autorizado, pérdida o destrucción, incluyendo comunicaciones cifradas (HTTPS) y acceso restringido a la base de datos.</p>
+
+  <h2>9. Cambios a esta política</h2>
+  <p>Podemos actualizar esta Política de Privacidad en cualquier momento. Notificaremos cambios significativos publicando la nueva versión en esta página con la fecha de actualización correspondiente.</p>
+
+  <h2>10. Contacto</h2>
+  <p>Si tiene dudas sobre esta política o el tratamiento de sus datos, contáctenos en <a href="mailto:info@automwiz.com">info@automwiz.com</a> o por WhatsApp al <a href="https://wa.me/528717866322">+52 871 786 6322</a>.</p>
+
+  <footer-note>© 2025 AUTOMWIZ. Todos los derechos reservados. Torreón, Coahuila, México.</footer-note>
+</div>
+
+</body>
+</html>
