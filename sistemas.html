@@ -471,18 +471,107 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
 </section>
 
 <!-- ─── DEMO: CLÍNICA ─── -->
+<!-- ─── DEMO: CLÍNICA ─── -->
 <section id="demo-clinica" class="demo-section">
   <div class="container">
     <div class="demo-header reveal">
       <div class="tag">Sistema Clínica</div>
       <h2>Tu clínica <span>atendiendo pacientes</span> sin recepcionista</h2>
-      <p>Agenda en línea, recordatorios automáticos y el historial de cada paciente en un solo lugar.</p>
+      <p>Agenda en línea, recordatorios automáticos y control de citas — todo en un solo panel.</p>
     </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:40px;text-align:center;">
-      <div style="font-size:48px;margin-bottom:16px;">🏥</div>
-      <h3 style="font-family:'Exo 2',sans-serif;font-size:22px;font-weight:700;margin-bottom:12px;">Demo de Clínica</h3>
-      <p style="color:var(--muted);font-size:15px;max-width:440px;margin:0 auto 28px;">Este sistema incluye agenda médica, historial de pacientes, recordatorios por WhatsApp y gestión de consultas. Cada clínica es diferente — lo construimos a tu medida.</p>
-      <a href="/#diagnostico" class="btn-primary">Quiero el demo completo →</a>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+
+      <!-- Agenda del día -->
+      <div class="rest-menu reveal">
+        <div class="rest-menu-header">
+          <div>
+            <div class="rest-name">🏥 Clínica MediLaguna</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px;">Agenda del día — Martes 15 Abr</div>
+          </div>
+          <div class="rest-status">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;"></span>
+            Abierto
+          </div>
+        </div>
+
+        <!-- Doctor filter -->
+        <div class="rest-cats" id="docTabs">
+          <div class="rest-cat active" onclick="filterDoc('todos',this)">Todos</div>
+          <div class="rest-cat" onclick="filterDoc('garcia',this)">Dr. García</div>
+          <div class="rest-cat" onclick="filterDoc('martinez',this)">Dra. Martínez</div>
+          <div class="rest-cat" onclick="filterDoc('lopez',this)">Dr. López</div>
+        </div>
+
+        <div id="citasList" style="padding:0 24px 16px;display:flex;flex-direction:column;gap:0;max-height:340px;overflow-y:auto;"></div>
+      </div>
+
+      <!-- Nueva cita + stats -->
+      <div style="display:flex;flex-direction:column;gap:16px;">
+
+        <!-- Stats rápidos -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'Exo 2',sans-serif;font-size:24px;font-weight:800;color:var(--accent);">12</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px;">Citas hoy</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'Exo 2',sans-serif;font-size:24px;font-weight:800;color:var(--green);">9</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px;">Confirmadas</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-family:'Exo 2',sans-serif;font-size:24px;font-weight:800;color:#EF9F27;">2</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:4px;">Pendientes</div>
+          </div>
+        </div>
+
+        <!-- Nueva cita form -->
+        <div class="rest-cart reveal">
+          <div class="cart-header">
+            <h3>📅 Agendar cita</h3>
+          </div>
+          <div style="padding:16px 20px;display:flex;flex-direction:column;gap:12px;">
+            <div>
+              <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:6px;">Paciente</label>
+              <input type="text" id="citaPaciente" placeholder="Nombre del paciente" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <div>
+                <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:6px;">Doctor</label>
+                <select id="citaDoctor" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;">
+                  <option>Dr. García</option>
+                  <option>Dra. Martínez</option>
+                  <option>Dr. López</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:6px;">Horario</label>
+                <select id="citaHora" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;">
+                  <option>9:00 AM</option><option>9:30 AM</option><option>10:00 AM</option>
+                  <option>10:30 AM</option><option>11:00 AM</option><option>3:00 PM</option>
+                  <option>3:30 PM</option><option>4:00 PM</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:6px;">Motivo de consulta</label>
+              <select id="citaMotivo" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;">
+                <option>Consulta general</option>
+                <option>Seguimiento</option>
+                <option>Urgencia menor</option>
+                <option>Revisión de resultados</option>
+                <option>Primera vez</option>
+              </select>
+            </div>
+            <button onclick="agendarCita()" class="order-btn">Agendar cita →</button>
+            <div id="citaSuccess" style="display:none;text-align:center;padding:8px 0;">
+              <div style="font-size:24px;margin-bottom:4px;">✅</div>
+              <p style="font-size:13px;color:var(--muted);">Cita agendada. Se enviará recordatorio por WhatsApp al paciente.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
@@ -492,14 +581,93 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
   <div class="container">
     <div class="demo-header reveal">
       <div class="tag">Sistema Gym</div>
-      <h2>Tu gym <span>convirtiendo prospectos</span> en socios</h2>
-      <p>Gestión de membresías, control de acceso, clases y seguimiento de socios inactivos — todo automatizado.</p>
+      <h2>Tu gym <span>convirtiendo prospectos</span> en socios activos</h2>
+      <p>Control de membresías, horarios de clases y reactivación automática de socios — sin que tu equipo lo gestione.</p>
     </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:40px;text-align:center;">
-      <div style="font-size:48px;margin-bottom:16px;">💪</div>
-      <h3 style="font-family:'Exo 2',sans-serif;font-size:22px;font-weight:700;margin-bottom:12px;">Demo de Gym</h3>
-      <p style="color:var(--muted);font-size:15px;max-width:440px;margin:0 auto 28px;">Control de membresías, horarios de clases, acceso por QR y reactivación automática de socios inactivos. Lo adaptamos a tu operación específica.</p>
-      <a href="/#diagnostico" class="btn-primary">Quiero el demo completo →</a>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+
+      <!-- Members list -->
+      <div class="rest-menu reveal">
+        <div class="rest-menu-header">
+          <div>
+            <div class="rest-name">💪 FitZone Torreón</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px;">Panel de socios</div>
+          </div>
+          <div style="font-size:12px;font-weight:600;color:var(--accent);">142 socios activos</div>
+        </div>
+
+        <!-- Status filter -->
+        <div class="rest-cats">
+          <div class="rest-cat active" onclick="filterSocios('todos',this)">Todos</div>
+          <div class="rest-cat" onclick="filterSocios('activo',this)">Activos</div>
+          <div class="rest-cat" onclick="filterSocios('vencido',this)">Por vencer</div>
+          <div class="rest-cat" onclick="filterSocios('inactivo',this)">Inactivos</div>
+        </div>
+
+        <div id="sociosList" style="padding:0 24px 16px;display:flex;flex-direction:column;max-height:340px;overflow-y:auto;"></div>
+      </div>
+
+      <!-- Right: clases + nuevo socio -->
+      <div style="display:flex;flex-direction:column;gap:16px;">
+
+        <!-- Clases del día -->
+        <div class="rest-cart reveal">
+          <div class="cart-header">
+            <h3>🗓️ Clases de hoy</h3>
+            <span class="cart-badge">5</span>
+          </div>
+          <div style="padding:12px 20px;display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);">
+              <div><div style="font-size:13px;font-weight:500;">Spinning</div><div style="font-size:11px;color:var(--muted);">6:00 AM — Sala A</div></div>
+              <span style="font-size:11px;background:rgba(78,193,122,.12);color:var(--green);padding:3px 10px;border-radius:100px;font-weight:600;">12/15</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);">
+              <div><div style="font-size:13px;font-weight:500;">CrossFit</div><div style="font-size:11px;color:var(--muted);">7:00 AM — Área funcional</div></div>
+              <span style="font-size:11px;background:rgba(239,159,39,.12);color:#EF9F27;padding:3px 10px;border-radius:100px;font-weight:600;">8/10</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);">
+              <div><div style="font-size:13px;font-weight:500;">Yoga</div><div style="font-size:11px;color:var(--muted);">9:00 AM — Sala B</div></div>
+              <span style="font-size:11px;background:rgba(78,193,122,.12);color:var(--green);padding:3px 10px;border-radius:100px;font-weight:600;">6/12</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);">
+              <div><div style="font-size:13px;font-weight:500;">Zumba</div><div style="font-size:11px;color:var(--muted);">6:00 PM — Sala A</div></div>
+              <span style="font-size:11px;background:rgba(78,193,122,.12);color:var(--green);padding:3px 10px;border-radius:100px;font-weight:600;">10/20</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;">
+              <div><div style="font-size:13px;font-weight:500;">Box</div><div style="font-size:11px;color:var(--muted);">7:00 PM — Ring</div></div>
+              <span style="font-size:11px;background:rgba(226,75,74,.12);color:#E24B4A;padding:3px 10px;border-radius:100px;font-weight:600;">10/10</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nuevo socio -->
+        <div class="rest-cart reveal">
+          <div class="cart-header"><h3>➕ Nuevo socio</h3></div>
+          <div style="padding:14px 20px;display:flex;flex-direction:column;gap:10px;">
+            <input type="text" id="socioNombre" placeholder="Nombre completo" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <select id="socioPlan" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;">
+                <option>Mensual $599</option>
+                <option>Trimestral $1,599</option>
+                <option>Anual $5,999</option>
+              </select>
+              <select id="socioAcceso" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;">
+                <option>Acceso libre</option>
+                <option>Mañanas</option>
+                <option>Tardes</option>
+                <option>Clases grupales</option>
+              </select>
+            </div>
+            <button onclick="registrarSocio()" class="order-btn">Registrar socio →</button>
+            <div id="socioSuccess" style="display:none;text-align:center;padding:4px 0;">
+              <div style="font-size:22px;margin-bottom:4px;">✅</div>
+              <p style="font-size:13px;color:var(--muted);">Socio registrado. Se envió bienvenida por WhatsApp.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
@@ -724,6 +892,132 @@ document.getElementById('indChatInput')?.addEventListener('keydown', e => {
   if (e.key === 'Enter') sendIndMsg();
 });
 
+// ─── CLÍNICA DATA ───
+const citasData = [
+  {id:1,paciente:'María González',doctor:'garcia',hora:'9:00 AM',motivo:'Consulta general',estado:'confirmada'},
+  {id:2,paciente:'Roberto Herrera',doctor:'garcia',hora:'9:30 AM',motivo:'Seguimiento',estado:'confirmada'},
+  {id:3,paciente:'Ana Rodríguez',doctor:'martinez',hora:'10:00 AM',motivo:'Primera vez',estado:'pendiente'},
+  {id:4,paciente:'Carlos Méndez',doctor:'lopez',hora:'10:30 AM',motivo:'Revisión resultados',estado:'confirmada'},
+  {id:5,paciente:'Sofía Ramírez',doctor:'martinez',hora:'11:00 AM',motivo:'Consulta general',estado:'confirmada'},
+  {id:6,paciente:'Juan Torres',doctor:'garcia',hora:'3:00 PM',motivo:'Urgencia menor',estado:'pendiente'},
+  {id:7,paciente:'Laura Sánchez',doctor:'lopez',hora:'3:30 PM',motivo:'Seguimiento',estado:'confirmada'},
+  {id:8,paciente:'Miguel Flores',doctor:'martinez',hora:'4:00 PM',motivo:'Primera vez',estado:'confirmada'},
+];
+
+let citasLocal = [...citasData];
+
+const doctorColors = {garcia:'rgba(91,159,208,.15)',martinez:'rgba(200,170,128,.15)',lopez:'rgba(78,193,122,.15)'};
+const doctorNames = {garcia:'Dr. García',martinez:'Dra. Martínez',lopez:'Dr. López'};
+
+function renderCitas(filter) {
+  const list = document.getElementById('citasList');
+  if (!list) return;
+  const items = filter === 'todos' ? citasLocal : citasLocal.filter(c => c.doctor === filter);
+  list.innerHTML = items.map(c => `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:32px;height:32px;border-radius:50%;background:${doctorColors[c.doctor]};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent);flex-shrink:0;">${c.paciente.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
+        <div>
+          <div style="font-size:13px;font-weight:500;">${c.paciente}</div>
+          <div style="font-size:11px;color:var(--muted);">${c.hora} · ${doctorNames[c.doctor]} · ${c.motivo}</div>
+        </div>
+      </div>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;font-weight:600;${c.estado==='confirmada'?'background:rgba(78,193,122,.12);color:var(--green);':'background:rgba(239,159,39,.12);color:#EF9F27;'}">${c.estado==='confirmada'?'✓ Confirmada':'⏳ Pendiente'}</span>
+    </div>
+  `).join('') || '<p style="color:var(--muted);font-size:13px;padding:16px 0;">No hay citas para este filtro.</p>';
+}
+
+function filterDoc(filter, el) {
+  document.querySelectorAll('#docTabs .rest-cat').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderCitas(filter);
+}
+
+function agendarCita() {
+  const nombre = document.getElementById('citaPaciente').value;
+  if (!nombre.trim()) return;
+  const doctor = document.getElementById('citaDoctor').value.toLowerCase().split(' ').pop();
+  citasLocal.push({
+    id: citasLocal.length+1,
+    paciente: nombre,
+    doctor: doctor === 'garcía' ? 'garcia' : doctor === 'martínez' ? 'martinez' : 'lopez',
+    hora: document.getElementById('citaHora').value,
+    motivo: document.getElementById('citaMotivo').value,
+    estado: 'confirmada'
+  });
+  renderCitas('todos');
+  document.getElementById('citaPaciente').value = '';
+  document.getElementById('citaSuccess').style.display = 'block';
+  document.querySelector('#demo-clinica .order-btn').style.display = 'none';
+  setTimeout(() => {
+    document.getElementById('citaSuccess').style.display = 'none';
+    document.querySelector('#demo-clinica .order-btn').style.display = 'block';
+  }, 2500);
+}
+
+// ─── GYM DATA ───
+const sociosData = [
+  {id:1,nombre:'Carlos Vega',plan:'Mensual',estado:'activo',vence:'30 Abr'},
+  {id:2,nombre:'Patricia Luna',plan:'Trimestral',estado:'activo',vence:'15 Jun'},
+  {id:3,nombre:'Andrés Mora',plan:'Mensual',estado:'vencido',vence:'10 Abr'},
+  {id:4,nombre:'Daniela Cruz',plan:'Anual',estado:'activo',vence:'Dic 2025'},
+  {id:5,nombre:'Héctor Ríos',plan:'Mensual',estado:'inactivo',vence:'01 Mar'},
+  {id:6,nombre:'Valeria Peña',plan:'Trimestral',estado:'activo',vence:'20 May'},
+  {id:7,nombre:'Fernando Gil',plan:'Mensual',estado:'vencido',vence:'08 Abr'},
+  {id:8,nombre:'Natalia Reyes',plan:'Mensual',estado:'activo',vence:'28 Abr'},
+];
+
+let sociosLocal = [...sociosData];
+
+function renderSocios(filter) {
+  const list = document.getElementById('sociosList');
+  if (!list) return;
+  const items = filter === 'todos' ? sociosLocal : sociosLocal.filter(s => s.estado === filter);
+  const estadoStyle = {
+    activo: 'background:rgba(78,193,122,.12);color:var(--green);',
+    vencido: 'background:rgba(226,75,74,.12);color:#E24B4A;',
+    inactivo: 'background:rgba(106,132,153,.12);color:var(--muted);'
+  };
+  list.innerHTML = items.map(s => `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:32px;height:32px;border-radius:50%;background:rgba(200,170,128,.12);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent);flex-shrink:0;">${s.nombre.split(' ').map(n=>n[0]).join('')}</div>
+        <div>
+          <div style="font-size:13px;font-weight:500;">${s.nombre}</div>
+          <div style="font-size:11px;color:var(--muted);">${s.plan} · Vence: ${s.vence}</div>
+        </div>
+      </div>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;font-weight:600;${estadoStyle[s.estado]}">${s.estado}</span>
+    </div>
+  `).join('') || '<p style="color:var(--muted);font-size:13px;padding:12px 0;">Sin resultados.</p>';
+}
+
+function filterSocios(filter, el) {
+  document.querySelectorAll('#demo-gym .rest-cat').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderSocios(filter);
+}
+
+function registrarSocio() {
+  const nombre = document.getElementById('socioNombre').value;
+  if (!nombre.trim()) return;
+  sociosLocal.unshift({
+    id: sociosLocal.length+1,
+    nombre,
+    plan: document.getElementById('socioPlan').value.split(' ')[0],
+    estado: 'activo',
+    vence: '15 May'
+  });
+  renderSocios('todos');
+  document.getElementById('socioNombre').value = '';
+  document.getElementById('socioSuccess').style.display = 'block';
+  document.querySelector('#demo-gym .order-btn').style.display = 'none';
+  setTimeout(() => {
+    document.getElementById('socioSuccess').style.display = 'none';
+    document.querySelector('#demo-gym .order-btn').style.display = 'block';
+  }, 2500);
+}
+
 // ─── DEMO SWITCHER ───
 function showDemo(id) {
   document.querySelectorAll('.demo-section').forEach(s => s.classList.remove('active'));
@@ -744,6 +1038,8 @@ document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 // Init
 renderMenu('todo');
 renderCart();
+renderCitas('todos');
+renderSocios('todos');
 </script>
 
 </body>
