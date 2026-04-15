@@ -1658,7 +1658,7 @@ const faqData = {
     },
     {
       q: "¿Puedo cancelar cuando quiera?",
-      a: "Sí. Sin contratos anuales, sin penalizaciones, sin letra chica. Mes a mes, y si en algún momento no ves valor, cancelas y listo."
+      a: "Sí. Sin contratos anuales, sin penalizaciones, sin letra chica. Mes a mes. Si en algun momento no ves valor, cancelas."
     },
     {
       q: "¿Qué pasa si cambio de número o de negocio?",
@@ -1676,7 +1676,7 @@ const faqData = {
     },
     {
       q: "Can I keep my same WhatsApp number?",
-      a: "Yes, as long as it's WhatsApp Business. If you don't have it yet, we'll help you set it up at no extra cost."
+      a: "Yes, as long as it is WhatsApp Business. If you do not have it yet, we will help you set it up at no extra cost."
     },
     {
       q: "What platforms can it connect to?",
@@ -1687,7 +1687,7 @@ const faqData = {
       a: "For initial contact, lead qualification and appointment scheduling — yes, and it does it better because it works 24/7 without getting tired. For complex decisions, it automatically escalates to your team."
     },
     {
-      q: "What if the agent doesn't know how to answer something?",
+      q: "What if the agent does not know how to answer something?",
       a: "It immediately escalates to you or your team via WhatsApp. No customer is ever left without a response."
     },
     {
@@ -1708,7 +1708,7 @@ const faqData = {
     },
     {
       q: "Are my conversations and data secure?",
-      a: "Yes. Everything is stored on secure encrypted servers. We never share your information or your clients' data with third parties."
+      a: "Yes. Everything is stored on secure encrypted servers. We never share your information or your clients data with third parties."
     }
   ]
 };
@@ -1737,8 +1737,6 @@ function toggleFAQ(i) {
     else item.classList.remove('open');
   });
 }
-
-buildFAQ();
 
 // Rebuild FAQ on lang change
 const origLangClick = document.getElementById('langBtn').onclick;
@@ -2323,6 +2321,7 @@ if (resultsEl) resultsObserver.observe(resultsEl);
 
 // ─── INIT ───
 applyLang();
+buildFAQ();
 startTypewriter();
 setTimeout(showCookieBanner, 2000);
 </script>
