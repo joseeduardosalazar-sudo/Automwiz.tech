@@ -849,13 +849,19 @@ footer {
 
     <!-- Comparison table -->
     <div class="reveal" style="overflow-x:auto;margin-bottom:64px;">
-      <table style="width:100%;border-collapse:collapse;font-size:14px;">
+      <table style="width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed;">
+        <colgroup>
+          <col style="width:22%;">
+          <col style="width:26%;">
+          <col style="width:26%;">
+          <col style="width:26%;">
+        </colgroup>
         <thead>
           <tr>
-            <th style="padding:16px 20px;border-bottom:1px solid var(--border);width:18%;"></th>
-            <th style="padding:16px 20px;text-align:center;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);width:27%;" data-i18n="why_col1">Empleado humano</th>
-            <th style="padding:16px 20px;text-align:center;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);width:27%;" data-i18n="why_col2">Chatbot genérico</th>
-            <th style="padding:16px 20px;text-align:center;background:rgba(200,170,128,.06);border-bottom:2px solid var(--accent);border-radius:8px 8px 0 0;width:28%;">
+            <th style="padding:16px 20px;border-bottom:1px solid var(--border);"></th>
+            <th style="padding:16px 20px;text-align:center;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);" data-i18n="why_col1">Empleado humano</th>
+            <th style="padding:16px 20px;text-align:center;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);" data-i18n="why_col2">Chatbot genérico</th>
+            <th style="padding:16px 20px;text-align:center;background:rgba(200,170,128,.06);border-bottom:2px solid var(--accent);">
               <span style="font-family:'Exo 2',sans-serif;font-size:14px;font-weight:700;color:var(--accent);">AUTOMWIZ</span>
             </th>
           </tr>
