@@ -918,7 +918,9 @@ footer {
       </div>
     </div>
   </div>
-</section<script>
+</section>
+
+<script>
 // ─── DIAGNOSTIC STEPPER ───
 const diagSteps = [
   {
@@ -2212,17 +2214,11 @@ function showCookieBanner() {
   const banner = document.createElement('div');
   banner.id = 'cookieBanner';
   banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:998;background:var(--surface2);border-top:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;animation:slideUp .4s ease;';
-  banner.innerHTML = `
-    <p style="font-size:13px;color:var(--muted);flex:1;min-width:200px;">
-      Usamos cookies para mejorar tu experiencia y analizar el tráfico del sitio (Google Analytics).
-      Al continuar navegando aceptas su uso.
-      <a href="/privacidad.html" style="color:var(--accent);text-decoration:underline;margin-left:4px;">Política de privacidad</a>
-    </p>
-    <div style="display:flex;gap:10px;flex-shrink:0;">
-      <button onclick="rejectCookies()" style="background:none;border:1px solid var(--border);color:var(--muted);border-radius:100px;padding:8px 18px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='rgba(255,255,255,.2)'" onmouseout="this.style.borderColor='var(--border)'">Rechazar</button>
-      <button onclick="acceptCookies()" style="background:var(--accent);color:#0A1220;border:none;border-radius:100px;padding:8px 18px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Aceptar</button>
-    </div>
-  `;
+  banner.innerHTML = '<p style="font-size:13px;color:var(--muted);flex:1;min-width:200px;">Usamos cookies para mejorar tu experiencia y analizar el trafico del sitio (Google Analytics). Al continuar navegando aceptas su uso. <a href="/privacidad.html" style="color:var(--accent);text-decoration:underline;margin-left:4px;">Politica de privacidad</a></p>' +
+    '<div style="display:flex;gap:10px;flex-shrink:0;">' +
+    '<button onclick="rejectCookies()" style="background:none;border:1px solid var(--border);color:var(--muted);border-radius:100px;padding:8px 18px;font-family:sans-serif;font-size:13px;cursor:pointer;">Rechazar</button>' +
+    '<button onclick="acceptCookies()" style="background:var(--accent);color:#0A1220;border:none;border-radius:100px;padding:8px 18px;font-family:sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Aceptar</button>' +
+    '</div>';
   document.body.appendChild(banner);
 }
 
