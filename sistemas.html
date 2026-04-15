@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistemas Personalizados — AUTOMWIZ</title>
+<meta name="description" content="Sistemas digitales completos para restaurantes, industria y más. Demos interactivas reales. AUTOMWIZ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#070D16; --surface:#0C1622; --surface2:#11202E;
+  --border:rgba(160,210,255,0.08); --accent:#C8AA80; --accent2:#5B9FD0;
+  --text:#EDE7DC; --muted:#6A8499; --radius:12px; --green:#4EC17A;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.65;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rgba(7,13,22,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Exo 2',sans-serif;font-size:22px;font-weight:800;letter-spacing:.04em;}
+.nav-back{font-size:14px;color:var(--muted);display:flex;align-items:center;gap:6px;transition:color .2s;}
+.nav-back:hover{color:var(--text);}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#0A1220;font-size:14px;font-weight:600;padding:10px 22px;border-radius:100px;border:none;cursor:pointer;transition:opacity .2s;}
+.btn-primary:hover{opacity:.85;}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(91,159,208,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(91,159,208,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.hero-glow{position:absolute;top:-100px;left:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(200,170,128,.08) 0%,transparent 70%);pointer-events:none;}
+.container{max-width:1140px;margin:0 auto;padding:0 24px;}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(200,170,128,.25);padding:5px 14px;border-radius:100px;margin-bottom:20px;}
+.hero-title{font-family:'Exo 2',sans-serif;font-size:clamp(38px,6vw,68px);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:20px;}
+.hero-title span{color:var(--accent);}
+.hero-sub{font-size:18px;color:var(--muted);max-width:560px;margin-bottom:40px;line-height:1.7;}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--text);font-size:14px;font-weight:500;padding:10px 22px;border-radius:100px;border:1px solid var(--border);cursor:pointer;transition:all .2s;}
+.btn-outline:hover{border-color:rgba(255,255,255,.2);}
+
+/* INDUSTRY SELECTOR */
+#selector{padding:80px 0;border-top:1px solid var(--border);}
+.selector-title{text-align:center;margin-bottom:48px;}
+.selector-title h2{font-family:'Exo 2',sans-serif;font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.1;margin-bottom:12px;}
+.selector-title h2 span{color:var(--accent);}
+.selector-title p{color:var(--muted);font-size:16px;}
+.industry-tabs{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.ind-tab{padding:12px 24px;border:1px solid var(--border);border-radius:100px;background:var(--surface);color:var(--muted);font-size:14px;font-weight:500;cursor:pointer;transition:all .25s;display:flex;align-items:center;gap:8px;}
+.ind-tab:hover{border-color:rgba(200,170,128,.3);color:var(--text);}
+.ind-tab.active{background:rgba(200,170,128,.12);border-color:rgba(200,170,128,.4);color:var(--accent);}
+
+/* DEMO SECTIONS */
+.demo-section{display:none;padding:60px 0 100px;}
+.demo-section.active{display:block;}
+.demo-header{margin-bottom:48px;}
+.demo-header .tag{margin-bottom:16px;}
+.demo-header h2{font-family:'Exo 2',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;line-height:1.1;margin-bottom:12px;}
+.demo-header h2 span{color:var(--accent);}
+.demo-header p{color:var(--muted);font-size:16px;max-width:560px;}
+
+/* ── RESTAURANT SYSTEM ── */
+.rest-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+.rest-menu{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.rest-menu-header{background:var(--surface2);padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.rest-name{font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;}
+.rest-status{font-size:12px;color:var(--green);display:flex;align-items:center;gap:5px;}
+.rest-cats{display:flex;gap:8px;padding:16px 24px;border-bottom:1px solid var(--border);overflow-x:auto;}
+.rest-cat{padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;border:1px solid var(--border);color:var(--muted);}
+.rest-cat.active{background:rgba(200,170,128,.15);border-color:rgba(200,170,128,.35);color:var(--accent);}
+.rest-items{padding:16px 24px;display:flex;flex-direction:column;gap:12px;max-height:320px;overflow-y:auto;}
+.rest-item{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);}
+.rest-item:last-child{border:none;}
+.rest-item-info h4{font-size:14px;font-weight:500;margin-bottom:3px;}
+.rest-item-info p{font-size:12px;color:var(--muted);}
+.rest-item-right{display:flex;align-items:center;gap:12px;}
+.rest-price{font-family:'Exo 2',sans-serif;font-size:15px;font-weight:700;color:var(--accent);}
+.add-btn{width:30px;height:30px;border-radius:50%;background:rgba(200,170,128,.15);border:1px solid rgba(200,170,128,.3);color:var(--accent);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;line-height:1;}
+.add-btn:hover{background:rgba(200,170,128,.3);}
+
+/* Cart */
+.rest-cart{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.cart-header{background:var(--surface2);padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.cart-header h3{font-family:'Exo 2',sans-serif;font-size:15px;font-weight:700;}
+.cart-badge{background:var(--accent);color:#0A1220;font-size:11px;font-weight:700;padding:2px 8px;border-radius:100px;}
+.cart-items{padding:16px 20px;min-height:140px;display:flex;flex-direction:column;gap:10px;}
+.cart-empty{color:var(--muted);font-size:13px;text-align:center;padding:20px 0;}
+.cart-item{display:flex;align-items:center;justify-content:space-between;font-size:13px;}
+.cart-item-name{color:var(--text);}
+.cart-item-price{color:var(--accent);font-weight:600;}
+.cart-remove{color:var(--muted);cursor:pointer;font-size:16px;transition:color .2s;background:none;border:none;padding:0 4px;}
+.cart-remove:hover{color:#E24B4A;}
+.cart-footer{padding:16px 20px;border-top:1px solid var(--border);}
+.cart-total{display:flex;justify-content:space-between;margin-bottom:14px;font-size:15px;}
+.cart-total span:first-child{color:var(--muted);}
+.cart-total strong{font-family:'Exo 2',sans-serif;font-size:18px;color:var(--accent);}
+.order-btn{width:100%;background:var(--accent);color:#0A1220;border:none;border-radius:100px;padding:13px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .2s;}
+.order-btn:hover{opacity:.85;}
+.order-success{display:none;text-align:center;padding:16px 20px;}
+
+/* Reservation modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;max-width:420px;width:90%;position:relative;}
+.modal h3{font-family:'Exo 2',sans-serif;font-size:20px;font-weight:700;margin-bottom:20px;}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;}
+.form-group{margin-bottom:16px;}
+.form-group label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;}
+.form-group input,.form-group select{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s;}
+.form-group input:focus,.form-group select:focus{border-color:rgba(200,170,128,.4);}
+.form-group select option{background:var(--surface2);}
+.modal-confirm{width:100%;background:var(--accent);color:#0A1220;border:none;border-radius:100px;padding:13px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;margin-top:8px;}
+.modal-success{display:none;text-align:center;padding:10px 0;}
+.modal-success .check{font-size:48px;margin-bottom:12px;}
+
+/* ── INDUSTRIAL SYSTEM ── */
+.ind-layout{display:grid;grid-template-columns:240px 1fr;gap:0;background:var(--border);border-radius:var(--radius);overflow:hidden;}
+.ind-sidebar{background:var(--surface2);padding:0;display:flex;flex-direction:column;}
+.ind-sidebar-header{padding:20px;border-bottom:1px solid var(--border);}
+.ind-sidebar-header h3{font-family:'Exo 2',sans-serif;font-size:15px;font-weight:700;margin-bottom:4px;}
+.ind-sidebar-header p{font-size:12px;color:var(--muted);}
+.ind-nav{padding:12px 0;}
+.ind-nav-item{display:flex;align-items:center;gap:10px;padding:12px 20px;font-size:13px;color:var(--muted);cursor:pointer;transition:all .2s;}
+.ind-nav-item:hover{background:rgba(255,255,255,.04);color:var(--text);}
+.ind-nav-item.active{background:rgba(200,170,128,.08);color:var(--accent);border-right:2px solid var(--accent);}
+.ind-nav-item .ind-icon{width:16px;text-align:center;}
+.ind-content{background:var(--surface);padding:28px;}
+
+/* Dashboard */
+.ind-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+.ind-stat{background:var(--surface2);border-radius:8px;padding:16px;}
+.ind-stat-num{font-family:'Exo 2',sans-serif;font-size:24px;font-weight:800;margin-bottom:4px;}
+.ind-stat-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+.ind-stat-trend{font-size:11px;margin-top:4px;}
+.ind-stat-trend.up{color:var(--green);}
+.ind-stat-trend.warn{color:#EF9F27;}
+
+/* Table */
+.ind-table{width:100%;border-collapse:collapse;font-size:13px;}
+.ind-table th{padding:10px 14px;text-align:left;color:var(--muted);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);}
+.ind-table td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--text);}
+.ind-table tr:last-child td{border:none;}
+.ind-table tr:hover td{background:rgba(255,255,255,.02);}
+.badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600;}
+.badge-ok{background:rgba(78,193,122,.12);color:var(--green);}
+.badge-warn{background:rgba(239,159,39,.12);color:#EF9F27;}
+.badge-alert{background:rgba(226,75,74,.12);color:#E24B4A;}
+
+/* Agent chat mini */
+.ind-agent{background:var(--surface2);border-radius:8px;padding:16px;margin-top:20px;}
+.ind-agent-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.ind-agent-avatar{width:32px;height:32px;border-radius:50%;background:rgba(200,170,128,.15);display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-size:12px;font-weight:700;color:var(--accent);}
+.ind-agent-name{font-size:13px;font-weight:600;}
+.ind-agent-status{font-size:11px;color:var(--green);}
+.ind-chat-msgs{max-height:160px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.ind-msg{max-width:85%;padding:9px 13px;font-size:13px;line-height:1.5;}
+.ind-msg.bot{background:var(--surface);border-radius:10px 10px 10px 2px;color:var(--text);}
+.ind-msg.user{background:rgba(200,170,128,.15);border-radius:10px 10px 2px 10px;color:var(--text);align-self:flex-end;margin-left:auto;}
+.ind-chat-input{display:flex;gap:8px;}
+.ind-chat-input input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 13px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;}
+.ind-chat-input input:focus{border-color:rgba(200,170,128,.3);}
+.ind-chat-send{background:var(--accent);color:#0A1220;border:none;border-radius:8px;padding:9px 14px;cursor:pointer;font-size:14px;font-weight:600;}
+
+/* ── CTA ── */
+#cta-sistemas{padding:100px 0;border-top:1px solid var(--border);text-align:center;}
+#cta-sistemas h2{font-family:'Exo 2',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:800;margin-bottom:16px;}
+#cta-sistemas h2 span{color:var(--accent);}
+#cta-sistemas p{color:var(--muted);font-size:17px;max-width:500px;margin:0 auto 36px;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .rest-layout{grid-template-columns:1fr;}
+  .ind-layout{grid-template-columns:1fr;}
+  .ind-sidebar{display:none;}
+  .ind-stats{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  .ind-stats{grid-template-columns:1fr 1fr;}
+  .industry-tabs{gap:8px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">AUTOMWIZ</a>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="/" class="nav-back">← Página principal</a>
+      <a href="/#diagnostico" class="btn-primary">Quiero mi sistema →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="tag">Sistemas personalizados</div>
+    <h1 class="hero-title">
+      Tu operación completa,<br><span>digitalizada y automatizada.</span>
+    </h1>
+    <p class="hero-sub">No vendemos plantillas. Construimos el sistema exacto que tu negocio necesita — desde la página web hasta el control interno. Explora los demos y ve cómo funcionaría para ti.</p>
+    <div class="hero-ctas">
+      <a href="#selector" class="btn-primary">Ver demos →</a>
+      <a href="/#diagnostico" class="btn-outline">Hablar con un asesor</a>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRY SELECTOR -->
+<section id="selector">
+  <div class="container">
+    <div class="selector-title reveal">
+      <div class="tag">Elige tu industria</div>
+      <h2>¿Qué tipo de <span>negocio tienes?</span></h2>
+      <p>Selecciona tu sector y te mostramos exactamente cómo funcionaría tu sistema.</p>
+    </div>
+    <div class="industry-tabs reveal">
+      <div class="ind-tab active" onclick="showDemo('restaurante')">🍽️ Restaurante</div>
+      <div class="ind-tab" onclick="showDemo('industrial')">🏭 Industrial / Ganadería</div>
+      <div class="ind-tab" onclick="showDemo('clinica')">🏥 Clínica / Consultorio</div>
+      <div class="ind-tab" onclick="showDemo('gym')">💪 Gym / Fitness</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DEMO: RESTAURANTE ─── -->
+<section id="demo-restaurante" class="demo-section active">
+  <div class="container">
+    <div class="demo-header reveal">
+      <div class="tag">Sistema Restaurante</div>
+      <h2>Tu restaurante <span>vendiendo solo,</span> 24/7</h2>
+      <p>Menú digital, pedidos en línea y reservaciones automáticas. Sin que tu equipo toque el celular.</p>
+    </div>
+
+    <div class="rest-layout">
+      <!-- Menu -->
+      <div class="rest-menu reveal">
+        <div class="rest-menu-header">
+          <div>
+            <div class="rest-name">🍕 La Trattoria</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px;">Torreón, Coahuila</div>
+          </div>
+          <div class="rest-status">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;"></span>
+            Abierto ahora
+          </div>
+        </div>
+        <div class="rest-cats" id="restCats">
+          <div class="rest-cat active" onclick="filterMenu('todo')">Todo</div>
+          <div class="rest-cat" onclick="filterMenu('entradas')">Entradas</div>
+          <div class="rest-cat" onclick="filterMenu('pizzas')">Pizzas</div>
+          <div class="rest-cat" onclick="filterMenu('pastas')">Pastas</div>
+          <div class="rest-cat" onclick="filterMenu('bebidas')">Bebidas</div>
+        </div>
+        <div class="rest-items" id="restItems"></div>
+      </div>
+
+      <!-- Cart + Reservation -->
+      <div style="display:flex;flex-direction:column;gap:16px;">
+
+        <div class="rest-cart reveal">
+          <div class="cart-header">
+            <h3>Tu pedido</h3>
+            <span class="cart-badge" id="cartCount">0</span>
+          </div>
+          <div class="cart-items" id="cartItems">
+            <div class="cart-empty" id="cartEmpty">Agrega platillos de la carta 🍽️</div>
+          </div>
+          <div class="cart-footer">
+            <div class="cart-total">
+              <span>Total</span>
+              <strong id="cartTotal">$0</strong>
+            </div>
+            <button class="order-btn" onclick="placeOrder()">Hacer pedido por WhatsApp →</button>
+            <div class="order-success" id="orderSuccess">
+              <div style="font-size:28px;margin-bottom:6px;">✅</div>
+              <p style="font-size:13px;color:var(--muted);">¡Pedido enviado! Te contactamos en instantes.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reservation -->
+        <div class="rest-cart reveal" style="padding:0;">
+          <div class="cart-header" style="justify-content:flex-start;gap:12px;">
+            <span style="font-size:18px;">📅</span>
+            <div>
+              <h3>Reservaciones</h3>
+              <p style="font-size:12px;color:var(--muted);margin-top:2px;">Disponibilidad en tiempo real</p>
+            </div>
+          </div>
+          <div style="padding:16px 20px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+              <div style="background:var(--surface2);border-radius:8px;padding:12px;text-align:center;cursor:pointer;border:1px solid var(--border);transition:all .2s;" class="slot-btn" onclick="selectSlot(this,'Hoy 14:00')">
+                <div style="font-size:12px;color:var(--muted);">Hoy</div>
+                <div style="font-size:15px;font-weight:600;">2:00 PM</div>
+                <div style="font-size:11px;color:var(--green);margin-top:2px;">Disponible</div>
+              </div>
+              <div style="background:var(--surface2);border-radius:8px;padding:12px;text-align:center;cursor:pointer;border:1px solid var(--border);transition:all .2s;" class="slot-btn" onclick="selectSlot(this,'Hoy 20:00')">
+                <div style="font-size:12px;color:var(--muted);">Hoy</div>
+                <div style="font-size:15px;font-weight:600;">8:00 PM</div>
+                <div style="font-size:11px;color:var(--green);margin-top:2px;">Disponible</div>
+              </div>
+              <div style="background:var(--surface2);border-radius:8px;padding:12px;text-align:center;cursor:pointer;border:1px solid var(--border);transition:all .2s;" class="slot-btn" onclick="selectSlot(this,'Mañana 14:00')">
+                <div style="font-size:12px;color:var(--muted);">Mañana</div>
+                <div style="font-size:15px;font-weight:600;">2:00 PM</div>
+                <div style="font-size:11px;color:var(--green);margin-top:2px;">Disponible</div>
+              </div>
+              <div style="background:var(--surface2);border-radius:8px;padding:12px;text-align:center;border:1px solid var(--border);opacity:.5;">
+                <div style="font-size:12px;color:var(--muted);">Mañana</div>
+                <div style="font-size:15px;font-weight:600;">8:00 PM</div>
+                <div style="font-size:11px;color:#E24B4A;margin-top:2px;">Lleno</div>
+              </div>
+            </div>
+            <button class="order-btn" onclick="openReservation()">Confirmar reservación →</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DEMO: INDUSTRIAL ─── -->
+<section id="demo-industrial" class="demo-section">
+  <div class="container">
+    <div class="demo-header reveal">
+      <div class="tag">Sistema Industrial</div>
+      <h2>Control total de <span>tu operación,</span> en tiempo real</h2>
+      <p>Inventario, procesos, personal y reportes — todo en un solo panel. Con un agente que conoce cada proceso de tu empresa.</p>
+    </div>
+
+    <div class="ind-layout reveal">
+      <!-- Sidebar -->
+      <div class="ind-sidebar">
+        <div class="ind-sidebar-header">
+          <h3>🐄 Rancho El Mezquite</h3>
+          <p>Sistema de gestión</p>
+        </div>
+        <nav class="ind-nav">
+          <div class="ind-nav-item active" onclick="showIndPanel('dashboard',this)"><span class="ind-icon">📊</span> Dashboard</div>
+          <div class="ind-nav-item" onclick="showIndPanel('inventario',this)"><span class="ind-icon">📦</span> Inventario</div>
+          <div class="ind-nav-item" onclick="showIndPanel('procesos',this)"><span class="ind-icon">⚙️</span> Procesos</div>
+          <div class="ind-nav-item" onclick="showIndPanel('personal',this)"><span class="ind-icon">👥</span> Personal</div>
+          <div class="ind-nav-item" onclick="showIndPanel('agente',this)"><span class="ind-icon">🤖</span> Agente IA</div>
+        </nav>
+      </div>
+
+      <!-- Content -->
+      <div class="ind-content">
+
+        <!-- Dashboard Panel -->
+        <div id="panel-dashboard">
+          <h3 style="font-family:'Exo 2',sans-serif;font-size:17px;font-weight:700;margin-bottom:16px;">Resumen del día</h3>
+          <div class="ind-stats">
+            <div class="ind-stat">
+              <div class="ind-stat-num" style="color:var(--accent);">342</div>
+              <div class="ind-stat-label">Cabezas activas</div>
+              <div class="ind-stat-trend up">↑ +3 esta semana</div>
+            </div>
+            <div class="ind-stat">
+              <div class="ind-stat-num" style="color:var(--accent2);">1,840 L</div>
+              <div class="ind-stat-label">Producción hoy</div>
+              <div class="ind-stat-trend up">↑ +120L vs ayer</div>
+            </div>
+            <div class="ind-stat">
+              <div class="ind-stat-num" style="color:#EF9F27;">3</div>
+              <div class="ind-stat-label">Alertas activas</div>
+              <div class="ind-stat-trend warn">⚠ Requiere atención</div>
+            </div>
+            <div class="ind-stat">
+              <div class="ind-stat-num" style="color:var(--green);">94%</div>
+              <div class="ind-stat-label">Eficiencia</div>
+              <div class="ind-stat-trend up">↑ vs 89% mes ant.</div>
+            </div>
+          </div>
+          <h4 style="font-size:13px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Alertas recientes</h4>
+          <table class="ind-table">
+            <thead><tr><th>Tipo</th><th>Descripción</th><th>Prioridad</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td>💊 Medicamento</td><td>Stock bajo — Oxitetraciclina</td><td><span class="badge badge-alert">Alta</span></td><td>Pendiente</td></tr>
+              <tr><td>🐄 Sanidad</td><td>Vaca #287 — revisión 30 días</td><td><span class="badge badge-warn">Media</span></td><td>Programado</td></tr>
+              <tr><td>🌾 Forraje</td><td>Henolate zona norte — 15 días</td><td><span class="badge badge-warn">Media</span></td><td>En proceso</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Inventario Panel -->
+        <div id="panel-inventario" style="display:none;">
+          <h3 style="font-family:'Exo 2',sans-serif;font-size:17px;font-weight:700;margin-bottom:16px;">Control de inventario</h3>
+          <table class="ind-table">
+            <thead><tr><th>Producto</th><th>Stock actual</th><th>Mínimo</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td>Oxitetraciclina 500mg</td><td>12 frascos</td><td>20</td><td><span class="badge badge-alert">Bajo</span></td></tr>
+              <tr><td>Ivermectina 1%</td><td>48 frascos</td><td>20</td><td><span class="badge badge-ok">OK</span></td></tr>
+              <tr><td>Vitaminas ADE</td><td>6 litros</td><td>10</td><td><span class="badge badge-warn">Revisar</span></td></tr>
+              <tr><td>Henolate (pacas)</td><td>340 pacas</td><td>200</td><td><span class="badge badge-ok">OK</span></td></tr>
+              <tr><td>Sal mineralizada</td><td>80 kg</td><td>50</td><td><span class="badge badge-ok">OK</span></td></tr>
+              <tr><td>Vacuna Brucelosis</td><td>25 dosis</td><td>30</td><td><span class="badge badge-warn">Revisar</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Procesos Panel -->
+        <div id="panel-procesos" style="display:none;">
+          <h3 style="font-family:'Exo 2',sans-serif;font-size:17px;font-weight:700;margin-bottom:16px;">Mapa de procesos</h3>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="background:var(--surface2);border-radius:8px;padding:16px;display:flex;align-items:center;gap:16px;">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(78,193,122,.15);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🌅</div>
+              <div><div style="font-size:14px;font-weight:600;margin-bottom:3px;">Rutina matutina — 6:00 AM</div><div style="font-size:12px;color:var(--muted);">Ordeña, alimentación y revisión sanitaria. 8 pasos documentados.</div></div>
+              <span class="badge badge-ok" style="margin-left:auto;flex-shrink:0;">Activo</span>
+            </div>
+            <div style="background:var(--surface2);border-radius:8px;padding:16px;display:flex;align-items:center;gap:16px;">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(91,159,208,.15);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">💊</div>
+              <div><div style="font-size:14px;font-weight:600;margin-bottom:3px;">Protocolo de medicación</div><div style="font-size:12px;color:var(--muted);">Dosis, frecuencia y registro por arete. 5 pasos con validación.</div></div>
+              <span class="badge badge-ok" style="margin-left:auto;flex-shrink:0;">Activo</span>
+            </div>
+            <div style="background:var(--surface2);border-radius:8px;padding:16px;display:flex;align-items:center;gap:16px;">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(239,159,39,.15);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📋</div>
+              <div><div style="font-size:14px;font-weight:600;margin-bottom:3px;">Reporte semanal automático</div><div style="font-size:12px;color:var(--muted);">Se genera y envía a dirección cada lunes a las 7:00 AM.</div></div>
+              <span class="badge badge-warn" style="margin-left:auto;flex-shrink:0;">Configurar</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Personal Panel -->
+        <div id="panel-personal" style="display:none;">
+          <h3 style="font-family:'Exo 2',sans-serif;font-size:17px;font-weight:700;margin-bottom:16px;">Equipo de trabajo</h3>
+          <table class="ind-table">
+            <thead><tr><th>Nombre</th><th>Rol</th><th>Área</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td>Carlos M.</td><td>Encargado ordeña</td><td>Producción</td><td><span class="badge badge-ok">Activo</span></td></tr>
+              <tr><td>Roberto S.</td><td>Vaquero</td><td>Pastoreo</td><td><span class="badge badge-ok">Activo</span></td></tr>
+              <tr><td>Juan P.</td><td>Auxiliar sanidad</td><td>Veterinaria</td><td><span class="badge badge-warn">Capacitando</span></td></tr>
+              <tr><td>Miguel R.</td><td>Operador maquinaria</td><td>Mantenimiento</td><td><span class="badge badge-ok">Activo</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Agente Panel -->
+        <div id="panel-agente" style="display:none;">
+          <div class="ind-agent" style="margin:0;">
+            <div class="ind-agent-header">
+              <div class="ind-agent-avatar">IA</div>
+              <div>
+                <div class="ind-agent-name">Agente de Capacitación</div>
+                <div class="ind-agent-status">● Activo — conoce todos tus procesos</div>
+              </div>
+            </div>
+            <div class="ind-chat-msgs" id="indChatMsgs">
+              <div class="ind-msg bot">Hola 👋 Soy el agente de capacitación del Rancho El Mezquite. Pregúntame cualquier cosa sobre los procesos, medicamentos o protocolos.</div>
+            </div>
+            <div class="ind-chat-input">
+              <input type="text" id="indChatInput" placeholder="Ej. ¿Cuál es la dosis de ivermectina?" onkeydown="if(event.key==='Enter')sendIndMsg()">
+              <button class="ind-chat-send" onclick="sendIndMsg()">→</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DEMO: CLÍNICA ─── -->
+<section id="demo-clinica" class="demo-section">
+  <div class="container">
+    <div class="demo-header reveal">
+      <div class="tag">Sistema Clínica</div>
+      <h2>Tu clínica <span>atendiendo pacientes</span> sin recepcionista</h2>
+      <p>Agenda en línea, recordatorios automáticos y el historial de cada paciente en un solo lugar.</p>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:40px;text-align:center;">
+      <div style="font-size:48px;margin-bottom:16px;">🏥</div>
+      <h3 style="font-family:'Exo 2',sans-serif;font-size:22px;font-weight:700;margin-bottom:12px;">Demo de Clínica</h3>
+      <p style="color:var(--muted);font-size:15px;max-width:440px;margin:0 auto 28px;">Este sistema incluye agenda médica, historial de pacientes, recordatorios por WhatsApp y gestión de consultas. Cada clínica es diferente — lo construimos a tu medida.</p>
+      <a href="/#diagnostico" class="btn-primary">Quiero el demo completo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DEMO: GYM ─── -->
+<section id="demo-gym" class="demo-section">
+  <div class="container">
+    <div class="demo-header reveal">
+      <div class="tag">Sistema Gym</div>
+      <h2>Tu gym <span>convirtiendo prospectos</span> en socios</h2>
+      <p>Gestión de membresías, control de acceso, clases y seguimiento de socios inactivos — todo automatizado.</p>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:40px;text-align:center;">
+      <div style="font-size:48px;margin-bottom:16px;">💪</div>
+      <h3 style="font-family:'Exo 2',sans-serif;font-size:22px;font-weight:700;margin-bottom:12px;">Demo de Gym</h3>
+      <p style="color:var(--muted);font-size:15px;max-width:440px;margin:0 auto 28px;">Control de membresías, horarios de clases, acceso por QR y reactivación automática de socios inactivos. Lo adaptamos a tu operación específica.</p>
+      <a href="/#diagnostico" class="btn-primary">Quiero el demo completo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta-sistemas">
+  <div class="container">
+    <div class="tag">¿Listo para tu sistema?</div>
+    <h2>Cuéntanos cómo opera <span>tu negocio</span></h2>
+    <p>En 30 minutos te mostramos exactamente cómo quedaría tu sistema personalizado y cuánto costaría.</p>
+    <a href="/#diagnostico" class="btn-primary" style="font-size:16px;padding:14px 32px;">Quiero mi diagnóstico gratuito →</a>
+  </div>
+</section>
+
+<!-- RESERVATION MODAL -->
+<div class="modal-overlay" id="reservModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeReservation()">×</button>
+    <h3>📅 Confirmar reservación</h3>
+    <div id="modalForm">
+      <div class="form-group">
+        <label>Nombre completo</label>
+        <input type="text" id="resNombre" placeholder="Tu nombre">
+      </div>
+      <div class="form-group">
+        <label>Número de personas</label>
+        <select id="resPersonas">
+          <option>1 persona</option>
+          <option>2 personas</option>
+          <option selected>3–4 personas</option>
+          <option>5–6 personas</option>
+          <option>Más de 6</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Horario seleccionado</label>
+        <input type="text" id="resHorario" readonly style="opacity:.7;">
+      </div>
+      <button class="modal-confirm" onclick="confirmReservation()">Confirmar →</button>
+    </div>
+    <div class="modal-success" id="modalSuccess">
+      <div class="check">✅</div>
+      <h3 style="margin-bottom:8px;">¡Reservación confirmada!</h3>
+      <p style="color:var(--muted);font-size:14px;">Te mandamos confirmación por WhatsApp. ¡Nos vemos pronto!</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── RESTAURANT MENU DATA ───
+const menuData = [
+  {id:1,name:'Bruschetta al pomodoro',desc:'Pan tostado, tomate fresco, albahaca',price:89,cat:'entradas'},
+  {id:2,name:'Tabla de quesos',desc:'Surtido de quesos italianos con miel',price:149,cat:'entradas'},
+  {id:3,name:'Sopa minestrone',desc:'Verduras frescas, pasta y hierbas',price:95,cat:'entradas'},
+  {id:4,name:'Pizza Margherita',desc:'Salsa de tomate, mozzarella, albahaca',price:189,cat:'pizzas'},
+  {id:5,name:'Pizza Pepperoni',desc:'Pepperoni artesanal, queso derretido',price:219,cat:'pizzas'},
+  {id:6,name:'Pizza 4 Formaggi',desc:'Mozzarella, gorgonzola, parmesano, provolone',price:239,cat:'pizzas'},
+  {id:7,name:'Spaghetti Carbonara',desc:'Huevo, pancetta, parmesano, pimienta negra',price:179,cat:'pastas'},
+  {id:8,name:'Penne Arrabbiata',desc:'Salsa de tomate picante, ajo, perejil',price:159,cat:'pastas'},
+  {id:9,name:'Fettuccine Alfredo',desc:'Crema, mantequilla, parmesano',price:169,cat:'pastas'},
+  {id:10,name:'Agua mineral',desc:'San Pellegrino 500ml',price:45,cat:'bebidas'},
+  {id:11,name:'Limonada italiana',desc:'Limón, azúcar, menta fresca',price:65,cat:'bebidas'},
+  {id:12,name:'Vino de la casa',desc:'Copa de vino tinto o blanco',price:95,cat:'bebidas'},
+];
+
+let cart = [];
+let currentCat = 'todo';
+let selectedSlot = '';
+
+function renderMenu(cat) {
+  const items = cat === 'todo' ? menuData : menuData.filter(i => i.cat === cat);
+  const container = document.getElementById('restItems');
+  container.innerHTML = items.map(item => `
+    <div class="rest-item">
+      <div class="rest-item-info">
+        <h4>${item.name}</h4>
+        <p>${item.desc}</p>
+      </div>
+      <div class="rest-item-right">
+        <div class="rest-price">$${item.price}</div>
+        <button class="add-btn" onclick="addToCart(${item.id})">+</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterMenu(cat) {
+  currentCat = cat;
+  document.querySelectorAll('.rest-cat').forEach(c => c.classList.remove('active'));
+  event.target.classList.add('active');
+  renderMenu(cat);
+}
+
+function addToCart(id) {
+  const item = menuData.find(i => i.id === id);
+  const existing = cart.find(c => c.id === id);
+  if (existing) existing.qty++;
+  else cart.push({...item, qty:1});
+  renderCart();
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(c => c.id !== id);
+  renderCart();
+}
+
+function renderCart() {
+  const count = cart.reduce((a,c) => a+c.qty, 0);
+  const total = cart.reduce((a,c) => a+(c.price*c.qty), 0);
+  document.getElementById('cartCount').textContent = count;
+  document.getElementById('cartTotal').textContent = `$${total}`;
+  const container = document.getElementById('cartItems');
+  const empty = document.getElementById('cartEmpty');
+  if (cart.length === 0) {
+    empty.style.display = 'block';
+    container.innerHTML = '';
+    container.appendChild(empty);
+    return;
+  }
+  empty.style.display = 'none';
+  container.innerHTML = cart.map(c => `
+    <div class="cart-item">
+      <span class="cart-item-name">${c.qty}x ${c.name}</span>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="cart-item-price">$${c.price*c.qty}</span>
+        <button class="cart-remove" onclick="removeFromCart(${c.id})">×</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function placeOrder() {
+  if (cart.length === 0) { alert('Agrega platillos primero'); return; }
+  document.getElementById('orderSuccess').style.display = 'block';
+  document.querySelector('.order-btn').style.display = 'none';
+  setTimeout(() => {
+    document.getElementById('orderSuccess').style.display = 'none';
+    document.querySelector('.order-btn').style.display = 'block';
+    cart = [];
+    renderCart();
+  }, 3000);
+}
+
+function selectSlot(el, slot) {
+  document.querySelectorAll('.slot-btn').forEach(b => {
+    b.style.borderColor = 'var(--border)';
+    b.style.background = 'var(--surface2)';
+  });
+  el.style.borderColor = 'rgba(200,170,128,.5)';
+  el.style.background = 'rgba(200,170,128,.1)';
+  selectedSlot = slot;
+}
+
+function openReservation() {
+  document.getElementById('resHorario').value = selectedSlot || 'Selecciona un horario primero';
+  document.getElementById('reservModal').classList.add('open');
+  document.getElementById('modalForm').style.display = 'block';
+  document.getElementById('modalSuccess').style.display = 'none';
+}
+
+function closeReservation() {
+  document.getElementById('reservModal').classList.remove('open');
+}
+
+function confirmReservation() {
+  const nombre = document.getElementById('resNombre').value;
+  if (!nombre.trim()) { alert('Ingresa tu nombre'); return; }
+  document.getElementById('modalForm').style.display = 'none';
+  document.getElementById('modalSuccess').style.display = 'block';
+  setTimeout(closeReservation, 2500);
+}
+
+// ─── INDUSTRIAL PANELS ───
+function showIndPanel(panel, el) {
+  document.querySelectorAll('[id^="panel-"]').forEach(p => p.style.display = 'none');
+  document.getElementById('panel-'+panel).style.display = 'block';
+  document.querySelectorAll('.ind-nav-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ─── INDUSTRIAL AGENT ───
+const indResponses = {
+  'dosis': 'La dosis de ivermectina al 1% es de **1ml por cada 50kg** de peso vivo. Aplicar subcutáneo en la tabla del cuello. Repetir cada 3 meses según el programa sanitario.',
+  'oxitetraciclina': 'La oxitetraciclina se aplica a razón de **10mg/kg** de peso vivo por vía IM. Para una vaca de 450kg serían 4.5ml. Revisar el stock — actualmente está BAJO del mínimo.',
+  'ordeña': 'El proceso de ordeña matutina inicia a las **6:00 AM**: 1) Arrear del potrero, 2) Lavado de pezones, 3) Sellado previo, 4) Ordeña mecánica, 5) Sellado posterior, 6) Registro de litros por vaca.',
+  'vitaminas': 'Las vitaminas ADE se aplican **una vez al mes** a razón de 5ml/vaca adulto. El stock actual es de 6 litros — revisar, está por debajo del mínimo de 10L.',
+  'brucella': 'El protocolo de vacunación contra Brucelosis se aplica a **becerras entre 3 y 6 meses** de edad, dosis única de 2ml SC. Requiere registro en SENASICA y certificado de MVZ.',
+  'default': 'Entendido. Para esa información específica te recomiendo revisar el manual de procesos en la sección **Procesos** o consultar al MVZ responsable. ¿Tienes alguna otra pregunta sobre los protocolos del rancho?'
+};
+
+function sendIndMsg() {
+  const input = document.getElementById('indChatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  const msgs = document.getElementById('indChatMsgs');
+
+  // User msg
+  const userDiv = document.createElement('div');
+  userDiv.className = 'ind-msg user';
+  userDiv.textContent = msg;
+  msgs.appendChild(userDiv);
+  input.value = '';
+  msgs.scrollTop = msgs.scrollHeight;
+
+  // Bot response
+  setTimeout(() => {
+    const lower = msg.toLowerCase();
+    let response = indResponses.default;
+    for (const [key, val] of Object.entries(indResponses)) {
+      if (lower.includes(key)) { response = val; break; }
+    }
+    const botDiv = document.createElement('div');
+    botDiv.className = 'ind-msg bot';
+    botDiv.textContent = response.replace(/\*\*/g, '');
+    msgs.appendChild(botDiv);
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 700);
+}
+
+document.getElementById('indChatInput')?.addEventListener('keydown', e => {
+  if (e.key === 'Enter') sendIndMsg();
+});
+
+// ─── DEMO SWITCHER ───
+function showDemo(id) {
+  document.querySelectorAll('.demo-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.ind-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('demo-'+id).classList.add('active');
+  event.target.classList.add('active');
+  document.getElementById('demo-'+id).scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ─── SCROLL REVEAL ───
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// Init
+renderMenu('todo');
+renderCart();
+</script>
+
+</body>
+</html>
