@@ -846,31 +846,6 @@ footer {
       <h2 class="section-title" style="justify-content:center;" data-i18n="why_title">No somos una app. <span>Somos tu equipo.</span></h2>
       <p class="section-sub" style="margin:14px auto 0;" data-i18n="why_sub">Cualquiera puede vender un chatbot. Nosotros construimos el sistema que hace crecer tu negocio.</p>
     </div>
-
-    <!-- Comparison table -->
-    <div class="reveal" style="overflow-x:auto;margin-bottom:64px;">
-      <table style="width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed;">
-        <colgroup>
-          <col style="width:25%;">
-          <col style="width:25%;">
-          <col style="width:25%;">
-          <col style="width:25%;">
-        </colgroup>
-        <thead>
-          <tr>
-            <th style="padding:16px 20px;border-bottom:1px solid var(--border);"></th>
-            <th style="padding:16px 20px;text-align:center;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);" data-i18n="why_col1">Empleado humano</th>
-            <th style="padding:16px 20px;text-align:center;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);" data-i18n="why_col2">Chatbot genérico</th>
-            <th style="padding:16px 20px;text-align:center;background:rgba(200,170,128,.06);border-bottom:2px solid var(--accent);">
-              <span style="font-family:'Exo 2',sans-serif;font-size:14px;font-weight:700;color:var(--accent);">AUTOMWIZ</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody id="whyTable">
-        </tbody>
-      </table>
-    </div>
-
     <!-- Differentiators cards -->
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;">
 
@@ -928,49 +903,6 @@ footer {
 </style>
 
 <script>
-// Why table data
-const whyRows = {
-  es: [
-    ["⏰ Disponibilidad", "Lunes–Viernes 9–6pm ❌", "24/7 sin contexto ⚠️", "24/7 personalizado ✅"],
-    ["💰 Costo mensual", "$8,000–15,000 MXN + IMSS ❌", "Barato pero sin soporte ⚠️", "Desde $3,000 MXN ✅"],
-    ["🚀 Arranque", "2–4 semanas ❌", "Inmediato, sin config ⚠️", "5 días configurado ✅"],
-    ["🎯 Errores", "Humanos y olvidos ❌", "Flujos rotos ⚠️", "Consistente siempre ✅"],
-    ["📈 Escala", "1 persona = 1 chat ❌", "Escala sin calidad ⚠️", "Miles en paralelo ✅"],
-    ["🛠️ Personalización", "Alta pero cara ❌", "Baja o nula ⚠️", "Hecha para ti ✅"],
-  ],
-  en: [
-    ["⏰ Availability", "Mon–Fri 9–6pm ❌", "24/7 no context ⚠️", "24/7 personalized ✅"],
-    ["💰 Monthly cost", "$8,000–15,000 MXN + benefits ❌", "Cheap but no support ⚠️", "From $3,000 MXN ✅"],
-    ["🚀 Setup", "2–4 weeks ❌", "Instant, no config ⚠️", "5 days configured ✅"],
-    ["🎯 Errors", "Human & forgetfulness ❌", "Broken flows ⚠️", "Always consistent ✅"],
-    ["📈 Scale", "1 person = 1 chat ❌", "Scales no quality ⚠️", "Thousands in parallel ✅"],
-    ["🛠️ Customization", "High but expensive ❌", "Low or none ⚠️", "Built for you ✅"],
-  ]
-};
-
-function buildWhyTable() {
-  const tbody = document.getElementById('whyTable');
-  if (!tbody) return;
-  tbody.innerHTML = '';
-  const rows = whyRows[lang] || whyRows.es;
-  rows.forEach((row, i) => {
-    const tr = document.createElement('tr');
-    tr.style.cssText = `background:${i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,.02)'};`;
-    row.forEach((cell, j) => {
-      const td = document.createElement('td');
-      const colors = ['transparent','rgba(255,80,80,.04)','rgba(255,180,0,.04)','rgba(200,170,128,.04)']; td.style.cssText = `padding:14px 20px;border-bottom:1px solid var(--border);text-align:center;font-size:13px;background:${colors[j]||'transparent'};${j === 0 ? 'text-align:left;color:var(--text);font-weight:600;' : ''}${j === 3 ? 'color:var(--text);font-weight:500;' : j===0?'':'color:var(--muted);'}`;
-      td.textContent = cell;
-      tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
-  });
-}
-
-buildWhyTable();
-const origLangBtn = document.getElementById('langBtn').onclick;
-document.getElementById('langBtn').addEventListener('click', () => {
-  setTimeout(buildWhyTable, 50);
-});
 </script>
 
 <section id="services" class="agents-section">
@@ -1719,6 +1651,7 @@ diagObserver.observe(document.getElementById('diagnostico'));
         <ul>
           <li><a href="#proceso" data-i18n="footer_proc">Proceso</a></li>
           <li><a href="#diagnostico" data-i18n="footer_contacto">Contacto</a></li>
+          <li><a href="/privacidad.html" data-i18n="footer_privacy">Política de privacidad</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1862,7 +1795,7 @@ const i18n = {
     success_msg:"Nos ponemos en contacto contigo en las próximas horas. Revisa tu WhatsApp.",
     footer_desc:"Automatización con IA para negocios que quieren crecer sin contratar más gente.",
     footer_sol:"Soluciones",footer_agentes:"Agentes de texto",footer_rest:"Sistema restaurante",footer_ind:"Sistema industrial",
-    footer_empresa:"Empresa",footer_proc:"Proceso",footer_contacto:"Contacto",
+    footer_empresa:"Empresa",footer_proc:"Proceso", footer_privacy:"Política de privacidad",footer_contacto:"Contacto",
     footer_contactar:"Contactar",footer_wa:"WhatsApp directo",
     footer_copy:"© 2025 AUTOMWIZ. Todos los derechos reservados. Torreón, México.",
     footer_slogan:"INNOVAR NUNCA FUE TAN FÁCIL"
@@ -1981,7 +1914,7 @@ const i18n = {
     success_msg:"We'll contact you within the next few hours. Check your WhatsApp.",
     footer_desc:"AI automation for businesses that want to grow without hiring more staff.",
     footer_sol:"Solutions",footer_agentes:"Text agents",footer_rest:"Restaurant system",footer_ind:"Industrial system",
-    footer_empresa:"Company",footer_proc:"Process",footer_contacto:"Contact",
+    footer_empresa:"Company",footer_proc:"Process", footer_privacy:"Privacy policy",footer_contacto:"Contact",
     footer_contactar:"Contact",footer_wa:"WhatsApp direct",
     footer_copy:"© 2025 AUTOMWIZ. All rights reserved. Torreón, Mexico.",
     footer_slogan:"INNOVATION HAS NEVER BEEN EASIER"
@@ -2044,51 +1977,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 const SUPABASE_URL = 'https://qeqesoyzngyzlgecohpl.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFlcWVzb3l6bmd5emxnZWNvaHBsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1Mzk4MDEsImV4cCI6MjA5MDExNTgwMX0.1M3RNWU8Gc-xVlfYXpNcH1ud7gQd6y2mEBkku2Q-k6s';
 
-document.getElementById('leadForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const btn = e.target.querySelector('.form-btn');
-  btn.textContent = lang === 'es' ? 'Enviando...' : 'Sending...';
-  btn.disabled = true;
-
-  const payload = {
-    nombre: document.getElementById('f_name').value,
-    empresa: document.getElementById('f_empresa').value,
-    industria: document.getElementById('f_industria').value,
-    whatsapp: document.getElementById('f_wa').value,
-    mensaje: document.getElementById('f_msg').value,
-    idioma: lang,
-    fecha: new Date().toISOString()
-  };
-
-  try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify(payload)
-    });
-
-    if (res.ok || res.status === 201) {
-      document.getElementById('leadForm').style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-      showNotif(lang === 'es' ? '¡Lead registrado exitosamente!' : 'Lead registered successfully!');
-    } else {
-      throw new Error('Error al guardar');
-    }
-  } catch (err) {
-    // Fallback: abrir WhatsApp con los datos
-    const msg = encodeURIComponent(
-      `Hola AUTOMWIZ, quiero mi diagnóstico gratuito.\n\nNombre: ${payload.nombre}\nEmpresa: ${payload.empresa}\nSector: ${payload.industria}\nMensaje: ${payload.mensaje || 'Sin mensaje adicional'}`
-    );
-    window.open(`https://wa.me/528717866322?text=${msg}`, '_blank');
-    document.getElementById('leadForm').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-  }
-});
+// leadForm replaced by AI chat stepper — submitDiag handles Supabase save
 
 // ─── NOTIFICATION ───
 function showNotif(msg) {
