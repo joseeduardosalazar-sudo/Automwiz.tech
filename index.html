@@ -1098,7 +1098,7 @@ async function initAutom() {
 
   const greeting = lang === 'es'
     ? '¡Hola! Soy AUTOM 👋 ¿En qué tipo de negocio puedo ayudarte hoy?'
-    : 'Hi! I'm AUTOM 👋 What type of business can I help you with today?';
+    : "Hi! I'm AUTOM 👋 What type of business can I help you with today?";
 
   showTyping();
   await new Promise(r => setTimeout(r, 900));
@@ -2153,8 +2153,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 // ─── LEAD FORM ───
 // TODO: Reemplaza estos valores con los de tu proyecto Supabase
-const SUPABASE_URL = 'https://qeqesoyzngyzlgecohpl.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFlcWVzb3l6bmd5emxnZWNvaHBsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1Mzk4MDEsImV4cCI6MjA5MDExNTgwMX0.1M3RNWU8Gc-xVlfYXpNcH1ud7gQd6y2mEBkku2Q-k6s';
+
 
 // leadForm replaced by AI chat stepper — submitDiag handles Supabase save
 
