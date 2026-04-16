@@ -780,7 +780,7 @@ footer {
     <div class="hero-content">
 
       <h1 class="hero-title" style="margin-bottom:20px;">
-        <span id="heroTyping" style="color:var(--muted);font-size:.55em;display:block;margin-bottom:12px;font-weight:500;letter-spacing:.01em;min-height:1.2em;"></span>
+        <span id="heroTyping" style="color:var(--muted);font-size:16px;display:block;margin-bottom:12px;font-weight:500;letter-spacing:.01em;height:24px;white-space:nowrap;overflow:hidden;"></span>
         <span class="line1">Tu competencia</span><br><span class="line2" style="color:var(--text);">sí </span><span style="color:var(--accent2);font-family:'Exo 2',sans-serif;">responde.</span>
       </h1>
 
@@ -822,25 +822,23 @@ footer {
   <div class="container">
     <div class="pain-intro reveal">
       <div class="tag" data-i18n="pain_tag">Datos que incomodan</div>
-      <h2 class="section-title" data-i18n="pain_title">Lo que te <span>cuesta</span> no automatizar</h2>
-      <p class="section-sub" data-i18n="pain_sub">Estos no son números inventados. Son los promedios reales de negocios en México como el tuyo.</p>
     </div>
     <div class="pain-cards">
       <div class="pain-card reveal">
-        <div class="pain-num">78%</div>
-        <p data-i18n="pain1"><strong>de tus prospectos</strong> se van con la competencia si no recibes respuesta en los primeros 5 minutos.</p>
+        <div class="pain-num" id="pain-78">0%</div>
+        <p data-i18n="pain1"><strong>de prospectos</strong> se van si no respondes en 5 min.</p>
       </div>
       <div class="pain-card reveal">
-        <div class="pain-num">40%</div>
-        <p data-i18n="pain2"><strong>de tus leads se pierden</strong> por falta de seguimiento. Tu equipo no puede responder todo a la vez.</p>
+        <div class="pain-num" id="pain-40">0%</div>
+        <p data-i18n="pain2"><strong>de tus leads</strong> se pierden por falta de seguimiento.</p>
       </div>
       <div class="pain-card reveal">
-        <div class="pain-num">67%</div>
-        <p data-i18n="pain3"><strong>de tus clientes</strong> prefieren chatear antes de hablar. Si no tienes chat, ya los perdiste.</p>
+        <div class="pain-num" id="pain-67">0%</div>
+        <p data-i18n="pain3"><strong>de tus clientes</strong> prefieren chatear antes de llamar.</p>
       </div>
       <div class="pain-card reveal">
-        <div class="pain-num">$8k</div>
-        <p data-i18n="pain4"><strong>cuesta al mes</strong> un empleado de atención al cliente. Un agente de IA hace más por menos de la mitad.</p>
+        <div class="pain-num" id="pain-8k">$0k</div>
+        <p data-i18n="pain4"><strong>cuesta al mes</strong> un empleado de atención. Un agente hace más por menos.</p>
       </div>
     </div>
   </div>
@@ -860,24 +858,15 @@ footer {
         <div class="form-perks">
           <div class="perk">
             <div class="perk-icon">🎯</div>
-            <div class="perk-text">
-              <strong data-i18n="perk1a">Análisis de tu operación actual</strong>
-              <span data-i18n="perk1b">Identificamos los puntos exactos donde pierdes leads y dinero.</span>
-            </div>
+<div class="perk-text"><strong data-i18n="perk1a">Análisis de tu operación actual</strong></div>
           </div>
           <div class="perk">
             <div class="perk-icon">⚡</div>
-            <div class="perk-text">
-              <strong data-i18n="perk2a">Propuesta personalizada</strong>
-              <span data-i18n="perk2b">No plantillas genéricas. Una solución hecha para tu negocio.</span>
-            </div>
+<div class="perk-text"><strong data-i18n="perk2a">Propuesta personalizada</strong></div>
           </div>
           <div class="perk">
             <div class="perk-icon">📊</div>
-            <div class="perk-text">
-              <strong data-i18n="perk3a">ROI estimado real</strong>
-              <span data-i18n="perk3b">Te mostramos los números antes de que inviertas un solo peso.</span>
-            </div>
+<div class="perk-text"><strong data-i18n="perk3a">ROI estimado real</strong></div>
           </div>
         </div>
       </div>
@@ -1170,35 +1159,16 @@ window.addEventListener('load', function() {
       <div class="why-card reveal" style="background:var(--surface);padding:40px 32px;transition:all .3s;cursor:default;">
         <div style="width:52px;height:52px;border-radius:12px;background:rgba(91,159,208,.1);border:1px solid rgba(91,159,208,.2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:24px;">⚙️</div>
         <h3 style="font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px;" data-i18n="why_d2_title">Todo en un sistema</h3>
-        <p style="font-size:14px;color:var(--muted);line-height:1.65;" data-i18n="why_d2_desc">Agente + CRM + conversaciones centralizadas + reportes. No necesitas 4 herramientas distintas. Todo vive en un solo lugar.</p>
-      </div>
-
-      <div class="why-card reveal" style="background:var(--surface);padding:40px 32px;transition:all .3s;cursor:default;">
-        <div style="width:52px;height:52px;border-radius:12px;background:rgba(78,193,122,.1);border:1px solid rgba(78,193,122,.2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:24px;">📈</div>
-        <h3 style="font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px;" data-i18n="why_d3_title">Mejora continua real</h3>
-        <p style="font-size:14px;color:var(--muted);line-height:1.65;" data-i18n="why_d3_desc">No te entregamos el agente y nos vamos. Monitoreamos, optimizamos y ajustamos con base en datos reales de tu operación.</p>
+        <p style="font-size:14px;color:var(--muted);line-height:1.65;" data-i18n="why_d2_desc">Agente + CRM + conversaciones centralizadas + reportes. No necesitas 4 herramientas distintas.</p>
       </div>
 
       <div class="why-card reveal" style="background:var(--surface);padding:40px 32px;transition:all .3s;cursor:default;">
         <div style="width:52px;height:52px;border-radius:12px;background:rgba(200,170,128,.1);border:1px solid rgba(200,170,128,.2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:24px;">🚀</div>
         <h3 style="font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px;" data-i18n="why_d4_title">Listo en 5 días</h3>
-        <p style="font-size:14px;color:var(--muted);line-height:1.65;" data-i18n="why_d4_desc">Mientras la competencia tarda meses en implementar, tú ya estás atendiendo leads automáticamente desde la primera semana.</p>
-      </div>
-
-      <div class="why-card reveal" style="background:var(--surface);padding:40px 32px;transition:all .3s;cursor:default;">
-        <div style="width:52px;height:52px;border-radius:12px;background:rgba(91,159,208,.1);border:1px solid rgba(91,159,208,.2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:24px;">🇲🇽</div>
-        <h3 style="font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px;" data-i18n="why_d5_title">Hecho para México</h3>
-        <p style="font-size:14px;color:var(--muted);line-height:1.65;" data-i18n="why_d5_desc">Entendemos cómo hablan tus clientes, qué esperan y cómo opera un negocio local. No es una solución gringa adaptada.</p>
-      </div>
-
-      <div class="why-card reveal" style="background:var(--surface);padding:40px 32px;transition:all .3s;cursor:default;">
-        <div style="width:52px;height:52px;border-radius:12px;background:rgba(78,193,122,.1);border:1px solid rgba(78,193,122,.2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:24px;">🔒</div>
-        <h3 style="font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px;" data-i18n="why_d6_title">Sin contratos anuales</h3>
-        <p style="font-size:14px;color:var(--muted);line-height:1.65;" data-i18n="why_d6_desc">Mes a mes. Si el agente no te genera valor, no tienes por qué quedarte. Apostamos a los resultados, no a los contratos.</p>
+        <p style="font-size:14px;color:var(--muted);line-height:1.65;" data-i18n="why_d4_desc">Mientras la competencia tarda meses, tú ya estás atendiendo leads desde la primera semana.</p>
       </div>
 
     </div>
-  </div>
 </section>
 
 <style>
@@ -1404,7 +1374,6 @@ window.addEventListener('load', function() {
 
     <div class="reveal" style="text-align:center;">
       <a href="/sistemas.html" class="btn-primary" style="font-size:15px;padding:14px 32px;" data-i18n="sys_cta">Ver demos interactivos →</a>
-      <p style="font-size:13px;color:var(--muted);margin-top:14px;" data-i18n="sys_note">Explora cómo funcionaría tu sistema antes de invertir</p>
     </div>
 
   </div>
@@ -1485,7 +1454,7 @@ window.addEventListener('load', function() {
     <div class="proceso-header reveal" style="text-align:center;margin-bottom:64px;">
       <div class="tag" data-i18n="proc_tag">Proceso de implementación</div>
       <h2 class="section-title" style="justify-content:center;" data-i18n="proc_title">Tu agente listo y <span>funcionando</span> en 5 días</h2>
-      <p class="section-sub" style="margin:14px auto 0;" data-i18n="proc_sub">Sin meses de espera ni integraciones complejas. Un proceso probado y claro.</p>
+      
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;">
@@ -2329,6 +2298,35 @@ const resultsObserver = new IntersectionObserver(entries => {
 
 const resultsEl = document.getElementById('resultados');
 if (resultsEl) resultsObserver.observe(resultsEl);
+
+// Pain counters
+const painObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      const p78 = document.getElementById('pain-78');
+      const p40 = document.getElementById('pain-40');
+      const p67 = document.getElementById('pain-67');
+      const p8k = document.getElementById('pain-8k');
+      if (p78 && p78.textContent === '0%') {
+        animateCounter(p78, 78, '', '%', 1800);
+        animateCounter(p40, 40, '', '%', 1600);
+        animateCounter(p67, 67, '', '%', 1700);
+        // Special for $8k
+        const start = performance.now();
+        (function tick(time) {
+          const progress = Math.min((time - start) / 1600, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          p8k.textContent = '$' + Math.round(eased * 8) + 'k';
+          if (progress < 1) requestAnimationFrame(tick);
+          else p8k.textContent = '$8k';
+        })(start);
+      }
+      painObserver.disconnect();
+    }
+  });
+}, { threshold: 0.2 });
+const painEl = document.getElementById('pain');
+if (painEl) painObserver.observe(painEl);
 
 // ─── INIT ───
 applyLang();
