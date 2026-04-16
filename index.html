@@ -215,6 +215,10 @@ nav.scrolled {
   display:flex; gap:40px; margin-top:64px;
   flex-wrap:wrap;
 }
+@media(max-width:640px){
+  .hero-stats { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:40px; }
+  .hero-stat-num { font-size:28px; }
+}
 .hero-stat-num {
   font-family:'Exo 2', sans-serif;
   font-size:36px;
@@ -698,9 +702,11 @@ footer {
 }
 @media (max-width:640px) {
   .hero-stats { gap:28px; }
-  .pain-cards { grid-template-columns:1fr; }
+  .pain-cards { grid-template-columns:1fr 1fr !important; }
   .steps { grid-template-columns:1fr; }
   .footer-grid { grid-template-columns:1fr; }
+  section { padding:60px 0 !important; }
+  .hero-title { font-size:clamp(36px,10vw,56px) !important; }
 }
 
 /* ─── SCROLL REVEAL ─── */
@@ -1153,7 +1159,7 @@ window.addEventListener('load', function() {
       <div class="why-card reveal" style="background:var(--surface);padding:40px 32px;transition:all .3s;cursor:default;">
         <div style="width:52px;height:52px;border-radius:12px;background:rgba(200,170,128,.1);border:1px solid rgba(200,170,128,.2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:24px;">🧠</div>
         <h3 style="font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px;" data-i18n="why_d1_title">Conocemos tu industria</h3>
-        <p style="font-size:14px;color:var(--muted);line-height:1.65;" data-i18n="why_d1_desc">No empezamos de cero. Tenemos bases probadas para clínicas, gyms, financieras y más. Tu agente arranca con ventaja.</p>
+        <p style="font-size:14px;color:var(--muted);line-height:1.65;display:none;" class="hide-mobile" data-i18n="why_d1_desc">No empezamos de cero. Tenemos bases probadas para clínicas, gyms, financieras y más. Tu agente arranca con ventaja.</p>
       </div>
 
       <div class="why-card reveal" style="background:var(--surface);padding:40px 32px;transition:all .3s;cursor:default;">
@@ -1737,18 +1743,25 @@ document.getElementById('langBtn').addEventListener('click', () => {
     <div class="reveal" style="text-align:center;margin-bottom:16px;">
       <div class="tag" data-i18n="price_tag">Planes y precios</div>
     </div>
-    <div class="reveal" style="text-align:center;margin-bottom:64px;">
+    <div class="reveal" style="text-align:center;margin-bottom:40px;">
       <h2 class="section-title" style="justify-content:center;" data-i18n="price_title">Invierte en <span>automatización,</span> no en nómina</h2>
-      <p class="section-sub" style="margin:14px auto 0;" data-i18n="price_sub">Sin contratos anuales forzados. Sin setup fee oculto. Solo resultados desde el primer mes.</p>
+      <p style="font-size:16px;color:var(--muted);margin-top:14px;max-width:540px;margin-left:auto;margin-right:auto;">Un empleado de atención cuesta $8,000–15,000/mes. Tu agente cuesta menos de la mitad y trabaja 24/7.</p>
+      <!-- Toggle mensual / anual -->
+      <div style="display:inline-flex;align-items:center;gap:4px;margin-top:24px;background:var(--surface2);border:1px solid var(--border);border-radius:100px;padding:4px;">
+        <button id="toggleMensual" onclick="setPeriod('mensual')" style="padding:8px 20px;border-radius:100px;border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;background:var(--accent);color:#0A1220;">Mensual</button>
+        <button id="toggleAnual" onclick="setPeriod('anual')" style="padding:8px 20px;border-radius:100px;border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;background:transparent;color:var(--muted);">Anual <span style="font-size:11px;color:var(--green);font-weight:700;">-20%</span></button>
+      </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;max-width:800px;margin:0 auto;">
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;max-width:800px;margin:0 auto;" class="precios-grid">
 
       <!-- Starter -->
       <div style="background:var(--surface);padding:48px 36px;display:flex;flex-direction:column;">
         <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;" data-i18n="p1_label">Starter</div>
-        <div style="font-family:'Exo 2',sans-serif;font-size:48px;font-weight:800;line-height:1;color:var(--text);margin-bottom:6px;">$3,000</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:24px;" data-i18n="p_period">MXN / mes</div>
-        <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.6;" data-i18n="p1_desc">Ideal para negocios que quieren empezar a automatizar su atención al cliente con un agente inteligente.</p>
+        <div style="font-family:'Exo 2',sans-serif;font-size:48px;font-weight:800;line-height:1;color:var(--text);margin-bottom:4px;" id="price-starter">$3,000</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:8px;" id="period-starter">MXN / mes</div>
+        <div style="font-size:13px;color:var(--green);margin-bottom:24px;font-weight:500;">↑ Recupera 30–50 leads al mes que hoy pierdes</div>
+        <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.6;" data-i18n="p1_desc">Para el negocio que pierde leads por no contestar a tiempo. Listo en 5 días.</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px;flex:1;">
           <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p1_f1">1 agente de texto IA</span></li>
           <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p1_f2">1 canal (WhatsApp o Instagram)</span></li>
@@ -1756,16 +1769,17 @@ document.getElementById('langBtn').addEventListener('click', () => {
           <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p1_f4">Reporte mensual básico</span></li>
           <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p1_f5">Soporte por WhatsApp</span></li>
         </ul>
-        <a href="#diagnostico" class="btn-outline" style="text-align:center;justify-content:center;" data-i18n="p_cta">Agendar diagnóstico</a>
+        <a href="https://calendly.com/automwiz-info/automwiz" target="_blank" class="btn-outline" style="text-align:center;justify-content:center;">Empezar con Starter →</a>
       </div>
 
       <!-- Pro -->
       <div style="background:var(--surface2);padding:48px 36px;display:flex;flex-direction:column;position:relative;">
         <div style="position:absolute;top:20px;right:20px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(200,170,128,.15);border:1px solid rgba(200,170,128,.3);color:var(--accent);padding:4px 12px;border-radius:100px;" data-i18n="p_popular">Más popular</div>
         <div style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;">Pro</div>
-        <div style="font-family:'Exo 2',sans-serif;font-size:48px;font-weight:800;line-height:1;color:var(--text);margin-bottom:6px;">$5,500</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:24px;" data-i18n="p_period">MXN / mes</div>
-        <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.6;" data-i18n="p2_desc">Para negocios que quieren escalar con múltiples agentes y canales integrados.</p>
+        <div style="font-family:'Exo 2',sans-serif;font-size:48px;font-weight:800;line-height:1;color:var(--text);margin-bottom:4px;" id="price-pro">$5,500</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:8px;" id="period-pro">MXN / mes</div>
+        <div style="font-size:13px;color:var(--green);margin-bottom:24px;font-weight:500;">↑ Gestiona 500+ conversaciones al mes en 3 canales</div>
+        <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.6;" data-i18n="p2_desc">Para el negocio que quiere escalar sin contratar más gente.</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px;flex:1;">
           <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p2_f1">2 agentes de texto IA</span></li>
           <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p2_f2">Multicanal (WhatsApp + Instagram + Web)</span></li>
@@ -1774,7 +1788,7 @@ document.getElementById('langBtn').addEventListener('click', () => {
           <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p2_f5">Optimización continua</span></li>
           <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted);"><span style="color:var(--accent);font-size:16px;line-height:1.4;">✓</span><span data-i18n="p2_f6">Soporte prioritario</span></li>
         </ul>
-        <a href="#diagnostico" class="btn-primary" style="text-align:center;justify-content:center;" data-i18n="p_cta">Agendar diagnóstico</a>
+        <a href="https://calendly.com/automwiz-info/automwiz" target="_blank" class="btn-primary" style="text-align:center;justify-content:center;">Empezar con Pro →</a>
       </div>
 
     </div>
@@ -1782,10 +1796,31 @@ document.getElementById('langBtn').addEventListener('click', () => {
     <div class="reveal" style="text-align:center;margin-top:32px;padding:32px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);max-width:600px;margin-left:auto;margin-right:auto;">
       <p style="font-size:16px;color:var(--text);margin-bottom:8px;" data-i18n="sys_cta_title">¿Necesitas un sistema completo para tu operación?</p>
       <p style="font-size:14px;color:var(--muted);margin-bottom:20px;" data-i18n="sys_cta_sub">Restaurante, industrial, ganadería — lo construimos a medida. Cotización personalizada sin compromiso.</p>
-      <a href="#diagnostico" class="btn-primary" data-i18n="sys_cta_btn">Hablemos →</a>
+      <a href="https://calendly.com/automwiz-info/automwiz" target="_blank" class="btn-primary" data-i18n="sys_cta_btn">Hablemos →</a>
     </div>
   </div>
 </section>
+
+<script>
+// ─── PRICE TOGGLE ───
+const prices = { starter: { mensual: '$3,000', anual: '$2,400' }, pro: { mensual: '$5,500', anual: '$4,400' } };
+const periods = { mensual: 'MXN / mes', anual: 'MXN / mes · pagado anualmente' };
+function setPeriod(period) {
+  document.getElementById('price-starter').textContent = prices.starter[period];
+  document.getElementById('price-pro').textContent = prices.pro[period];
+  document.getElementById('period-starter').textContent = periods[period];
+  document.getElementById('period-pro').textContent = periods[period];
+  const mBtn = document.getElementById('toggleMensual');
+  const aBtn = document.getElementById('toggleAnual');
+  if (period === 'mensual') {
+    mBtn.style.cssText += ';background:var(--accent);color:#0A1220;font-weight:600;';
+    aBtn.style.cssText += ';background:transparent;color:var(--muted);font-weight:500;';
+  } else {
+    aBtn.style.cssText += ';background:var(--accent);color:#0A1220;font-weight:600;';
+    mBtn.style.cssText += ';background:transparent;color:var(--muted);font-weight:500;';
+  }
+}
+</script>
 
 <!-- ─── FOOTER ─── -->
 <footer>
