@@ -517,15 +517,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
     entries.forEach(function(e) {
       if (e.isIntersecting) { startMainAnimations(); obs.disconnect(); }
     });
-  }, { threshold: 0.2 });
+  }, { threshold: 0.05, rootMargin: "0px 0px -50px 0px" });
   var sec = document.getElementById('aprende');
   if (sec) obs.observe(sec);
 
   // Fallback on load
   window.addEventListener('load', function() {
     setTimeout(function() {
-      if (!started) startMainAnimations();
-    }, 500);
+      startMainAnimations();
+    }, 300);
   });
 })();
 </script>
