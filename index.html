@@ -735,6 +735,71 @@ footer {
 }
 .notif.show { transform:translateY(0); }
 .notif-dot { width:8px; height:8px; border-radius:50%; background:#4EC17A; flex-shrink:0; }
+
+/* ─── MOBILE COMPREHENSIVE ─── */
+@media(max-width:768px){
+
+  /* Hero two-path layout */
+  .hero-paths{grid-template-columns:1fr!important;}
+  .hero-paths > div:nth-child(2){display:none!important;}
+  .hero-paths > div{padding:28px 20px!important;}
+  .hero-paths > div:last-child{border-top:1px solid var(--border);}
+  .hero-paths a{width:100%;text-align:center;justify-content:center;}
+
+  /* Hero stats */
+  .hero-stats{display:grid!important;grid-template-columns:1fr 1fr!important;gap:20px!important;padding-top:28px!important;}
+  .hero-stat-num{font-size:28px!important;}
+
+  /* Sections */
+  section[id]{padding:60px 0!important;}
+
+  /* Nav */
+  .hero-typewriter{font-size:14px!important;}
+
+  /* Pain cards */
+  .pain-cards{grid-template-columns:1fr 1fr!important;}
+
+  /* Why cards */
+  #porque .container > div:last-child{grid-template-columns:1fr!important;}
+
+  /* Agents section */
+  .agents-grid{grid-template-columns:1fr!important;}
+  .agent-demo{flex-direction:column!important;}
+
+  /* Sistemas cards */
+  .sistemas-cards-grid{grid-template-columns:1fr!important;}
+  .hero-paths div[style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr!important;}
+
+  /* AI predictions feed */
+  #aiPredictions .ai-pred{flex-wrap:wrap;}
+
+  /* Resultados */
+  .resultados-grid{grid-template-columns:1fr!important;}
+  div[style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr 1fr!important;}
+
+  /* Proceso steps */
+  .steps{grid-template-columns:1fr!important;}
+
+  /* FAQ */
+  #faqList{grid-template-columns:1fr!important;}
+
+  /* Precios */
+  .precios-grid{grid-template-columns:1fr!important;}
+  #precios div[style*="grid-template-columns:repeat(2,1fr)"]{grid-template-columns:1fr!important;}
+
+  /* Form */
+  .form-wrapper{grid-template-columns:1fr!important;}
+  .form-left{display:none;}
+
+  /* Footer */
+  .footer-grid{grid-template-columns:1fr 1fr!important;}
+}
+
+@media(max-width:480px){
+  .pain-cards{grid-template-columns:1fr!important;}
+  .hero-stats{grid-template-columns:1fr 1fr!important;}
+  .footer-grid{grid-template-columns:1fr!important;}
+}
 </style>
 </head>
 <body>
