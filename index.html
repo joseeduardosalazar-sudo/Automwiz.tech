@@ -946,36 +946,9 @@ footer {
 }
 </style>
 
-<!-- ─── PAIN ─── -->
-<section id="pain">
-  <div class="container">
-    <div class="pain-intro reveal">
-      <h2 style="font-family:'Exo 2',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--text);">Datos que <span style="color:var(--accent);">incomodan</span></h2>
-    </div>
-    <div class="pain-cards">
-      <div class="pain-card reveal">
-        <div class="pain-num" id="pain-78">0%</div>
-        <p data-i18n="pain1"><strong>de prospectos</strong> se van si no respondes en 5 min.</p>
-      </div>
-      <div class="pain-card reveal">
-        <div class="pain-num" id="pain-40">0%</div>
-        <p data-i18n="pain2"><strong>de tus leads</strong> se pierden por falta de seguimiento.</p>
-      </div>
-      <div class="pain-card reveal">
-        <div class="pain-num" id="pain-67">0%</div>
-        <p data-i18n="pain3"><strong>de tus clientes</strong> prefieren chatear antes de llamar.</p>
-      </div>
-      <div class="pain-card reveal">
-        <div class="pain-num" id="pain-8k">$0k</div>
-        <p data-i18n="pain4"><strong>cuesta al mes</strong> un empleado de atención. Un agente hace más por menos.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ─── AGENTES DE TEXTO ─── -->
 
-<section id="diagnostico" style="padding:100px 0;border-top:1px solid var(--border);">
+<section id="diagnostico" style="padding:70px 0;border-top:1px solid var(--border);">
   <div class="container">
     <div class="form-wrapper">
 
@@ -1267,55 +1240,6 @@ window.addEventListener('load', function() {
 </script>
 
 
-<!-- ─── POR QUÉ AUTOMWIZ ─── -->
-<section id="porque" style="padding:100px 0;border-top:1px solid var(--border);">
-  <div class="container">
-
-    <div class="reveal" style="text-align:center;margin-bottom:64px;">
-      <div class="tag" data-i18n="why_tag">Por qué AUTOMWIZ</div>
-      <h2 class="section-title" style="justify-content:center;" data-i18n="why_title">No somos una app. <span>Somos tu equipo.</span></h2>
-      <p class="section-sub" style="margin:14px auto 0;" data-i18n="why_sub">Cualquiera puede vender un chatbot. Nosotros construimos el sistema que hace crecer tu negocio.</p>
-    </div>
-    <!-- Differentiators cards -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;">
-
-      <div class="why-card reveal" style="background:var(--surface);padding:40px 32px;transition:all .3s;cursor:default;">
-        <div style="width:52px;height:52px;border-radius:12px;background:rgba(200,170,128,.1);border:1px solid rgba(200,170,128,.2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:24px;">🧠</div>
-        <h3 style="font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px;" data-i18n="why_d1_title">Conocemos tu industria</h3>
-        <p style="font-size:14px;color:var(--muted);line-height:1.65;" data-i18n="why_d1_desc">No empezamos de cero. Tenemos bases probadas para clínicas, gyms, financieras y más. Tu agente arranca con ventaja.</p>
-      </div>
-
-      <div class="why-card reveal" style="background:var(--surface);padding:40px 32px;transition:all .3s;cursor:default;">
-        <div style="width:52px;height:52px;border-radius:12px;background:rgba(91,159,208,.1);border:1px solid rgba(91,159,208,.2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:24px;">⚙️</div>
-        <h3 style="font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px;" data-i18n="why_d2_title">Todo en un sistema</h3>
-        <p style="font-size:14px;color:var(--muted);line-height:1.65;" data-i18n="why_d2_desc">Agente + CRM + conversaciones centralizadas + reportes. No necesitas 4 herramientas distintas.</p>
-      </div>
-
-      <div class="why-card reveal" style="background:var(--surface);padding:40px 32px;transition:all .3s;cursor:default;">
-        <div style="width:52px;height:52px;border-radius:12px;background:rgba(200,170,128,.1);border:1px solid rgba(200,170,128,.2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:24px;">🚀</div>
-        <h3 style="font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;margin-bottom:10px;" data-i18n="why_d4_title">Listo en 5 días</h3>
-        <p style="font-size:14px;color:var(--muted);line-height:1.65;" data-i18n="why_d4_desc">Mientras la competencia tarda meses, tú ya estás atendiendo leads desde la primera semana.</p>
-      </div>
-
-    </div>
-</section>
-
-<style>
-.why-card:hover {
-  background:var(--surface2) !important;
-  transform:translateY(-4px);
-}
-@media (max-width:900px) {
-  #porque .container > div:last-child { grid-template-columns:1fr 1fr !important; }
-}
-@media (max-width:640px) {
-  #porque .container > div:last-child { grid-template-columns:1fr !important; }
-}
-</style>
-
-<script>
-</script>
-
 <section id="services" class="agents-section">
   <div class="container">
     <div class="agents-header reveal" style="margin-bottom:48px;">
@@ -1463,146 +1387,26 @@ function showAgent(key, tabEl) {
 showAgent('clinica', null);
 </script>
 
-<!-- ─── SISTEMAS PERSONALIZADOS ─── -->
-<section id="sistemas" style="padding:100px 0;border-top:1px solid var(--border);overflow:hidden;position:relative;">
-
-  <!-- Background glow -->
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(91,159,208,.05) 0%,transparent 70%);pointer-events:none;"></div>
-
+<!-- ─── SISTEMAS BANNER ─── -->
+<section style="padding:60px 0;border-top:1px solid var(--border);background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(91,159,208,.06),transparent 70%);pointer-events:none;"></div>
   <div class="container" style="position:relative;">
-
-    <!-- AI Hero — la estrella principal -->
-    <div class="reveal" style="text-align:center;margin-bottom:60px;">
-      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(91,159,208,.08);border:1px solid rgba(91,159,208,.2);border-radius:100px;padding:6px 16px;margin-bottom:24px;">
-        <span style="width:7px;height:7px;border-radius:50%;background:var(--accent2);display:inline-block;animation:pulse 2s infinite;"></span>
-        <span style="font-size:12px;font-weight:600;color:var(--accent2);letter-spacing:.08em;text-transform:uppercase;">IA que aprende tu operación</span>
-      </div>
-      <h2 style="font-family:'Exo 2',sans-serif;font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:16px;">
-        Tu sistema no solo registra.<br><span style="color:var(--accent2);">Predice. Aprende. Te avisa.</span>
-      </h2>
-      <p style="font-size:17px;color:var(--muted);max-width:600px;margin:0 auto;line-height:1.7;">
-        Construimos sistemas con IA que aprende de tu negocio. Después de un mes sabe qué va a pasar antes de que pase — y te dice qué hacer.
-      </p>
-    </div>
-
-    <!-- Prediction feed animado -->
-    <div class="reveal" style="background:var(--surface);border:1px solid rgba(91,159,208,.2);border-radius:var(--radius);overflow:hidden;margin-bottom:40px;max-width:780px;margin-left:auto;margin-right:auto;">
-      <div style="background:var(--surface2);padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
-        <span style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 2s infinite;"></span>
-        <span style="font-size:13px;font-weight:600;">Sistema activo — La Trattoria · Torreón</span>
-        <span style="margin-left:auto;font-size:11px;color:var(--muted);">Actualizado hace 2 min</span>
-      </div>
-      <div style="padding:20px;display:flex;flex-direction:column;gap:12px;" id="aiPredictions">
-        <div class="ai-pred" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(239,159,39,.06);border:1px solid rgba(239,159,39,.2);border-radius:10px;opacity:0;transform:translateY(8px);transition:all .5s;">
-          <span style="font-size:22px;">🍅</span>
-          <div style="flex:1;">
-            <div style="font-size:13px;font-weight:600;margin-bottom:2px;">El viernes necesitarás 40% más jitomate</div>
-            <div style="font-size:12px;color:var(--muted);">Basado en los últimos 4 viernes — pico de tacos entre 1–3 PM</div>
-          </div>
-          <span style="font-size:11px;background:rgba(239,159,39,.15);color:#EF9F27;padding:4px 12px;border-radius:100px;font-weight:600;white-space:nowrap;">Pedir hoy</span>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(91,159,208,.1);border:1px solid rgba(91,159,208,.2);border-radius:100px;padding:4px 14px;margin-bottom:14px;">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--accent2);display:inline-block;animation:pulse 2s infinite;"></span>
+          <span style="font-size:11px;font-weight:600;color:var(--accent2);letter-spacing:.1em;text-transform:uppercase;">IA que aprende tu operación</span>
         </div>
-        <div class="ai-pred" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(78,193,122,.06);border:1px solid rgba(78,193,122,.15);border-radius:10px;opacity:0;transform:translateY(8px);transition:all .5s .15s;">
-          <span style="font-size:22px;">💡</span>
-          <div style="flex:1;">
-            <div style="font-size:13px;font-weight:600;margin-bottom:2px;">La Quesadilla tiene 73% de margen — ponla primero en el menú</div>
-            <div style="font-size:12px;color:var(--muted);">Tu platillo más rentable no está destacado. Moverlo puede subir ventas 20%</div>
-          </div>
-          <span style="font-size:11px;background:rgba(78,193,122,.12);color:var(--green);padding:4px 12px;border-radius:100px;font-weight:600;white-space:nowrap;">Oportunidad</span>
-        </div>
-        <div class="ai-pred" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(91,159,208,.06);border:1px solid rgba(91,159,208,.15);border-radius:10px;opacity:0;transform:translateY(8px);transition:all .5s .3s;">
-          <span style="font-size:22px;">📈</span>
-          <div style="flex:1;">
-            <div style="font-size:13px;font-weight:600;margin-bottom:2px;">Sábado en la noche: +35% demanda de pizza</div>
-            <div style="font-size:12px;color:var(--muted);">Prepara más masa el sábado en la tarde para evitar quedarte sin</div>
-          </div>
-          <span style="font-size:11px;background:rgba(91,159,208,.12);color:var(--accent2);padding:4px 12px;border-radius:100px;font-weight:600;white-space:nowrap;">Preparar</span>
-        </div>
+        <h2 style="font-family:'Exo 2',sans-serif;font-size:clamp(24px,3.5vw,36px);font-weight:800;color:var(--text);line-height:1.1;margin-bottom:10px;">Tu sistema no solo registra.<br><span style="color:var(--accent2);">Predice. Aprende. Te avisa.</span></h2>
+        <p style="font-size:15px;color:var(--muted);max-width:520px;">Restaurantes, industria, clínicas y más — con IA que aprende de tu operación real cada semana.</p>
       </div>
+      <a href="/sistemas.html" class="btn-primary" style="font-size:15px;padding:14px 32px;flex-shrink:0;">Ver demos interactivos →</a>
     </div>
-
-    <!-- 3 diferenciadores clave -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px;" class="reveal sys-stats-grid">
-      <div style="text-align:center;padding:24px 16px;">
-        <div style="font-family:'Exo 2',sans-serif;font-size:36px;font-weight:800;color:var(--accent2);margin-bottom:8px;">30 días</div>
-        <div style="font-size:14px;color:var(--muted);line-height:1.5;">para que el sistema empiece a hacer predicciones reales de tu negocio</div>
-      </div>
-      <div style="text-align:center;padding:24px 16px;border-left:1px solid var(--border);border-right:1px solid var(--border);">
-        <div style="font-family:'Exo 2',sans-serif;font-size:36px;font-weight:800;color:var(--accent);margin-bottom:8px;">24/7</div>
-        <div style="font-size:14px;color:var(--muted);line-height:1.5;">monitoreando tu operación sin que tú tengas que hacer nada</div>
-      </div>
-      <div style="text-align:center;padding:24px 16px;">
-        <div style="font-family:'Exo 2',sans-serif;font-size:36px;font-weight:800;color:var(--accent);margin-bottom:8px;">Mejores</div>
-        <div style="font-size:14px;color:var(--muted);line-height:1.5;">decisiones. Tu sistema convierte datos en acciones concretas antes de que el problema llegue.</div>
-      </div>
-    </div>
-
-    <!-- Las dos cards abajo -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;" class="reveal sistemas-cards-grid">
-      <div class="system-card" style="transition:all .3s;cursor:default;border-radius:var(--radius);">
-        <div style="font-size:28px;margin-bottom:12px;">🍽️</div>
-        <div class="system-badge" data-i18n="sys1_badge">Sistema Restaurante</div>
-        <h3 class="system-title" style="font-size:16px;" data-i18n="sys1_title">Menú, pedidos y reservas — sin que tu equipo toque el celular</h3>
-        <div class="service-tags" style="margin-top:12px;">
-          <span class="stag active">Menú digital</span>
-          <span class="stag">Reservaciones</span>
-          <span class="stag">Pedidos WA</span>
-          <span class="stag">IA Predictiva</span>
-        </div>
-      </div>
-      <div class="system-card" style="transition:all .3s;cursor:default;border-radius:var(--radius);">
-        <div style="font-size:28px;margin-bottom:12px;">🏭</div>
-        <div class="system-badge" data-i18n="sys2_badge">Sistema Industrial</div>
-        <h3 class="system-title" style="font-size:16px;" data-i18n="sys2_title">Control de procesos, inventario y personal en un solo panel</h3>
-        <div class="service-tags" style="margin-top:12px;">
-          <span class="stag active">Agente IA</span>
-          <span class="stag">Inventario</span>
-          <span class="stag">Procesos</span>
-          <span class="stag">Reportes IA</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="reveal" style="text-align:center;">
-      <a href="/sistemas.html" class="btn-primary" style="font-size:15px;padding:14px 32px;" data-i18n="sys_cta">Ver demos interactivos →</a>
-      <p style="font-size:13px;color:var(--muted);margin-top:12px;">Explora la IA predictiva en vivo en el demo</p>
-    </div>
-
   </div>
 </section>
 
-<style>
-@media(max-width:640px){
-  .sistemas-cards-grid { grid-template-columns:1fr !important; }
-}
-</style>
-
-<script>
-// Animate prediction cards when section comes into view
-// Show predictions when sistemas section visible
-const predObs = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) {
-    if (e.isIntersecting) {
-      document.querySelectorAll('.ai-pred').forEach(function(el) {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-      });
-      predObs.disconnect();
-    }
-  });
-}, { threshold: 0.05, rootMargin: '0px 0px 100px 0px' });
-const sisteEl = document.getElementById('sistemas');
-if (sisteEl) predObs.observe(sisteEl);
-
-// Show immediately on load
-document.querySelectorAll('.ai-pred').forEach(function(el) {
-  el.style.opacity = '1';
-  el.style.transform = 'translateY(0)';
-  el.style.transition = 'none';
-});
-</script>
-
 <!-- ─── CALCULADORA TEASER ─── -->
-<section id="calculadora-teaser" style="padding:100px 0;border-top:1px solid var(--border);position:relative;overflow:hidden;">
+<section id="calculadora-teaser" style="padding:70px 0;border-top:1px solid var(--border);position:relative;overflow:hidden;">
   <div style="position:absolute;top:50%;left:-100px;transform:translateY(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(200,170,128,.06) 0%,transparent 70%);pointer-events:none;"></div>
   <div class="container">
     <div class="reveal" style="display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1;" id="teaserGrid">
@@ -1610,24 +1414,10 @@ document.querySelectorAll('.ai-pred').forEach(function(el) {
       <!-- LEFT: Hook -->
       <div>
         <div class="tag" data-i18n="calc_tag">Calculadora gratuita</div>
-        <h2 class="section-title" style="margin-bottom:20px;">¿Cuánto <span data-i18n="calc_title_accent">dejas de ganar</span> <span data-i18n="calc_title_rest">cada mes por no contestar?</span></h2>
-        <p style="font-size:17px;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:480px;" data-i18n="calc_sub">En 2 minutos calculas el dinero que se te va con la competencia y cuántos clientes podrías recuperar con un agente IA. Cálculo conservador, sin promesas infladas.</p>
-        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:36px;">
-          <div style="display:flex;align-items:flex-start;gap:12px;">
-            <span style="color:var(--accent);font-size:18px;font-weight:700;flex-shrink:0;line-height:1.4;">→</span>
-            <span style="font-size:15px;color:var(--text);" data-i18n="calc_b1">Cuánto dinero pierdes al mes en leads sin respuesta</span>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:12px;">
-            <span style="color:var(--accent);font-size:18px;font-weight:700;flex-shrink:0;line-height:1.4;">→</span>
-            <span style="font-size:15px;color:var(--text);" data-i18n="calc_b2">Cuántos clientes nuevos puedes ganar respondiendo a tiempo</span>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:12px;">
-            <span style="color:var(--accent);font-size:18px;font-weight:700;flex-shrink:0;line-height:1.4;">→</span>
-            <span style="font-size:15px;color:var(--text);" data-i18n="calc_b3">En cuántos meses se paga el sistema</span>
-          </div>
-        </div>
+        <h2 class="section-title" style="margin-bottom:16px;">¿Cuánto <span data-i18n="calc_title_accent">dejas de ganar</span> <span data-i18n="calc_title_rest">cada mes por no contestar?</span></h2>
+        <p style="font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:28px;max-width:480px;">En 2 minutos calculas exactamente cuánto dinero se va con la competencia — y cuánto recuperarías con un agente IA.</p>
         <a href="/calculadora" class="btn-primary" style="font-size:15px;padding:14px 28px;" data-i18n="calc_cta">Probar la calculadora →</a>
-        <p style="font-size:13px;color:var(--muted);margin-top:14px;" data-i18n="calc_note">Disponible para todos los negocios</p>
+        <p style="font-size:13px;color:var(--muted);margin-top:12px;">Cálculo conservador · Sin promesas infladas</p>
       </div>
 
       <!-- RIGHT: Visual mockup -->
@@ -1676,7 +1466,7 @@ document.querySelectorAll('.ai-pred').forEach(function(el) {
 
 <!-- ─── PROCESO ─── -->
 <!-- ─── RESULTADOS ─── -->
-<section id="resultados" style="padding:100px 0;border-top:1px solid var(--border);">
+<section id="resultados" style="padding:60px 0;border-top:1px solid var(--border);">
   <div class="container">
     <div class="reveal" style="text-align:center;margin-bottom:64px;">
       <div class="tag" data-i18n="res_tag">Resultados reales</div>
@@ -1687,11 +1477,11 @@ document.querySelectorAll('.ai-pred').forEach(function(el) {
     <!-- Casos reales -->
     <div class="fix-mobile-1col" style="display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:3px;">
 
-      <div class="reveal" style="background:var(--surface);padding:48px 40px;">
+      <div class="reveal" style="background:var(--surface);padding:32px;">
         <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;" data-i18n="res_client">Cliente AUTOMWIZ</div>
-        <div style="font-family:'Exo 2',sans-serif;font-size:72px;font-weight:800;line-height:1;color:var(--text);margin-bottom:8px;" id="stat-700">0</div>
+        <div style="font-family:'Exo 2',sans-serif;font-size:52px;font-weight:800;line-height:1;color:var(--text);margin-bottom:6px;" id="stat-700">0</div>
         <div style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:12px;" data-i18n="res1_title">Conversaciones atendidas</div>
-        <p style="font-size:15px;color:var(--muted);line-height:1.65;" data-i18n="res1_desc">Clínica médica en La Laguna. El agente atiende, califica y agenda sin que el equipo tenga que estar disponible. Respuesta inmediata las 24 horas.</p>
+        
         <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);display:flex;align-items:center;gap:12px;">
           <div style="width:36px;height:36px;border-radius:50%;background:rgba(91,159,208,.15);display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--accent2);">C</div>
           <div>
@@ -1701,11 +1491,11 @@ document.querySelectorAll('.ai-pred').forEach(function(el) {
         </div>
       </div>
 
-      <div class="reveal" style="background:var(--surface);padding:48px 40px;">
+      <div class="reveal" style="background:var(--surface);padding:32px;">
         <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;" data-i18n="res_client">Cliente AUTOMWIZ</div>
-        <div style="font-family:'Exo 2',sans-serif;font-size:72px;font-weight:800;line-height:1;color:var(--text);margin-bottom:8px;" id="stat-20">0%</div>
+        <div style="font-family:'Exo 2',sans-serif;font-size:52px;font-weight:800;line-height:1;color:var(--text);margin-bottom:6px;" id="stat-20">0%</div>
         <div style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:12px;" data-i18n="res2_title">Llamadas de venta agendadas</div>
-        <p style="font-size:15px;color:var(--muted);line-height:1.65;" data-i18n="res2_desc">Empresa financiera. El agente filtra, califica y agenda automáticamente — el equipo comercial solo habla con prospectos listos para comprar.</p>
+        
         <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);display:flex;align-items:center;gap:12px;">
           <div style="width:36px;height:36px;border-radius:50%;background:rgba(91,159,208,.15);display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--accent2);">F</div>
           <div>
@@ -1744,7 +1534,7 @@ document.querySelectorAll('.ai-pred').forEach(function(el) {
   </div>
 </section>
 
-<section id="proceso" style="padding:100px 0;border-top:1px solid var(--border);">
+<section id="proceso" style="padding:60px 0;border-top:1px solid var(--border);">
   <div class="container">
     <div class="proceso-header reveal" style="text-align:center;margin-bottom:64px;">
       <div class="tag" data-i18n="proc_tag">Proceso de implementación</div>
@@ -1759,7 +1549,7 @@ document.querySelectorAll('.ai-pred').forEach(function(el) {
 
       <!-- Step 1 -->
       <div class="proc-card reveal" style="padding:0 16px;text-align:center;cursor:default;">
-        <div class="proc-icon" style="width:128px;height:128px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;position:relative;z-index:1;transition:all .35s;">
+        <div class="proc-icon" style="width:80px;height:80px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;position:relative;z-index:1;transition:all .35s;">
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="24" cy="18" r="8" stroke="#C8AA80" stroke-width="2" fill="none"/>
             <path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="#C8AA80" stroke-width="2" stroke-linecap="round" fill="none"/>
@@ -1774,7 +1564,7 @@ document.querySelectorAll('.ai-pred').forEach(function(el) {
 
       <!-- Step 2 -->
       <div class="proc-card reveal" style="padding:0 16px;text-align:center;cursor:default;">
-        <div class="proc-icon" style="width:128px;height:128px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;position:relative;z-index:1;transition:all .35s;">
+        <div class="proc-icon" style="width:80px;height:80px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;position:relative;z-index:1;transition:all .35s;">
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
             <rect x="8" y="10" width="32" height="28" rx="3" stroke="#C8AA80" stroke-width="2" fill="none"/>
             <path d="M16 22h16M16 28h10" stroke="#C8AA80" stroke-width="2" stroke-linecap="round"/>
@@ -1790,7 +1580,7 @@ document.querySelectorAll('.ai-pred').forEach(function(el) {
 
       <!-- Step 3 -->
       <div class="proc-card reveal" style="padding:0 16px;text-align:center;cursor:default;">
-        <div class="proc-icon" style="width:128px;height:128px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;position:relative;z-index:1;transition:all .35s;">
+        <div class="proc-icon" style="width:80px;height:80px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;position:relative;z-index:1;transition:all .35s;">
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
             <path d="M24 8v8M24 32v8M8 24h8M32 24h8" stroke="#5B9FD0" stroke-width="2" stroke-linecap="round"/>
             <circle cx="24" cy="24" r="8" stroke="#C8AA80" stroke-width="2" fill="none"/>
@@ -1806,7 +1596,7 @@ document.querySelectorAll('.ai-pred').forEach(function(el) {
 
       <!-- Step 4 -->
       <div class="proc-card reveal" style="padding:0 16px;text-align:center;cursor:default;">
-        <div class="proc-icon" style="width:128px;height:128px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;position:relative;z-index:1;transition:all .35s;">
+        <div class="proc-icon" style="width:80px;height:80px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;position:relative;z-index:1;transition:all .35s;">
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
             <path d="M12 24l8 8 16-16" stroke="#4EC17A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             <circle cx="24" cy="24" r="16" stroke="#C8AA80" stroke-width="2" fill="none" stroke-dasharray="4 3"/>
@@ -1820,7 +1610,7 @@ document.querySelectorAll('.ai-pred').forEach(function(el) {
 
       <!-- Step 5 -->
       <div class="proc-card reveal" style="padding:0 16px;text-align:center;cursor:default;">
-        <div class="proc-icon" style="width:128px;height:128px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;position:relative;z-index:1;transition:all .35s;">
+        <div class="proc-icon" style="width:80px;height:80px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;position:relative;z-index:1;transition:all .35s;">
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
             <path d="M10 34l8-12 6 8 6-10 8 14" stroke="#C8AA80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             <circle cx="38" cy="14" r="5" stroke="#5B9FD0" stroke-width="1.5" fill="none"/>
@@ -1835,18 +1625,9 @@ document.querySelectorAll('.ai-pred').forEach(function(el) {
 
     </div>
 
-    <!-- Total time banner -->
-    <div class="reveal" style="margin-top:56px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
-      <div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:4px;" data-i18n="total_label">Tiempo promedio total</div>
-        <div style="font-family:'Exo 2',sans-serif;font-size:28px;font-weight:800;color:var(--text);">5 días</div>
-      </div>
-      <div style="width:1px;height:40px;background:var(--border);"></div>
-      <div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:4px;" data-i18n="total_sub">De la llamada de diagnóstico a tu agente activo</div>
-        <div style="font-size:15px;color:var(--accent);" data-i18n="total_note">Sin afectar tu operación actual</div>
-      </div>
-      <a href="#diagnostico" class="btn-primary" data-i18n="total_cta">Empezar ahora →</a>
+    <div class="reveal" style="margin-top:40px;text-align:center;">
+      <p style="font-size:14px;color:var(--muted);">De la llamada de diagnóstico a tu agente activo en <strong style="color:var(--accent);">5 días</strong> · Sin afectar tu operación actual</p>
+      <a href="#diagnostico" class="btn-primary" style="margin-top:20px;display:inline-flex;font-size:15px;padding:13px 28px;" data-i18n="total_cta">Empezar ahora →</a>
     </div>
 
   </div>
@@ -1868,8 +1649,9 @@ document.querySelectorAll('.ai-pred').forEach(function(el) {
 
 <!-- ─── LEAD FORM ─── -->
 <!-- ─── PRECIOS ─── -->
+
 <!-- ─── FAQ ─── -->
-<section id="faq" style="padding:100px 0;border-top:1px solid var(--border);">
+<section id="faq" style="padding:70px 0;border-top:1px solid var(--border);">
   <div class="container">
     <div class="reveal" style="text-align:center;margin-bottom:64px;">
       <div class="tag" data-i18n="faq_tag">Preguntas frecuentes</div>
@@ -2027,7 +1809,7 @@ document.getElementById('langBtn').addEventListener('click', () => {
 });
 </script>
 
-<section id="precios" style="padding:100px 0;border-top:1px solid var(--border);">
+<section id="precios" style="padding:70px 0;border-top:1px solid var(--border);">
   <div class="container">
     <div class="reveal" style="text-align:center;margin-bottom:16px;">
       <div class="tag" data-i18n="price_tag">Planes y precios</div>
