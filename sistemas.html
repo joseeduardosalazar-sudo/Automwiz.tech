@@ -571,7 +571,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
 
     <!-- Ventas content -->
     <div id="rest-ventas">
-    <div class="rest-layout" id="restLayoutMain">
+    <div class="rest-layout fix-rest-mobile" id="restLayoutMain">
       <!-- Menu -->
       <div class="rest-menu reveal">
         <div class="rest-menu-header">
@@ -815,7 +815,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
       <p>Agenda en línea, recordatorios automáticos y control de citas — todo en un solo panel.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+    <div class="fix-clinica-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
 
       <!-- Agenda del día -->
       <div class="rest-menu reveal">
@@ -920,7 +920,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
       <p>Control de membresías, horarios de clases y reactivación automática de socios — sin que tu equipo lo gestione.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+    <div class="fix-gym-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
 
       <!-- Members list -->
       <div class="rest-menu reveal">
@@ -1017,7 +1017,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
     </div>
 
     <!-- Nav tabs del sistema -->
-    <div style="display:flex;gap:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;overflow-x:auto;-webkit-overflow-scrolling:touch;">
+    <div class="inv-panel-nav" style="display:flex;gap:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;overflow-x:auto;-webkit-overflow-scrolling:touch;">
       <button class="inv-panel-btn active" onclick="showInvPanel('dashboard',this)" style="flex:1;padding:13px;background:rgba(200,170,128,.1);border:none;border-right:1px solid var(--border);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">📊 Dashboard</button>
       <button class="inv-panel-btn" onclick="showInvPanel('inventario',this)" style="flex:1;padding:13px;background:none;border:none;border-right:1px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">📦 Inventario</button>
       <button class="inv-panel-btn" onclick="showInvPanel('movimientos',this)" style="flex:1;padding:13px;background:none;border:none;border-right:1px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">↕️ Movimientos</button>
@@ -2199,6 +2199,46 @@ renderCitas('todos');
 renderSocios('todos');
 renderInvTable();
 </script>
+
+
+<style id="sistemas-mobile-master">
+@media(max-width:768px){
+  /* HERO */
+  #hero { min-height:auto !important; padding:80px 0 50px !important; }
+  
+  /* RESTAURANT */
+  .fix-rest-mobile, .rest-layout { grid-template-columns:1fr !important; }
+  
+  /* CLINICA + GYM */
+  .fix-clinica-grid, .fix-gym-grid { grid-template-columns:1fr !important; }
+  
+  /* LEARN PANELS */
+  .learn-panels-grid { grid-template-columns:1fr !important; }
+  .learn-stats-grid { grid-template-columns:1fr !important; }
+  .ia-learn-grid { grid-template-columns:1fr !important; }
+  .ia-bottom-grid { grid-template-columns:1fr !important; }
+  
+  /* INDUSTRY TABS */
+  .industry-tabs { flex-wrap:wrap !important; gap:8px !important; justify-content:flex-start !important; }
+  .ind-tab { font-size:12px !important; padding:9px 14px !important; }
+  
+  /* INV PANEL BUTTONS */
+  .inv-panel-nav { overflow-x:auto !important; -webkit-overflow-scrolling:touch; }
+  .inv-panel-btn { font-size:11px !important; padding:11px 8px !important; white-space:nowrap !important; flex-shrink:0 !important; }
+  
+  /* SECTIONS */
+  section { padding:60px 0 !important; }
+  .demo-section { padding:60px 0 100px !important; }
+  
+  /* STATS GRIDS */
+  .ind-stats { grid-template-columns:1fr 1fr !important; }
+  div[style*="repeat(4,1fr)"] { grid-template-columns:1fr 1fr !important; }
+  
+  /* INDUSTRIAL LAYOUT */
+  .ind-layout { grid-template-columns:1fr !important; }
+  .ind-sidebar { display:none !important; }
+}
+</style>
 
 </body>
 </html>
