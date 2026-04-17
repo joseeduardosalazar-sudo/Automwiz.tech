@@ -177,9 +177,60 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
   .ind-sidebar{display:none;}
   .ind-stats{grid-template-columns:1fr 1fr;}
 }
+@media(max-width:768px){
+  /* Nav */
+  .nav-back{display:none;}
+
+  /* Hero */
+  #hero{padding:100px 0 60px;}
+  .hero-title{font-size:clamp(32px,9vw,56px)!important;}
+  .hero-sub{font-size:15px!important;}
+  .hero-ctas{flex-direction:column!important;gap:10px!important;}
+  .hero-ctas a{width:100%;text-align:center;justify-content:center;}
+
+  /* Sections padding */
+  section{padding:60px 0!important;}
+
+  /* Industry tabs - scrollable horizontal */
+  .industry-tabs{flex-wrap:nowrap!important;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px;justify-content:flex-start!important;}
+  .ind-tab{flex-shrink:0;font-size:13px;padding:10px 16px;}
+
+  /* Inv panel nav - scrollable */
+  div[style*="inv-panel-btn"]{flex-wrap:nowrap;overflow-x:auto;}
+
+  /* Demo header */
+  .demo-header h2{font-size:clamp(24px,6vw,36px)!important;}
+
+  /* Rest layout */
+  .rest-layout{grid-template-columns:1fr!important;}
+
+  /* Clinica grid */
+  #demo-clinica > .container > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;}
+  #demo-gym > .container > div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;}
+
+  /* Industrial stats */
+  .ind-stats{grid-template-columns:1fr 1fr!important;}
+
+  /* Inventario panels */
+  .ia-learn-grid{grid-template-columns:1fr!important;}
+  .ia-bottom-grid{grid-template-columns:1fr!important;}
+  .learn-panels-grid{grid-template-columns:1fr!important;}
+  .learn-stats-grid{grid-template-columns:1fr!important;}
+
+  /* Precios grid */
+  div[style*="grid-template-columns:repeat(4,1fr)"].ind-stats{grid-template-columns:1fr 1fr!important;}
+
+  /* Resultados */
+  div.resultados-grid{grid-template-columns:1fr!important;}
+}
 @media(max-width:600px){
-  .ind-stats{grid-template-columns:1fr 1fr;}
-  .industry-tabs{gap:8px;}
+  .industry-tabs{gap:6px;}
+  .ind-tab{font-size:12px;padding:9px 14px;}
+  /* Inv panel buttons - horizontal scroll */
+  div[style*="display:flex;gap:0"]{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .inv-panel-btn{font-size:11px!important;padding:11px 8px!important;white-space:nowrap;flex-shrink:0;}
+  /* Charts */
+  canvas{max-width:100%!important;}
 }
 </style>
 </head>
@@ -189,9 +240,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
 <nav>
   <div class="nav-inner">
     <a href="/" class="logo">AUTOMWIZ</a>
-    <div style="display:flex;align-items:center;gap:20px;">
-      <a href="/" class="nav-back">← Página principal</a>
-      <a href="/#diagnostico" class="btn-primary">Quiero mi sistema →</a>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="/" class="nav-back" style="font-size:13px;">← Inicio</a>
+      <a href="/#diagnostico" class="btn-primary" style="font-size:13px;padding:9px 16px;">Empezar →</a>
     </div>
   </div>
 </nav>
@@ -966,7 +1017,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
     </div>
 
     <!-- Nav tabs del sistema -->
-    <div style="display:flex;gap:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;">
+    <div style="display:flex;gap:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;overflow-x:auto;-webkit-overflow-scrolling:touch;">
       <button class="inv-panel-btn active" onclick="showInvPanel('dashboard',this)" style="flex:1;padding:13px;background:rgba(200,170,128,.1);border:none;border-right:1px solid var(--border);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">📊 Dashboard</button>
       <button class="inv-panel-btn" onclick="showInvPanel('inventario',this)" style="flex:1;padding:13px;background:none;border:none;border-right:1px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">📦 Inventario</button>
       <button class="inv-panel-btn" onclick="showInvPanel('movimientos',this)" style="flex:1;padding:13px;background:none;border:none;border-right:1px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">↕️ Movimientos</button>
