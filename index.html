@@ -779,42 +779,85 @@ footer {
 </div>
 
 <!-- ─── HERO ─── -->
-<section id="hero">
+<section id="hero" style="min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;position:relative;overflow:hidden;">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
+  <!-- Extra glow for right side -->
+  <div style="position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(91,159,208,.07) 0%,transparent 70%);pointer-events:none;"></div>
+
   <div class="container">
-    <div class="hero-content">
 
-      <h1 class="hero-title" style="margin-bottom:20px;">
-        <span id="heroTyping" style="color:var(--muted);font-size:16px;display:block;margin-bottom:12px;font-weight:500;letter-spacing:.01em;height:24px;white-space:nowrap;overflow:hidden;"></span>
-        <span class="line1">Tu competencia</span><br><span class="line2" style="color:var(--text);">sí </span><span style="color:var(--accent2);font-family:'Exo 2',sans-serif;">responde.</span>
-      </h1>
+    <!-- Top question typewriter -->
+    <div style="text-align:center;margin-bottom:48px;">
+      <span id="heroTyping" style="color:var(--muted);font-size:16px;display:block;font-weight:500;letter-spacing:.01em;height:24px;white-space:nowrap;overflow:hidden;text-align:center;"></span>
+    </div>
 
-      <p class="hero-sub" style="font-size:16px;margin-bottom:32px;" data-i18n="hero_sub">Agentes de IA que atienden y califican leads 24/7. Sin sueldos extra, sin errores.</p>
+    <!-- Two paths grid -->
+    <div style="display:grid;grid-template-columns:1fr 1px 1fr;gap:0;align-items:stretch;margin-bottom:60px;" class="hero-paths">
 
-      <div class="hero-ctas">
-        <a href="#diagnostico" class="btn-primary" style="font-size:15px;padding:13px 26px;" data-i18n="hero_cta1">Quiero un asistente IA</a>
-        <a href="/sistemas.html" class="btn-outline" style="font-size:15px;padding:13px 26px;border-color:rgba(200,170,128,.3);color:var(--accent);" data-i18n="hero_cta2">Ver sistemas →</a>
+      <!-- LEFT: Agente IA -->
+      <div style="padding:48px 40px;display:flex;flex-direction:column;gap:20px;">
+        <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(200,170,128,.08);border:1px solid rgba(200,170,128,.2);border-radius:100px;padding:5px 14px;width:fit-content;">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;animation:pulse 2s infinite;"></span>
+          <span style="font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;">Asistente IA</span>
+        </div>
+        <h2 style="font-family:'Exo 2',sans-serif;font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.05;letter-spacing:-.02em;color:var(--text);">Tu negocio<br>responde solo, <span style="color:var(--accent);">24/7</span></h2>
+        <p style="font-size:15px;color:var(--muted);line-height:1.65;max-width:340px;">Atiende, califica y agenda leads por WhatsApp e Instagram — sin sueldos extra, sin errores.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);"><span style="color:var(--accent);">✓</span> Respuesta inmediata las 24 horas</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);"><span style="color:var(--accent);">✓</span> Califica leads automáticamente</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);"><span style="color:var(--accent);">✓</span> Agenda citas sin intervención humana</div>
+        </div>
+        <a href="#diagnostico" class="btn-primary" style="font-size:15px;padding:14px 28px;width:fit-content;margin-top:8px;">Quiero mi asistente →</a>
       </div>
 
-      <div class="hero-stats">
-        <div>
-          <div class="hero-stat-num" id="stat-78">0%</div>
-          <div class="hero-stat-label" data-i18n="stat1">leads perdidos sin<br>respuesta en 5 min</div>
+      <!-- Divider -->
+      <div style="background:var(--border);width:1px;"></div>
+
+      <!-- RIGHT: Sistema IA -->
+      <div style="padding:48px 40px;display:flex;flex-direction:column;gap:20px;position:relative;background:linear-gradient(135deg,rgba(91,159,208,.04) 0%,transparent 60%);">
+        <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(91,159,208,.1);border:1px solid rgba(91,159,208,.25);border-radius:100px;padding:5px 14px;width:fit-content;">
+          <span style="width:6px;height:6px;border-radius:50%;background:var(--accent2);display:inline-block;animation:pulse 2s infinite;"></span>
+          <span style="font-size:11px;font-weight:600;color:var(--accent2);letter-spacing:.1em;text-transform:uppercase;">Sistema con IA</span>
         </div>
-        <div>
-          <div class="hero-stat-num" id="stat-247">24/7</div>
-          <div class="hero-stat-label" data-i18n="stat2">disponibilidad real<br>sin horas extra</div>
+        <h2 style="font-family:'Exo 2',sans-serif;font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.05;letter-spacing:-.02em;color:var(--text);">Tu operación<br><span style="color:var(--accent2);">aprende</span> y <span style="color:var(--accent2);">predice</span></h2>
+        <p style="font-size:15px;color:var(--muted);line-height:1.65;max-width:340px;">Sabe qué va a pasar antes de que pase. Te dice cuándo pedir, qué vender y dónde estás perdiendo dinero.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);"><span style="color:var(--accent2);">✓</span> Predicciones basadas en tu historial real</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);"><span style="color:var(--accent2);">✓</span> Alertas antes de que se acabe el inventario</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);"><span style="color:var(--accent2);">✓</span> Nadie más en La Laguna lo ofrece</div>
         </div>
-        <div>
-          <div class="hero-stat-num" id="stat-65">0%</div>
-          <div class="hero-stat-label" data-i18n="stat3">costo vs un<br>empleado nuevo</div>
-        </div>
+        <a href="/sistemas.html" class="btn-outline" style="font-size:15px;padding:14px 28px;width:fit-content;margin-top:8px;border-color:rgba(91,159,208,.4);color:var(--accent2);">Quiero mi sistema →</a>
       </div>
 
     </div>
+
+    <!-- Stats bottom -->
+    <div class="hero-stats" style="justify-content:center;border-top:1px solid var(--border);padding-top:40px;">
+      <div>
+        <div class="hero-stat-num" id="stat-78">0%</div>
+        <div class="hero-stat-label" data-i18n="stat1">leads perdidos sin<br>respuesta en 5 min</div>
+      </div>
+      <div>
+        <div class="hero-stat-num" id="stat-247">24/7</div>
+        <div class="hero-stat-label" data-i18n="stat2">disponibilidad real<br>sin horas extra</div>
+      </div>
+      <div>
+        <div class="hero-stat-num" id="stat-65">0%</div>
+        <div class="hero-stat-label" data-i18n="stat3">costo vs un<br>empleado nuevo</div>
+      </div>
+    </div>
+
   </div>
 </section>
+
+<style>
+@media(max-width:768px){
+  .hero-paths { grid-template-columns:1fr !important; }
+  .hero-paths > div:nth-child(2) { display:none; }
+  .hero-paths > div { padding:32px 20px !important; }
+  .hero-paths > div:last-child { border-top:1px solid var(--border); }
+}
 
 <style>
 @keyframes pulse {
@@ -1341,49 +1384,134 @@ window.addEventListener('load', function() {
 </section>
 
 <!-- ─── SISTEMAS PERSONALIZADOS ─── -->
-<section id="sistemas" style="padding:100px 0;border-top:1px solid var(--border);">
-  <div class="container">
+<section id="sistemas" style="padding:100px 0;border-top:1px solid var(--border);overflow:hidden;position:relative;">
 
-    <div class="reveal" style="text-align:center;margin-bottom:56px;">
-      <div class="tag" data-i18n="sys_tag">Sistemas personalizados</div>
-      <h2 class="section-title" style="justify-content:center;" data-i18n="sys_title">¿Tu negocio necesita <span>más que un agente?</span></h2>
-      <p class="section-sub" style="margin:14px auto 0;" data-i18n="sys_sub">Construimos plataformas completas — desde menú digital hasta control de inventario industrial.</p>
+  <!-- Background glow -->
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(91,159,208,.05) 0%,transparent 70%);pointer-events:none;"></div>
+
+  <div class="container" style="position:relative;">
+
+    <!-- AI Hero — la estrella principal -->
+    <div class="reveal" style="text-align:center;margin-bottom:60px;">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(91,159,208,.08);border:1px solid rgba(91,159,208,.2);border-radius:100px;padding:6px 16px;margin-bottom:24px;">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--accent2);display:inline-block;animation:pulse 2s infinite;"></span>
+        <span style="font-size:12px;font-weight:600;color:var(--accent2);letter-spacing:.08em;text-transform:uppercase;">IA que aprende tu operación</span>
+      </div>
+      <h2 style="font-family:'Exo 2',sans-serif;font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:16px;">
+        Tu sistema no solo registra.<br><span style="color:var(--accent2);">Predice. Aprende. Te avisa.</span>
+      </h2>
+      <p style="font-size:17px;color:var(--muted);max-width:600px;margin:0 auto;line-height:1.7;">
+        Construimos sistemas con IA que aprende de tu negocio. Después de un mes sabe qué va a pasar antes de que pase — y te dice qué hacer.
+      </p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;">
+    <!-- Prediction feed animado -->
+    <div class="reveal" style="background:var(--surface);border:1px solid rgba(91,159,208,.2);border-radius:var(--radius);overflow:hidden;margin-bottom:40px;max-width:780px;margin-left:auto;margin-right:auto;">
+      <div style="background:var(--surface2);padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 2s infinite;"></span>
+        <span style="font-size:13px;font-weight:600;">Sistema activo — La Trattoria · Torreón</span>
+        <span style="margin-left:auto;font-size:11px;color:var(--muted);">Actualizado hace 2 min</span>
+      </div>
+      <div style="padding:20px;display:flex;flex-direction:column;gap:12px;" id="aiPredictions">
+        <div class="ai-pred" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(239,159,39,.06);border:1px solid rgba(239,159,39,.2);border-radius:10px;opacity:0;transform:translateY(8px);transition:all .5s;">
+          <span style="font-size:22px;">🍅</span>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:600;margin-bottom:2px;">El viernes necesitarás 40% más jitomate</div>
+            <div style="font-size:12px;color:var(--muted);">Basado en los últimos 4 viernes — pico de tacos entre 1–3 PM</div>
+          </div>
+          <span style="font-size:11px;background:rgba(239,159,39,.15);color:#EF9F27;padding:4px 12px;border-radius:100px;font-weight:600;white-space:nowrap;">Pedir hoy</span>
+        </div>
+        <div class="ai-pred" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(78,193,122,.06);border:1px solid rgba(78,193,122,.15);border-radius:10px;opacity:0;transform:translateY(8px);transition:all .5s .15s;">
+          <span style="font-size:22px;">💡</span>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:600;margin-bottom:2px;">La Quesadilla tiene 73% de margen — ponla primero en el menú</div>
+            <div style="font-size:12px;color:var(--muted);">Tu platillo más rentable no está destacado. Moverlo puede subir ventas 20%</div>
+          </div>
+          <span style="font-size:11px;background:rgba(78,193,122,.12);color:var(--green);padding:4px 12px;border-radius:100px;font-weight:600;white-space:nowrap;">Oportunidad</span>
+        </div>
+        <div class="ai-pred" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(91,159,208,.06);border:1px solid rgba(91,159,208,.15);border-radius:10px;opacity:0;transform:translateY(8px);transition:all .5s .3s;">
+          <span style="font-size:22px;">📈</span>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:600;margin-bottom:2px;">Sábado en la noche: +35% demanda de pizza</div>
+            <div style="font-size:12px;color:var(--muted);">Prepara más masa el sábado en la tarde para evitar quedarte sin</div>
+          </div>
+          <span style="font-size:11px;background:rgba(91,159,208,.12);color:var(--accent2);padding:4px 12px;border-radius:100px;font-weight:600;white-space:nowrap;">Preparar</span>
+        </div>
+      </div>
+    </div>
 
-      <div class="system-card reveal" style="transition:all .3s;cursor:default;">
-        <div style="font-size:32px;margin-bottom:16px;">🍽️</div>
+    <!-- 3 diferenciadores clave -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px;" class="reveal">
+      <div style="text-align:center;padding:24px 16px;">
+        <div style="font-family:'Exo 2',sans-serif;font-size:36px;font-weight:800;color:var(--accent2);margin-bottom:8px;">30 días</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.5;">para que el sistema empiece a hacer predicciones reales de tu negocio</div>
+      </div>
+      <div style="text-align:center;padding:24px 16px;border-left:1px solid var(--border);border-right:1px solid var(--border);">
+        <div style="font-family:'Exo 2',sans-serif;font-size:36px;font-weight:800;color:var(--accent);margin-bottom:8px;">24/7</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.5;">monitoreando tu operación sin que tú tengas que hacer nada</div>
+      </div>
+      <div style="text-align:center;padding:24px 16px;">
+        <div style="font-family:'Exo 2',sans-serif;font-size:36px;font-weight:800;color:var(--green);margin-bottom:8px;">0</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.5;">competidores en La Laguna ofrecen esto. Tú serías el primero.</div>
+      </div>
+    </div>
+
+    <!-- Las dos cards abajo -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;" class="reveal sistemas-cards-grid">
+      <div class="system-card" style="transition:all .3s;cursor:default;border-radius:var(--radius);">
+        <div style="font-size:28px;margin-bottom:12px;">🍽️</div>
         <div class="system-badge" data-i18n="sys1_badge">Sistema Restaurante</div>
-        <h3 class="system-title" data-i18n="sys1_title">Menú, pedidos y reservas — sin que tu equipo toque el celular</h3>
-        <div class="service-tags" style="margin-top:16px;">
-          <span class="stag active" data-i18n="sys1_f1">Menú digital</span>
-          <span class="stag" data-i18n="sys1_f2">Reservaciones</span>
-          <span class="stag" data-i18n="sys1_f3">Pedidos WhatsApp</span>
-          <span class="stag" data-i18n="sys1_f5">Panel admin</span>
+        <h3 class="system-title" style="font-size:16px;" data-i18n="sys1_title">Menú, pedidos y reservas — sin que tu equipo toque el celular</h3>
+        <div class="service-tags" style="margin-top:12px;">
+          <span class="stag active">Menú digital</span>
+          <span class="stag">Reservaciones</span>
+          <span class="stag">Pedidos WA</span>
+          <span class="stag">IA Predictiva</span>
         </div>
       </div>
-
-      <div class="system-card reveal" style="transition:all .3s;cursor:default;">
-        <div style="font-size:32px;margin-bottom:16px;">🏭</div>
+      <div class="system-card" style="transition:all .3s;cursor:default;border-radius:var(--radius);">
+        <div style="font-size:28px;margin-bottom:12px;">🏭</div>
         <div class="system-badge" data-i18n="sys2_badge">Sistema Industrial</div>
-        <h3 class="system-title" data-i18n="sys2_title">Control de procesos, inventario y personal en un solo panel</h3>
-        <div class="service-tags" style="margin-top:16px;">
-          <span class="stag active" data-i18n="sys2_f1">Agente de capacitación</span>
-          <span class="stag" data-i18n="sys2_f2">Inventario</span>
-          <span class="stag" data-i18n="sys2_f4">Mapeo de procesos</span>
-          <span class="stag" data-i18n="sys2_f5">Reportes</span>
+        <h3 class="system-title" style="font-size:16px;" data-i18n="sys2_title">Control de procesos, inventario y personal en un solo panel</h3>
+        <div class="service-tags" style="margin-top:12px;">
+          <span class="stag active">Agente IA</span>
+          <span class="stag">Inventario</span>
+          <span class="stag">Procesos</span>
+          <span class="stag">Reportes IA</span>
         </div>
       </div>
-
     </div>
 
     <div class="reveal" style="text-align:center;">
       <a href="/sistemas.html" class="btn-primary" style="font-size:15px;padding:14px 32px;" data-i18n="sys_cta">Ver demos interactivos →</a>
+      <p style="font-size:13px;color:var(--muted);margin-top:12px;">Explora la IA predictiva en vivo en el demo</p>
     </div>
 
   </div>
 </section>
+
+<style>
+@media(max-width:640px){
+  .sistemas-cards-grid { grid-template-columns:1fr !important; }
+}
+</style>
+
+<script>
+// Animate prediction cards when section comes into view
+const predObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      document.querySelectorAll('.ai-pred').forEach(function(el) {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
+      predObs.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+const sisteEl = document.getElementById('sistemas');
+if (sisteEl) predObs.observe(sisteEl);
+</script>
 
 <!-- ─── PROCESO ─── -->
 <!-- ─── RESULTADOS ─── -->
