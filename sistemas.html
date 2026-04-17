@@ -26,7 +26,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
 .btn-primary:hover{opacity:.85;}
 
 /* HERO */
-#hero{display:flex;align-items:center;padding:120px 0 80px;position:relative;overflow:hidden;} @media(max-width:768px){#hero{min-height:0!important;padding:90px 0 48px!important;}}
+#hero{display:flex;align-items:flex-start;padding:90px 0 40px;position:relative;overflow:hidden;} @media(max-width:768px){#hero{min-height:0!important;padding:90px 0 48px!important;}}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(91,159,208,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(91,159,208,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
 .hero-glow{position:absolute;top:-100px;left:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(200,170,128,.08) 0%,transparent 70%);pointer-events:none;}
 .container{max-width:1140px;margin:0 auto;padding:0 24px;}
@@ -59,7 +59,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
 .demo-header p{color:var(--muted);font-size:16px;max-width:560px;}
 
 /* ── RESTAURANT SYSTEM ── */
-.rest-layout{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;align-items:start;}
+.rest-layout{display:grid;grid-template-columns:1fr;gap:24px;align-items:start;}
 .rest-menu{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
 .rest-menu-header{background:var(--surface2);padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .rest-name{font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;}
@@ -280,7 +280,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
     </div>
 
     <!-- 3 panels -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:32px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));" class="learn-panels-grid">
+    <div style="display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:32px;" class="learn-panels-grid">
 
       <!-- PANEL 1: Data stream -->
       <div style="background:var(--surface);border:1px solid rgba(200,170,128,.15);border-radius:16px;overflow:hidden;">
@@ -364,7 +364,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
     </div>
 
     <!-- Bottom stats -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:40px;" class="learn-stats-grid">
+    <div style="display:grid;grid-template-columns:1fr;gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:40px;" class="learn-stats-grid">
       <div style="background:var(--surface);padding:28px;text-align:center;">
         <div style="font-family:'Exo 2',sans-serif;font-size:36px;font-weight:800;color:var(--accent2);margin-bottom:8px;">30 días</div>
         <div style="font-size:14px;color:var(--muted);line-height:1.5;">para que el sistema empiece a hacer predicciones reales</div>
@@ -811,7 +811,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
       <p>Agenda en línea, recordatorios automáticos y control de citas — todo en un solo panel.</p>
     </div>
 
-    <div class="fix-clinica-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+    <div class="fix-clinica-grid" style="display:grid;grid-template-columns:1fr;gap:24px;">
 
       <!-- Agenda del día -->
       <div class="rest-menu reveal">
@@ -916,7 +916,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
       <p>Control de membresías, horarios de clases y reactivación automática de socios — sin que tu equipo lo gestione.</p>
     </div>
 
-    <div class="fix-gym-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+    <div class="fix-gym-grid" style="display:grid;grid-template-columns:1fr;gap:24px;">
 
       <!-- Members list -->
       <div class="rest-menu reveal">
@@ -1216,7 +1216,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
       </div>
 
       <!-- Demand chart + alerts -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:20px;" class="ia-bottom-grid">
+      <div style="display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:20px;" class="ia-bottom-grid">
         <!-- Bar chart -->
         <div style="background:var(--surface2);border-radius:10px;padding:20px;">
           <div style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px;">📊 Predicción de demanda — 7 días</div>
