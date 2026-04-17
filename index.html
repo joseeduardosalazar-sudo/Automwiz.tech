@@ -1318,150 +1318,150 @@ window.addEventListener('load', function() {
 
 <section id="services" class="agents-section">
   <div class="container">
-    <div class="agents-header reveal">
+    <div class="agents-header reveal" style="margin-bottom:48px;">
       <div class="tag" data-i18n="agents_tag">Agentes de texto IA</div>
       <h2 class="section-title" data-i18n="agents_title">El empleado que <span>nunca falla</span></h2>
-      <p class="section-sub" data-i18n="agents_sub">Agentes conversacionales por WhatsApp, Instagram o web. Listos para tu industria. Configurados para tu negocio.</p>
+      <p class="section-sub" data-i18n="agents_sub">Agentes conversacionales por WhatsApp, Instagram o web. Elige tu industria y ve cómo funciona.</p>
     </div>
 
-    <div class="agents-list">
+    <!-- INDUSTRY TABS -->
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;" class="reveal" id="agentTabs">
+      <button class="agent-tab active" onclick="showAgent('clinica',this)">🏥 Clínicas</button>
+      <button class="agent-tab" onclick="showAgent('gym',this)">💪 Gym / Fitness</button>
+      <button class="agent-tab" onclick="showAgent('rrhh',this)">👥 Reclutamiento</button>
+      <button class="agent-tab" onclick="showAgent('otros',this)">🛒 Otros negocios</button>
+    </div>
 
-      <!-- Clínicas -->
-      <div class="agent-row reveal">
-        <div class="agent-info">
-          <div class="agent-num">01 / Clínicas y Consultorios</div>
-          <h3 class="agent-name" data-i18n="a1_title">Agenda citas y responde pacientes sin recepcionista disponible</h3>
-          <p class="agent-desc" data-i18n="a1_desc">El agente recibe mensajes, califica al paciente, agenda según disponibilidad real y envía recordatorios automáticos. Reduce cancelaciones y elimina llamadas perdidas.</p>
-          <div class="service-tags">
-            <span class="stag active" data-i18n="a1_t1">Agenda automática</span>
-            <span class="stag" data-i18n="a1_t2">Preguntas frecuentes</span>
-            <span class="stag" data-i18n="a1_t3">Recordatorios</span>
-            <span class="stag" data-i18n="a1_t4">Captación de leads</span>
-          </div>
-        </div>
-        <div class="agent-demo">
-          <div class="chat-demo">
-            <div class="chat-header">
-              <div class="chat-avatar">C+</div>
-              <div>
-                <div class="chat-name">Clínica Salud+</div>
-                <div class="chat-status">● En línea</div>
-              </div>
-            </div>
-            <div class="chat-msgs">
-              <div class="msg user">Hola, quiero una cita con el doctor García</div>
-              <div class="msg bot">¡Hola! Con gusto te ayudo 😊 ¿Es tu primera visita o eres paciente regular?</div>
-              <div class="msg user">Paciente regular</div>
-              <div class="msg bot">Perfecto. Tengo disponibilidad este <strong>jueves 17 a las 10am</strong> o <strong>viernes 18 a las 4pm</strong> ¿Cuál te funciona mejor?</div>
-              <div class="msg user">El jueves</div>
-              <div class="msg bot">✅ Listo, cita confirmada para el <strong>jueves 17 a las 10am</strong>. Te envío recordatorio un día antes. ¡Hasta entonces!</div>
-            </div>
-          </div>
-        </div>
+    <!-- SINGLE PANEL -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--surface);" class="reveal agent-panel-grid">
+
+      <!-- LEFT: Info -->
+      <div style="padding:48px;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;" id="agentInfo">
+        <!-- filled by JS -->
       </div>
 
-      <!-- Gyms -->
-      <div class="agent-row reverse reveal">
-        <div class="agent-info">
-          <div class="agent-num">02 / Centros Fitness y Gyms</div>
-          <h3 class="agent-name" data-i18n="a2_title">Convierte interesados en miembros activos sin que tu staff lo atienda</h3>
-          <p class="agent-desc" data-i18n="a2_desc">El agente informa sobre planes, horarios y precios, agenda visitas de prueba y hace seguimiento a los que no cerraron. Trabaja mientras tu equipo da clases.</p>
-          <div class="service-tags">
-            <span class="stag active" data-i18n="a2_t1">Captación de socios</span>
-            <span class="stag" data-i18n="a2_t2">Info de planes</span>
-            <span class="stag" data-i18n="a2_t3">Tour virtual</span>
-            <span class="stag" data-i18n="a2_t4">Reactivación</span>
-          </div>
-        </div>
-        <div class="agent-demo">
-          <div class="chat-demo">
-            <div class="chat-header">
-              <div class="chat-avatar">GF</div>
-              <div>
-                <div class="chat-name">GymFit Torreón</div>
-                <div class="chat-status">● En línea</div>
-              </div>
-            </div>
-            <div class="chat-msgs">
-              <div class="msg user">Cuánto cuesta la mensualidad?</div>
-              <div class="msg bot">¡Hola! Tenemos 3 planes: Básico $599, Pro $849 y Premium $1,199 al mes. ¿Qué días y horarios te irían mejor?</div>
-              <div class="msg user">Lunes miércoles viernes en las mañanas</div>
-              <div class="msg bot">¡Perfecto! Tenemos clases a las 6am, 7am y 8am esos días. ¿Te gustaría agendar una visita de prueba <strong>totalmente gratis</strong> esta semana? 💪</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Reclutamiento -->
-      <div class="agent-row reveal">
-        <div class="agent-info">
-          <div class="agent-num">03 / Reclutamiento y Capacitación Interna</div>
-          <h3 class="agent-name" data-i18n="a3_title">Filtra candidatos y capacita a tu equipo sin agendar reuniones</h3>
-          <p class="agent-desc" data-i18n="a3_desc">El agente hace preguntas de filtro a candidatos, evalúa requisitos básicos y solo escala a RRHH los perfiles que califican. También resuelve dudas de procesos internos para tu equipo.</p>
-          <div class="service-tags">
-            <span class="stag active" data-i18n="a3_t1">Filtro de candidatos</span>
-            <span class="stag" data-i18n="a3_t2">Entrevista inicial</span>
-            <span class="stag" data-i18n="a3_t3">Base de conocimiento</span>
-            <span class="stag" data-i18n="a3_t4">Onboarding</span>
-          </div>
-        </div>
-        <div class="agent-demo">
-          <div class="chat-demo">
-            <div class="chat-header">
-              <div class="chat-avatar">HR</div>
-              <div>
-                <div class="chat-name">Equipo RRHH</div>
-                <div class="chat-status">● Agente activo</div>
-              </div>
-            </div>
-            <div class="chat-msgs">
-              <div class="msg user">Vi la vacante de vendedor, me interesa</div>
-              <div class="msg bot">¡Hola! Me alegra tu interés. Cuéntame, ¿tienes experiencia previa en ventas? ¿Cuántos años?</div>
-              <div class="msg user">Sí, 3 años en ventas de seguros</div>
-              <div class="msg bot">Excelente perfil. ¿Tienes vehículo propio y disponibilidad para trabajar de lunes a sábado?</div>
-              <div class="msg user">Sí a los dos</div>
-              <div class="msg bot">✅ Perfil aceptado. Te comparto el siguiente paso: una entrevista con el área comercial. ¿Tienes disponibilidad esta semana?</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Otros -->
-      <div class="agent-row reverse reveal">
-        <div class="agent-info">
-          <div class="agent-num">04 / E-commerce, Restaurantes y Más</div>
-          <h3 class="agent-name" data-i18n="a4_title">Cualquier negocio que reciba mensajes puede automatizar su atención</h3>
-          <p class="agent-desc" data-i18n="a4_desc">Si tu cliente te escribe antes de comprar, tienes una oportunidad de automatizar. E-commerce, despachos, salones de belleza, hoteles, talleres — si hay conversación, hay automatización.</p>
-          <div class="service-tags">
-            <span class="stag active">E-commerce</span>
-            <span class="stag">Restaurantes</span>
-            <span class="stag">Salones de belleza</span>
-            <span class="stag">Despachos</span>
-            <span class="stag">Hoteles</span>
-          </div>
-        </div>
-        <div class="agent-demo">
-          <div class="chat-demo">
-            <div class="chat-header">
-              <div class="chat-avatar">S</div>
-              <div>
-                <div class="chat-name">Salón Élite</div>
-                <div class="chat-status">● En línea</div>
-              </div>
-            </div>
-            <div class="chat-msgs">
-              <div class="msg user">Quiero tinte y corte, ¿tienen el sábado?</div>
-              <div class="msg bot">¡Hola! Sí tenemos disponibilidad. El sábado tenemos espacio a las <strong>10am, 12pm y 2pm</strong>. El servicio tarda aprox 2.5 hrs. ¿Cuál horario prefieres?</div>
-              <div class="msg user">Las 10</div>
-              <div class="msg bot">Perfecto ✂️ Te agendo el sábado a las 10am. ¿Me confirmas tu nombre? Te mando un recordatorio el viernes.</div>
-            </div>
-          </div>
-        </div>
+      <!-- RIGHT: Chat -->
+      <div style="background:var(--surface2);display:flex;align-items:center;justify-content:center;padding:48px;" id="agentChat">
+        <!-- filled by JS -->
       </div>
 
     </div>
   </div>
 </section>
+
+<style>
+.agent-tab{
+  padding:10px 22px;border:1px solid var(--border);border-radius:100px;
+  background:var(--surface);color:var(--muted);font-size:14px;font-weight:500;
+  cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;
+}
+.agent-tab:hover{border-color:rgba(200,170,128,.3);color:var(--text);}
+.agent-tab.active{background:rgba(200,170,128,.12);border-color:rgba(200,170,128,.4);color:var(--accent);}
+@media(max-width:768px){
+  .agent-panel-grid{grid-template-columns:1fr!important;}
+  #agentInfo{padding:28px!important;border-right:none!important;border-bottom:1px solid var(--border);}
+  #agentChat{padding:24px!important;}
+}
+</style>
+
+<script>
+const agentData = {
+  clinica:{
+    num:'01 / Clínicas y Consultorios',
+    title:'Agenda citas sin recepcionista disponible',
+    desc:'Recibe mensajes, califica al paciente y agenda según disponibilidad real. Envía recordatorios automáticos y elimina llamadas perdidas.',
+    tags:['Agenda automática','Recordatorios','Captación de leads'],
+    avatar:'C+', name:'Clínica Salud+',
+    msgs:[
+      {t:'user',txt:'Hola, quiero una cita con el doctor García'},
+      {t:'bot',txt:'¡Hola! Con gusto 😊 ¿Es tu primera visita o eres paciente regular?'},
+      {t:'user',txt:'Paciente regular'},
+      {t:'bot',txt:'Perfecto. Tengo disponibilidad el <strong>jueves 17 a las 10am</strong> o <strong>viernes 18 a las 4pm</strong>. ¿Cuál prefieres?'},
+      {t:'user',txt:'El jueves'},
+      {t:'bot',txt:'✅ Cita confirmada para el <strong>jueves 17 a las 10am</strong>. Te mando recordatorio un día antes.'},
+    ]
+  },
+  gym:{
+    num:'02 / Gyms y Centros Fitness',
+    title:'Convierte interesados en socios sin que tu staff intervenga',
+    desc:'Informa sobre planes, horarios y precios, agenda visitas de prueba y hace seguimiento a los que no cerraron. Trabaja mientras tu equipo da clases.',
+    tags:['Captación de socios','Info de planes','Reactivación'],
+    avatar:'GF', name:'GymFit Torreón',
+    msgs:[
+      {t:'user',txt:'Cuánto cuesta la mensualidad?'},
+      {t:'bot',txt:'¡Hola! Tenemos 3 planes: Básico $599, Pro $849 y Premium $1,199/mes. ¿Qué días y horarios te irían mejor?'},
+      {t:'user',txt:'Lunes miércoles viernes en las mañanas'},
+      {t:'bot',txt:'¡Perfecto! Tenemos clases a las 6am, 7am y 8am. ¿Te gustaría agendar una visita de prueba <strong>totalmente gratis</strong>? 💪'},
+    ]
+  },
+  rrhh:{
+    num:'03 / Reclutamiento y Capacitación',
+    title:'Filtra candidatos sin agendar reuniones',
+    desc:'Hace preguntas de filtro, evalúa requisitos básicos y solo escala a RRHH los perfiles que califican. También resuelve dudas internas de tu equipo.',
+    tags:['Filtro de candidatos','Entrevista inicial','Onboarding'],
+    avatar:'HR', name:'Equipo RRHH',
+    msgs:[
+      {t:'user',txt:'Vi la vacante de vendedor, me interesa'},
+      {t:'bot',txt:'¡Hola! ¿Tienes experiencia en ventas? ¿Cuántos años?'},
+      {t:'user',txt:'Sí, 3 años en ventas de seguros'},
+      {t:'bot',txt:'¿Tienes vehículo propio y disponibilidad de lunes a sábado?'},
+      {t:'user',txt:'Sí a los dos'},
+      {t:'bot',txt:'✅ Perfil aceptado. El siguiente paso es una entrevista con el área comercial. ¿Tienes disponibilidad esta semana?'},
+    ]
+  },
+  otros:{
+    num:'04 / E-commerce, Salones y Más',
+    title:'Cualquier negocio que reciba mensajes puede automatizar',
+    desc:'Si tu cliente te escribe antes de comprar, hay una oportunidad. E-commerce, salones, hoteles, talleres — si hay conversación, hay automatización.',
+    tags:['E-commerce','Salones de belleza','Restaurantes','Hoteles'],
+    avatar:'S', name:'Salón Élite',
+    msgs:[
+      {t:'user',txt:'Quiero tinte y corte, ¿tienen el sábado?'},
+      {t:'bot',txt:'¡Hola! Sí. El sábado tenemos espacio a las <strong>10am, 12pm y 2pm</strong>. El servicio tarda ~2.5 hrs. ¿Cuál prefieres?'},
+      {t:'user',txt:'Las 10'},
+      {t:'bot',txt:'Perfecto ✂️ Agendado el sábado a las 10am. ¿Me confirmas tu nombre? Te mando recordatorio el viernes.'},
+    ]
+  }
+};
+
+function showAgent(key, tabEl) {
+  const d = agentData[key];
+  if (!d) return;
+
+  // Update tabs
+  document.querySelectorAll('.agent-tab').forEach(t => t.classList.remove('active'));
+  if (tabEl) tabEl.classList.add('active');
+
+  // Render info
+  document.getElementById('agentInfo').innerHTML = `
+    <div style="font-family:'Exo 2',sans-serif;font-size:12px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;">${d.num}</div>
+    <h3 style="font-family:'Exo 2',sans-serif;font-size:clamp(20px,2.5vw,26px);font-weight:700;line-height:1.2;margin-bottom:14px;color:var(--text);">${d.title}</h3>
+    <p style="font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:24px;">${d.desc}</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      ${d.tags.map((t,i) => `<span style="font-size:12px;padding:5px 14px;border-radius:100px;border:1px solid ${i===0?'rgba(91,159,208,.3)':'var(--border)'};background:${i===0?'rgba(91,159,208,.1)':'transparent'};color:${i===0?'var(--accent2)':'var(--muted)'};">${t}</span>`).join('')}
+    </div>
+  `;
+
+  // Render chat
+  document.getElementById('agentChat').innerHTML = `
+    <div class="chat-demo" style="width:100%;max-width:360px;">
+      <div class="chat-header">
+        <div class="chat-avatar">${d.avatar}</div>
+        <div>
+          <div class="chat-name">${d.name}</div>
+          <div class="chat-status">● En línea</div>
+        </div>
+      </div>
+      <div class="chat-msgs">
+        ${d.msgs.map(m => `<div class="msg ${m.t}">${m.txt}</div>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// Init on load
+showAgent('clinica', null);
+</script>
 
 <!-- ─── SISTEMAS PERSONALIZADOS ─── -->
 <section id="sistemas" style="padding:100px 0;border-top:1px solid var(--border);overflow:hidden;position:relative;">
