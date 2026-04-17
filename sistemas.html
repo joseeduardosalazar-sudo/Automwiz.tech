@@ -2240,5 +2240,53 @@ renderInvTable();
 }
 </style>
 
+
+<style id="mobile-zoom-fix">
+@media(max-width:768px){
+  /* Bigger container padding */
+  .container { padding:0 16px !important; }
+  
+  /* Hero text bigger */
+  .hero-title { font-size:clamp(32px,9vw,52px) !important; }
+  .hero-sub { font-size:16px !important; }
+  
+  /* Panel text bigger */
+  .learn-panels-grid > div { padding:0 !important; }
+  #dataStreamMain { font-size:12px !important; height:180px !important; padding:14px !important; }
+  #neuralCanvasMain { height:160px !important; }
+  #patternCountMain { font-size:36px !important; }
+  
+  /* Prediction bars bigger */
+  #barM1, #barM2, #barM3, #barM4 { height:10px !important; }
+  
+  /* Stats bigger */
+  .learn-stats-grid > div { padding:24px 20px !important; }
+  .learn-stats-grid div[style*="font-size:36px"] { font-size:42px !important; }
+  .learn-stats-grid div[style*="font-size:14px"] { font-size:15px !important; }
+
+  /* Section headers bigger */
+  #aprende h2 { font-size:clamp(36px,10vw,52px) !important; }
+  #aprende p { font-size:16px !important; }
+  
+  /* Demo headers */
+  .demo-header h2 { font-size:clamp(28px,8vw,40px) !important; }
+  .selector-title h2 { font-size:clamp(28px,8vw,40px) !important; }
+  .selector-title p { font-size:15px !important; }
+  
+  /* Tabs bigger */
+  .ind-tab { font-size:14px !important; padding:12px 18px !important; }
+  
+  /* Cards padding */
+  .rest-menu-header { padding:16px 18px !important; }
+  .rest-name { font-size:16px !important; }
+  .rest-item-info h4 { font-size:15px !important; }
+  .cart-header { padding:14px 18px !important; }
+  .rest-price { font-size:16px !important; }
+  
+  /* Panel headers */
+  div[style*="padding:16px 20px"] { padding:16px 18px !important; }
+}
+</style>
+
 </body>
 </html>
