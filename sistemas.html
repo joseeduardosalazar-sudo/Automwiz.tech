@@ -59,7 +59,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
 .demo-header p{color:var(--muted);font-size:16px;max-width:560px;}
 
 /* ── RESTAURANT SYSTEM ── */
-.rest-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;} @media(max-width:768px){.rest-layout{grid-template-columns:1fr!important;}}
+.rest-layout{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;align-items:start;}
 .rest-menu{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
 .rest-menu-header{background:var(--surface2);padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .rest-name{font-family:'Exo 2',sans-serif;font-size:18px;font-weight:700;}
@@ -182,14 +182,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
   .nav-back{display:none;}
 
   /* Hero */
-  #hero{padding:100px 0 60px;}
-  .hero-title{font-size:clamp(32px,9vw,56px)!important;}
-  .hero-sub{font-size:15px!important;}
-  .hero-ctas{flex-direction:column!important;gap:10px!important;}
-  .hero-ctas a{width:100%;text-align:center;justify-content:center;}
+  #hero{min-height:0!important;padding:80px 0 40px!important;}
 
-  /* Sections padding */
-  section{padding:60px 0!important;}
+  /* Sections padding - not hero */
+  section:not(#hero){padding:60px 0!important;}
 
   /* Industry tabs - scrollable horizontal */
   .industry-tabs{flex-wrap:nowrap!important;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px;justify-content:flex-start!important;}
