@@ -221,15 +221,16 @@ nav.scrolled {
 }
 .hero-stat-num {
   font-family:'Exo 2', sans-serif;
-  font-size:36px;
+  font-size:48px;
   font-weight:800;
   color:var(--accent2);
   line-height:1;
 }
 .hero-stat-label {
-  font-size:13px;
+  font-size:14px;
   color:var(--muted);
-  margin-top:4px;
+  margin-top:6px;
+  line-height:1.4;
 }
 
 /* ─── PAIN / DATOS INCÓMODOS ─── */
@@ -823,13 +824,10 @@ footer {
   <div class="container nav-inner">
     <div class="logo">AUTOMWIZ</div>
     <ul class="nav-links">
-      <li><a href="#services" data-i18n="nav_servicios">Servicios</a></li>
-      <li><a href="#porque" data-i18n="nav_porque">Por qué</a></li>
-      <li><a href="#resultados" data-i18n="nav_resultados">Resultados</a></li>
-      <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
+      <li><a href="#services" data-i18n="nav_servicios">Agentes</a></li>
       <li><a href="#precios" data-i18n="nav_precios">Precios</a></li>
-      <li><a href="#proceso" data-i18n="nav_proceso">Proceso</a></li>
       <li><a href="/calculadora" data-i18n="nav_calc">Calculadora</a></li>
+      <li><a href="/sistemas.html">Sistemas</a></li>
       <li><a href="#diagnostico" data-i18n="nav_contacto">Contacto</a></li>
     </ul>
     <div class="nav-right">
@@ -853,8 +851,10 @@ footer {
       <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
     </svg>
   </button>
-  <a href="#services" onclick="closeMobileNav()" data-i18n="nav_servicios">Servicios</a>
-  <a href="#proceso" onclick="closeMobileNav()" data-i18n="nav_proceso">Proceso</a>
+  <a href="#services" onclick="closeMobileNav()">Agentes</a>
+  <a href="#precios" onclick="closeMobileNav()" data-i18n="nav_precios">Precios</a>
+  <a href="/calculadora" onclick="closeMobileNav()">Calculadora</a>
+  <a href="/sistemas.html" onclick="closeMobileNav()">Sistemas</a>
   <a href="#diagnostico" onclick="closeMobileNav()" data-i18n="nav_cta">Diagnóstico gratis</a>
 </div>
 
@@ -876,13 +876,13 @@ footer {
     <div style="display:grid;grid-template-columns:1fr 1px 1fr;gap:0;align-items:stretch;margin-bottom:60px;" class="hero-paths">
 
       <!-- LEFT: Agente IA -->
-      <div style="padding:48px 40px;display:flex;flex-direction:column;gap:20px;">
+      <div style="padding:56px 48px;display:flex;flex-direction:column;gap:20px;">
         <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(200,170,128,.08);border:1px solid rgba(200,170,128,.2);border-radius:100px;padding:5px 14px;width:fit-content;">
           <span style="width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;animation:pulse 2s infinite;"></span>
           <span style="font-size:11px;font-weight:600;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;">Asistente IA</span>
         </div>
-        <h2 style="font-family:'Exo 2',sans-serif;font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.05;letter-spacing:-.02em;color:var(--text);">Tu negocio<br>responde solo, <span style="color:var(--accent);">24/7</span></h2>
-        <p style="font-size:15px;color:var(--muted);line-height:1.65;max-width:340px;">Atiende, califica y agenda leads por WhatsApp e Instagram — sin sueldos extra, sin errores.</p>
+        <h2 style="font-family:'Exo 2',sans-serif;font-size:clamp(32px,4.5vw,52px);font-weight:800;line-height:1.05;letter-spacing:-.02em;color:var(--text);">Tu negocio<br>responde solo, <span style="color:var(--accent);">24/7</span></h2>
+        <p style="font-size:16px;color:var(--muted);line-height:1.65;max-width:360px;">Atiende, califica y agenda leads por WhatsApp e Instagram — sin sueldos extra, sin errores.</p>
         <div style="display:flex;flex-direction:column;gap:8px;">
           <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);"><span style="color:var(--accent);">✓</span> Respuesta inmediata las 24 horas</div>
           <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);"><span style="color:var(--accent);">✓</span> Califica leads automáticamente</div>
@@ -895,13 +895,13 @@ footer {
       <div style="background:var(--border);width:1px;"></div>
 
       <!-- RIGHT: Sistema IA -->
-      <div style="padding:48px 40px;display:flex;flex-direction:column;gap:20px;position:relative;background:linear-gradient(135deg,rgba(91,159,208,.04) 0%,transparent 60%);">
+      <div style="padding:56px 48px;display:flex;flex-direction:column;gap:20px;position:relative;background:linear-gradient(135deg,rgba(91,159,208,.04) 0%,transparent 60%);">
         <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(91,159,208,.1);border:1px solid rgba(91,159,208,.25);border-radius:100px;padding:5px 14px;width:fit-content;">
           <span style="width:6px;height:6px;border-radius:50%;background:var(--accent2);display:inline-block;animation:pulse 2s infinite;"></span>
           <span style="font-size:11px;font-weight:600;color:var(--accent2);letter-spacing:.1em;text-transform:uppercase;">Sistema con IA</span>
         </div>
-        <h2 style="font-family:'Exo 2',sans-serif;font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.05;letter-spacing:-.02em;color:var(--text);">Tu operación<br><span style="color:var(--accent2);">aprende</span> y <span style="color:var(--accent2);">predice</span></h2>
-        <p style="font-size:15px;color:var(--muted);line-height:1.65;max-width:340px;">Sabe qué va a pasar antes de que pase. Te dice cuándo pedir, qué vender y dónde estás perdiendo dinero.</p>
+        <h2 style="font-family:'Exo 2',sans-serif;font-size:clamp(32px,4.5vw,52px);font-weight:800;line-height:1.05;letter-spacing:-.02em;color:var(--text);">Tu operación<br><span style="color:var(--accent2);">aprende</span> y <span style="color:var(--accent2);">predice</span></h2>
+        <p style="font-size:16px;color:var(--muted);line-height:1.65;max-width:360px;">Sabe qué va a pasar antes de que pase. Te dice cuándo pedir, qué vender y dónde estás perdiendo dinero.</p>
         <div style="display:flex;flex-direction:column;gap:8px;">
           <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);"><span style="color:var(--accent2);">✓</span> Predicciones basadas en tu historial real</div>
           <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);"><span style="color:var(--accent2);">✓</span> Alertas antes de que se acabe el inventario</div>
@@ -1648,6 +1648,65 @@ showAgent('clinica', null);
 </style>
 
 <!-- ─── LEAD FORM ─── -->
+<!-- ─── TESTIMONIALES ─── -->
+<section id="testimoniales" style="padding:70px 0;border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:48px;">
+      <div class="tag">Clientes reales</div>
+      <h2 class="section-title" style="justify-content:center;">Lo que dicen <span>quienes ya lo usan</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;" class="testimoniales-grid">
+
+      <div class="reveal" style="background:var(--surface);padding:36px 32px;">
+        <div style="display:flex;gap:4px;margin-bottom:16px;">
+          <span style="color:var(--accent);font-size:16px;">★★★★★</span>
+        </div>
+        <p style="font-size:15px;color:var(--text);line-height:1.7;margin-bottom:24px;">"Antes perdíamos pacientes porque nadie contestaba en la noche. Ahora el agente agenda citas a las 11pm y llegamos a la mañana con la agenda llena."</p>
+        <div style="display:flex;align-items:center;gap:12px;border-top:1px solid var(--border);padding-top:20px;">
+          <div style="width:38px;height:38px;border-radius:50%;background:rgba(91,159,208,.15);display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--accent2);">MG</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;">Dr. García</div>
+            <div style="font-size:12px;color:var(--muted);">Clínica médica · Torreón</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal" style="background:var(--surface);padding:36px 32px;">
+        <div style="display:flex;gap:4px;margin-bottom:16px;">
+          <span style="color:var(--accent);font-size:16px;">★★★★★</span>
+        </div>
+        <p style="font-size:15px;color:var(--text);line-height:1.7;margin-bottom:24px;">"Lo que más me sorprendió es que el agente califica al prospecto antes de pasármelo. Solo hablo con gente que ya quiere comprar. Mi tasa de cierre subió 40%."</p>
+        <div style="display:flex;align-items:center;gap:12px;border-top:1px solid var(--border);padding-top:20px;">
+          <div style="width:38px;height:38px;border-radius:50%;background:rgba(200,170,128,.15);display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--accent);">RL</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;">Roberto L.</div>
+            <div style="font-size:12px;color:var(--muted);">Empresa financiera · México</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal" style="background:var(--surface);padding:36px 32px;">
+        <div style="display:flex;gap:4px;margin-bottom:16px;">
+          <span style="color:var(--accent);font-size:16px;">★★★★★</span>
+        </div>
+        <p style="font-size:15px;color:var(--text);line-height:1.7;margin-bottom:24px;">"En 5 días ya estaba funcionando. No tuve que hacer nada técnico — solo les di la información de mi negocio y ellos configuraron todo. El ROI fue inmediato."</p>
+        <div style="display:flex;align-items:center;gap:12px;border-top:1px solid var(--border);padding-top:20px;">
+          <div style="width:38px;height:38px;border-radius:50%;background:rgba(78,193,122,.15);display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:700;color:var(--green);">AP</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;">Ana P.</div>
+            <div style="font-size:12px;color:var(--muted);">Gym / Fitness · La Laguna</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+@media(max-width:768px){.testimoniales-grid{grid-template-columns:1fr!important;}}
+</style>
+
 <!-- ─── PRECIOS ─── -->
 
 <!-- ─── FAQ ─── -->
