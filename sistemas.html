@@ -213,6 +213,275 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
   </div>
 </section>
 
+<!-- ─── ASÍ APRENDE TU SISTEMA ─── -->
+<section id="aprende" style="padding:100px 0;border-top:1px solid var(--border);position:relative;overflow:hidden;">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:400px;background:radial-gradient(ellipse,rgba(91,159,208,.05) 0%,transparent 70%);pointer-events:none;"></div>
+  <div class="container" style="position:relative;">
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:60px;">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(91,159,208,.08);border:1px solid rgba(91,159,208,.2);border-radius:100px;padding:6px 18px;margin-bottom:20px;">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--accent2);display:inline-block;animation:pulse 2s infinite;"></span>
+        <span style="font-size:12px;font-weight:600;color:var(--accent2);letter-spacing:.1em;text-transform:uppercase;">LangChain · IA que aprende</span>
+      </div>
+      <h2 style="font-family:'Exo 2',sans-serif;font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:16px;">
+        Así aprende<br><span style="color:var(--accent2);">tu sistema</span>
+      </h2>
+      <p style="font-size:17px;color:var(--muted);max-width:580px;margin:0 auto;line-height:1.7;">
+        No es un software normal. Cada pedido, cada movimiento de inventario y cada patrón de tu negocio le enseña algo nuevo. En 30 días sabe más de tu operación que cualquier empleado.
+      </p>
+    </div>
+
+    <!-- 3 panels -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:32px;" class="learn-panels-grid">
+
+      <!-- PANEL 1: Data stream -->
+      <div style="background:var(--surface);border:1px solid rgba(200,170,128,.15);border-radius:16px;overflow:hidden;">
+        <div style="background:rgba(200,170,128,.06);border-bottom:1px solid rgba(200,170,128,.12);padding:16px 20px;display:flex;align-items:center;gap:10px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(200,170,128,.12);display:flex;align-items:center;justify-content:center;font-size:15px;">📥</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--accent);">1. Datos entrando</div>
+            <div style="font-size:11px;color:var(--muted);">Todo lo que pasa en tu negocio</div>
+          </div>
+        </div>
+        <div id="dataStreamMain" style="padding:16px;font-family:'Courier New',monospace;height:220px;overflow:hidden;display:flex;flex-direction:column;gap:5px;"></div>
+      </div>
+
+      <!-- PANEL 2: Neural network -->
+      <div style="background:var(--surface);border:1px solid rgba(91,159,208,.2);border-radius:16px;overflow:hidden;">
+        <div style="background:rgba(91,159,208,.06);border-bottom:1px solid rgba(91,159,208,.15);padding:16px 20px;display:flex;align-items:center;gap:10px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(91,159,208,.12);display:flex;align-items:center;justify-content:center;font-size:15px;">⚡</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--accent2);">2. IA procesando</div>
+            <div style="font-size:11px;color:var(--muted);">Detectando patrones invisibles</div>
+          </div>
+        </div>
+        <div style="padding:16px;display:flex;flex-direction:column;align-items:center;gap:14px;">
+          <canvas id="neuralCanvasMain" width="240" height="150" style="width:100%;max-width:240px;"></canvas>
+          <div style="text-align:center;background:var(--surface2);border-radius:8px;padding:12px 20px;width:100%;">
+            <div style="font-family:'Exo 2',sans-serif;font-size:32px;font-weight:800;color:var(--accent2);" id="patternCountMain">0</div>
+            <div style="font-size:12px;color:var(--muted);">patrones identificados</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 3: Predictions -->
+      <div style="background:var(--surface);border:1px solid rgba(78,193,122,.15);border-radius:16px;overflow:hidden;">
+        <div style="background:rgba(78,193,122,.06);border-bottom:1px solid rgba(78,193,122,.12);padding:16px 20px;display:flex;align-items:center;gap:10px;">
+          <div style="width:32px;height:32px;border-radius:8px;background:rgba(78,193,122,.12);display:flex;align-items:center;justify-content:center;font-size:15px;">🎯</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--green);">3. Predicciones</div>
+            <div style="font-size:11px;color:var(--muted);">Lo que va a pasar esta semana</div>
+          </div>
+        </div>
+        <div style="padding:20px;display:flex;flex-direction:column;gap:18px;">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px;">
+              <span style="color:var(--text);">🍅 Jitomate el viernes</span>
+              <span style="color:var(--green);font-weight:700;" id="confM1">0%</span>
+            </div>
+            <div style="background:rgba(255,255,255,.06);border-radius:100px;height:7px;overflow:hidden;">
+              <div id="barM1" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--green));border-radius:100px;transition:width 1.8s ease;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px;">
+              <span style="color:var(--text);">🍕 Pizza el sábado</span>
+              <span style="color:var(--green);font-weight:700;" id="confM2">0%</span>
+            </div>
+            <div style="background:rgba(255,255,255,.06);border-radius:100px;height:7px;overflow:hidden;">
+              <div id="barM2" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--green));border-radius:100px;transition:width 1.8s .2s ease;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px;">
+              <span style="color:var(--text);">💡 Quesadilla rentable</span>
+              <span style="color:var(--green);font-weight:700;" id="confM3">0%</span>
+            </div>
+            <div style="background:rgba(255,255,255,.06);border-radius:100px;height:7px;overflow:hidden;">
+              <div id="barM3" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--green));border-radius:100px;transition:width 1.8s .4s ease;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px;">
+              <span style="color:var(--text);">🧅 Cebolla el miércoles</span>
+              <span style="color:var(--green);font-weight:700;" id="confM4">0%</span>
+            </div>
+            <div style="background:rgba(255,255,255,.06);border-radius:100px;height:7px;overflow:hidden;">
+              <div id="barM4" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--green));border-radius:100px;transition:width 1.8s .6s ease;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom stats -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:40px;" class="learn-stats-grid">
+      <div style="background:var(--surface);padding:28px;text-align:center;">
+        <div style="font-family:'Exo 2',sans-serif;font-size:36px;font-weight:800;color:var(--accent2);margin-bottom:8px;">30 días</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.5;">para que el sistema empiece a hacer predicciones reales</div>
+      </div>
+      <div style="background:var(--surface);padding:28px;text-align:center;">
+        <div style="font-family:'Exo 2',sans-serif;font-size:36px;font-weight:800;color:var(--green);margin-bottom:8px;">94%</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.5;">de precisión en predicciones de demanda</div>
+      </div>
+      <div style="background:var(--surface);padding:28px;text-align:center;">
+        <div style="font-family:'Exo 2',sans-serif;font-size:36px;font-weight:800;color:var(--accent);margin-bottom:8px;">0</div>
+        <div style="font-size:14px;color:var(--muted);line-height:1.5;">competidores en La Laguna ofrecen esto hoy</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <a href="#selector" class="btn-primary" style="font-size:15px;padding:14px 32px;">Ver demos interactivos →</a>
+      <p style="font-size:13px;color:var(--muted);margin-top:12px;">🧬 Construido con LangChain · Aprende de tu operación real</p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+@media(max-width:900px){
+  .learn-panels-grid { grid-template-columns:1fr !important; }
+  .learn-stats-grid { grid-template-columns:1fr !important; }
+}
+</style>
+
+<script>
+// ─── MAIN PAGE ANIMATIONS ───
+(function() {
+  var events = [
+    { t: 'PEDIDO', txt: 'Mesa 4 · Pizza Margherita x2', c: '#4EC17A' },
+    { t: 'INGREDIENTE', txt: 'Jitomate -180g · Stock: 2.2kg', c: '#EF9F27' },
+    { t: 'PEDIDO', txt: 'Delivery · Carbonara + Bruschetta', c: '#4EC17A' },
+    { t: 'HORA', txt: 'Pico detectado 8:47PM sábado', c: '#5B9FD0' },
+    { t: 'INGREDIENTE', txt: 'Queso Oaxaca -120g · Stock: 0.5kg', c: '#E24B4A' },
+    { t: 'PATRÓN', txt: 'Viernes: tacos +40% vs semana', c: '#5B9FD0' },
+    { t: 'PEDIDO', txt: 'Mesa 2 · Quesadilla x3', c: '#4EC17A' },
+    { t: 'PATRÓN', txt: 'Sábado 8–10PM: pizza demand ↑', c: '#5B9FD0' },
+    { t: 'ALERTA', txt: 'Jitomate bajo mínimo en 2 días', c: '#E24B4A' },
+    { t: 'INGREDIENTE', txt: 'Aceite -30ml · Stock: 3.8L', c: '#4EC17A' },
+  ];
+
+  var started = false;
+  var streamInterval;
+  var animFrame;
+
+  function startMainAnimations() {
+    if (started) return;
+    started = true;
+
+    // Stream
+    var stream = document.getElementById('dataStreamMain');
+    if (stream) {
+      var i = 0;
+      function addEvent() {
+        var e = events[i % events.length];
+        var row = document.createElement('div');
+        row.style.cssText = 'display:flex;gap:6px;align-items:baseline;';
+        row.innerHTML = '<span style="color:' + e.c + ';font-size:9px;font-weight:700;flex-shrink:0;letter-spacing:.06em;">' + e.t + '</span>' +
+                        '<span style="color:#6A8499;font-size:10px;font-family:Courier New,monospace;">' + e.txt + '</span>';
+        stream.appendChild(row);
+        if (stream.children.length > 12) stream.removeChild(stream.firstChild);
+        i++;
+        streamInterval = setTimeout(addEvent, 650 + Math.random() * 500);
+      }
+      addEvent();
+    }
+
+    // Neural
+    var canvas = document.getElementById('neuralCanvasMain');
+    if (canvas) {
+      var ctx = canvas.getContext('2d');
+      var W = canvas.width, H = canvas.height;
+      var nodeData = [
+        {x:30,y:20,l:0},{x:30,y:75,l:0},{x:30,y:130,l:0},
+        {x:120,y:10,l:1},{x:120,y:50,l:1},{x:120,y:90,l:1},{x:120,y:130,l:1},
+        {x:210,y:20,l:2},{x:210,y:75,l:2},{x:210,y:130,l:2}
+      ];
+      var parts = [];
+      var cnt = 0;
+      var tgt = 847;
+      var colors = ['rgba(200,170,128,.9)','rgba(91,159,208,.9)','rgba(78,193,122,.9)'];
+      function draw() {
+        ctx.clearRect(0,0,W,H);
+        // Connections
+        nodeData.forEach(function(a) {
+          nodeData.forEach(function(b) {
+            if (b.l === a.l + 1) {
+              ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+              ctx.strokeStyle = 'rgba(91,159,208,.08)'; ctx.lineWidth=1; ctx.stroke();
+            }
+          });
+        });
+        // Particles
+        for (var p = parts.length-1; p >= 0; p--) {
+          var par = parts[p];
+          par.p += par.spd;
+          par.x += (par.tx-par.ox)*par.spd*1.8;
+          par.y += (par.ty-par.oy)*par.spd*1.8;
+          ctx.beginPath(); ctx.arc(par.x,par.y,2.5,0,Math.PI*2);
+          ctx.fillStyle='rgba(91,159,208,'+(1-par.p)+')'; ctx.fill();
+          if (par.p>=1) parts.splice(p,1);
+        }
+        // Nodes
+        nodeData.forEach(function(n) {
+          n.pulse = (n.pulse||Math.random()*6) + 0.06;
+          var r = 5 + Math.sin(n.pulse)*2;
+          ctx.beginPath(); ctx.arc(n.x,n.y,r,0,Math.PI*2);
+          ctx.fillStyle = colors[n.l]; ctx.fill();
+        });
+        if (cnt < tgt) cnt = Math.min(cnt+11, tgt);
+        var el = document.getElementById('patternCountMain');
+        if (el) el.textContent = cnt;
+        if (Math.random()<0.18) {
+          var from = nodeData.filter(function(n){return n.l<2;});
+          var f = from[Math.floor(Math.random()*from.length)];
+          var to = nodeData.filter(function(n){return n.l===f.l+1;});
+          var t = to[Math.floor(Math.random()*to.length)];
+          parts.push({x:f.x,y:f.y,ox:f.x,oy:f.y,tx:t.x,ty:t.y,p:0,spd:0.018+Math.random()*0.02});
+        }
+        animFrame = requestAnimationFrame(draw);
+      }
+      draw();
+    }
+
+    // Confidence bars
+    var confs = [94,89,97,82];
+    setTimeout(function() {
+      confs.forEach(function(c,i) {
+        var bar = document.getElementById('barM'+(i+1));
+        var conf = document.getElementById('confM'+(i+1));
+        if (bar) bar.style.width = c + '%';
+        if (conf) {
+          var s = 0;
+          var iv = setInterval(function() {
+            s += 3; if (s>=c) { s=c; clearInterval(iv); }
+            conf.textContent = s + '%';
+          }, 25);
+        }
+      });
+    }, 400);
+  }
+
+  // Start when section is visible
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { startMainAnimations(); obs.disconnect(); }
+    });
+  }, { threshold: 0.2 });
+  var sec = document.getElementById('aprende');
+  if (sec) obs.observe(sec);
+
+  // Fallback on load
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      if (!started) startMainAnimations();
+    }, 500);
+  });
+})();
+</script>
+
 <!-- INDUSTRY SELECTOR -->
 <section id="selector">
   <div class="container">
@@ -702,6 +971,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
       <button class="inv-panel-btn" onclick="showInvPanel('inventario',this)" style="flex:1;padding:13px;background:none;border:none;border-right:1px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">📦 Inventario</button>
       <button class="inv-panel-btn" onclick="showInvPanel('movimientos',this)" style="flex:1;padding:13px;background:none;border:none;border-right:1px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">↕️ Movimientos</button>
       <button class="inv-panel-btn" onclick="showInvPanel('platillos',this)" style="flex:1;padding:13px;background:none;border:none;border-right:1px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">🍽️ Costo x Platillo</button>
+      <button class="inv-panel-btn" onclick="showInvPanel('ia',this)" style="flex:1;padding:13px;background:none;border:none;border-right:1px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">🧬 IA Predictiva</button>
       <button class="inv-panel-btn" onclick="showInvPanel('proveedores',this)" style="flex:1;padding:13px;background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">🚚 Proveedores</button>
     </div>
 
@@ -805,6 +1075,144 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
     </div>
 
     <!-- PROVEEDORES PANEL -->
+    <!-- IA PREDICTIVA PANEL -->
+    <div id="inv-ia" class="inv-panel" style="display:none;">
+
+      <!-- Header -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+            <span style="font-size:20px;">🧬</span>
+            <h4 style="font-family:'Exo 2',sans-serif;font-size:18px;font-weight:800;color:var(--text);">Así aprende tu sistema</h4>
+          </div>
+          <p style="font-size:13px;color:var(--muted);">3 etapas en tiempo real — de los datos crudos a la predicción</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green);">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 2s infinite;"></span>
+          847 eventos analizados · 94% precisión
+        </div>
+      </div>
+
+      <!-- 3 panels -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;" class="ia-learn-grid">
+
+        <!-- PANEL 1: Data stream -->
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+          <div style="background:rgba(200,170,128,.08);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:8px;">
+            <span style="font-size:14px;">📥</span>
+            <span style="font-size:12px;font-weight:600;color:var(--accent);">1. Datos entrando</span>
+          </div>
+          <div id="dataStream" style="padding:14px;font-family:'Courier New',monospace;font-size:11px;height:200px;overflow:hidden;display:flex;flex-direction:column;gap:4px;"></div>
+        </div>
+
+        <!-- PANEL 2: Neural network -->
+        <div style="background:var(--surface2);border:1px solid rgba(91,159,208,.2);border-radius:12px;overflow:hidden;position:relative;">
+          <div style="background:rgba(91,159,208,.08);border-bottom:1px solid rgba(91,159,208,.15);padding:12px 16px;display:flex;align-items:center;gap:8px;">
+            <span style="font-size:14px;">⚡</span>
+            <span style="font-size:12px;font-weight:600;color:var(--accent2);">2. IA procesando</span>
+          </div>
+          <div style="padding:14px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+            <canvas id="neuralCanvas" width="200" height="140" style="width:100%;max-width:200px;"></canvas>
+            <div style="text-align:center;">
+              <div style="font-family:'Exo 2',sans-serif;font-size:22px;font-weight:800;color:var(--accent2);" id="patternCount">0</div>
+              <div style="font-size:11px;color:var(--muted);">patrones identificados</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 3: Predictions with confidence bars -->
+        <div style="background:var(--surface2);border:1px solid rgba(78,193,122,.15);border-radius:12px;overflow:hidden;">
+          <div style="background:rgba(78,193,122,.08);border-bottom:1px solid rgba(78,193,122,.15);padding:12px 16px;display:flex;align-items:center;gap:8px;">
+            <span style="font-size:14px;">🎯</span>
+            <span style="font-size:12px;font-weight:600;color:var(--green);">3. Predicciones</span>
+          </div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:14px;">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+                <span style="color:var(--text);">🍅 Jitomate viernes</span>
+                <span style="color:var(--green);font-weight:700;" id="conf1">0%</span>
+              </div>
+              <div style="background:rgba(255,255,255,.06);border-radius:100px;height:6px;overflow:hidden;">
+                <div id="bar1" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--green));border-radius:100px;transition:width 1.5s ease;"></div>
+              </div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+                <span style="color:var(--text);">🍕 Pizza sábado</span>
+                <span style="color:var(--green);font-weight:700;" id="conf2">0%</span>
+              </div>
+              <div style="background:rgba(255,255,255,.06);border-radius:100px;height:6px;overflow:hidden;">
+                <div id="bar2" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--green));border-radius:100px;transition:width 1.5s .2s ease;"></div>
+              </div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+                <span style="color:var(--text);">💡 Quesadilla rentable</span>
+                <span style="color:var(--green);font-weight:700;" id="conf3">0%</span>
+              </div>
+              <div style="background:rgba(255,255,255,.06);border-radius:100px;height:6px;overflow:hidden;">
+                <div id="bar3" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--green));border-radius:100px;transition:width 1.5s .4s ease;"></div>
+              </div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;">
+                <span style="color:var(--text);">🧅 Cebolla miércoles</span>
+                <span style="color:var(--green);font-weight:700;" id="conf4">0%</span>
+              </div>
+              <div style="background:rgba(255,255,255,.06);border-radius:100px;height:6px;overflow:hidden;">
+                <div id="bar4" style="height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--green));border-radius:100px;transition:width 1.5s .6s ease;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Demand chart + alerts -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;" class="ia-bottom-grid">
+        <!-- Bar chart -->
+        <div style="background:var(--surface2);border-radius:10px;padding:20px;">
+          <div style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px;">📊 Predicción de demanda — 7 días</div>
+          <div style="display:flex;align-items:flex-end;gap:6px;height:80px;margin-bottom:8px;">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:100%;background:rgba(91,159,208,.25);border-radius:3px 3px 0 0;transition:height .8s ease;" class="ia-bar" data-h="35"></div><span style="font-size:9px;color:var(--muted);">Lun</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:100%;background:rgba(91,159,208,.25);border-radius:3px 3px 0 0;transition:height .8s .1s ease;" class="ia-bar" data-h="42"></div><span style="font-size:9px;color:var(--muted);">Mar</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:100%;background:rgba(91,159,208,.25);border-radius:3px 3px 0 0;transition:height .8s .2s ease;" class="ia-bar" data-h="38"></div><span style="font-size:9px;color:var(--muted);">Mié</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:100%;background:rgba(91,159,208,.25);border-radius:3px 3px 0 0;transition:height .8s .3s ease;" class="ia-bar" data-h="55"></div><span style="font-size:9px;color:var(--muted);">Jue</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:100%;background:rgba(200,170,128,.7);border-radius:3px 3px 0 0;transition:height .8s .4s ease;" class="ia-bar" data-h="88"></div><span style="font-size:9px;color:var(--accent);font-weight:700;">Vie⚡</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:100%;background:rgba(200,170,128,.9);border-radius:3px 3px 0 0;transition:height .8s .5s ease;" class="ia-bar" data-h="95"></div><span style="font-size:9px;color:var(--accent);font-weight:700;">Sáb⚡</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;"><div style="width:100%;background:rgba(91,159,208,.15);border-radius:3px 3px 0 0;transition:height .8s .6s ease;" class="ia-bar" data-h="28"></div><span style="font-size:9px;color:var(--muted);">Dom</span></div>
+          </div>
+        </div>
+        <!-- Alerts -->
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="background:rgba(239,159,39,.06);border:1px solid rgba(239,159,39,.2);border-radius:8px;padding:12px;display:flex;gap:8px;align-items:center;">
+            <span>🍅</span><div style="flex:1;"><div style="font-size:12px;font-weight:600;">Jitomate bajo para el viernes</div><div style="font-size:11px;color:var(--muted);">+40% necesario. Pide hoy.</div></div>
+            <span style="font-size:10px;color:#EF9F27;background:rgba(239,159,39,.15);padding:2px 8px;border-radius:100px;font-weight:700;flex-shrink:0;">URGENTE</span>
+          </div>
+          <div style="background:rgba(78,193,122,.06);border:1px solid rgba(78,193,122,.15);border-radius:8px;padding:12px;display:flex;gap:8px;align-items:center;">
+            <span>💡</span><div style="flex:1;"><div style="font-size:12px;font-weight:600;">Quesadilla — 73% margen</div><div style="font-size:11px;color:var(--muted);">Destacarla sube ventas ~20%.</div></div>
+            <span style="font-size:10px;color:var(--green);background:rgba(78,193,122,.12);padding:2px 8px;border-radius:100px;font-weight:700;flex-shrink:0;">+DINERO</span>
+          </div>
+          <div style="background:rgba(91,159,208,.06);border:1px solid rgba(91,159,208,.15);border-radius:8px;padding:12px;display:flex;gap:8px;align-items:center;">
+            <span>📈</span><div style="flex:1;"><div style="font-size:12px;font-weight:600;">Pizza sábado noche +35%</div><div style="font-size:11px;color:var(--muted);">Prepara más masa esta tarde.</div></div>
+            <span style="font-size:10px;color:var(--accent2);background:rgba(91,159,208,.12);padding:2px 8px;border-radius:100px;font-weight:700;flex-shrink:0;">PREPARAR</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:rgba(91,159,208,.05);border:1px solid rgba(91,159,208,.1);border-radius:8px;padding:14px 18px;text-align:center;">
+        <p style="font-size:13px;color:var(--muted);margin:0;">🧬 Construido con <strong style="color:var(--accent2);">LangChain</strong> — aprende de tu operación real cada semana. <strong style="color:var(--text);">Nadie más en La Laguna lo ofrece.</strong></p>
+      </div>
+
+    </div>
+
+    <style>
+    @media(max-width:900px){
+      .ia-learn-grid { grid-template-columns:1fr !important; }
+      .ia-bottom-grid { grid-template-columns:1fr !important; }
+    }
+    </style>
+
     <div id="inv-proveedores" class="inv-panel" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
         <div>
@@ -1259,6 +1667,7 @@ function showInvPanel(panel, el) {
   if (panel === 'movimientos') renderMovimientos(currentMovFilter);
   if (panel === 'platillos') renderPlatillos();
   if (panel === 'proveedores') renderProveedores();
+  if (panel === 'ia') initIABars();
 }
 
 function openEntrada() {
@@ -1292,6 +1701,137 @@ function confirmarEntrada() {
   document.getElementById('entradaSuccess').style.display = 'block';
   renderMovimientos(currentMovFilter);
   setTimeout(closeEntrada, 2000);
+}
+
+function initIABars() {
+  // Bars
+  document.querySelectorAll('.ia-bar').forEach(function(bar) {
+    var h = parseInt(bar.getAttribute('data-h'));
+    bar.style.height = '0px';
+    setTimeout(function() { bar.style.height = h + 'px'; }, 150);
+  });
+
+  // Data stream
+  var events = [
+    { t: 'PEDIDO', txt: 'Mesa 4 · Pizza Margherita x2', c: '#4EC17A' },
+    { t: 'INGREDIENTE', txt: 'Jitomate -180g · Stock: 2.2kg', c: '#EF9F27' },
+    { t: 'PEDIDO', txt: 'Delivery · Carbonara + Bruschetta', c: '#4EC17A' },
+    { t: 'HORA', txt: 'Pico detectado 8:47PM sábado', c: '#5B9FD0' },
+    { t: 'INGREDIENTE', txt: 'Queso Oaxaca -120g · Stock: 0.5kg', c: '#E24B4A' },
+    { t: 'PATRÓN', txt: 'Viernes: tacos +40% vs semana', c: '#5B9FD0' },
+    { t: 'PEDIDO', txt: 'Mesa 2 · Quesadilla x3', c: '#4EC17A' },
+    { t: 'INGREDIENTE', txt: 'Aceite -30ml · Stock: 3.8L', c: '#4EC17A' },
+    { t: 'PATRÓN', txt: 'Sábado 8–10PM: pizza demand ↑', c: '#5B9FD0' },
+    { t: 'ALERTA', txt: 'Jitomate bajo mínimo en 2 días', c: '#E24B4A' },
+  ];
+  var stream = document.getElementById('dataStream');
+  if (!stream) return;
+  stream.innerHTML = '';
+  var i = 0;
+  function addEvent() {
+    if (!document.getElementById('dataStream')) return;
+    var e = events[i % events.length];
+    var row = document.createElement('div');
+    row.style.cssText = 'display:flex;gap:6px;align-items:baseline;animation:fadeUp .3s ease;opacity:0;';
+    row.innerHTML = '<span style="color:' + e.c + ';font-size:9px;font-weight:700;flex-shrink:0;">' + e.t + '</span>' +
+                    '<span style="color:#6A8499;font-size:10px;">' + e.txt + '</span>';
+    stream.appendChild(row);
+    setTimeout(function() { row.style.opacity = '1'; }, 50);
+    if (stream.children.length > 10) stream.removeChild(stream.firstChild);
+    i++;
+    setTimeout(addEvent, 700 + Math.random() * 600);
+  }
+  addEvent();
+
+  // Neural network canvas
+  var canvas = document.getElementById('neuralCanvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+  var nodes = [];
+  // 3 layers: 3, 4, 3
+  var layers = [[3,3],[4,3],[3,3]];
+  layers[0][0] = 3; layers[1][0] = 4; layers[2][0] = 3;
+  var lx = [30, 100, 170];
+  for (var l = 0; l < 3; l++) {
+    var count = [3,4,3][l];
+    for (var n = 0; n < count; n++) {
+      nodes.push({ x: lx[l], y: 20 + (H-40) * n / (count-1), l: l, pulse: Math.random() });
+    }
+  }
+  var particles = [];
+  function spawnParticle() {
+    var from = nodes.filter(function(n) { return n.l < 2; });
+    var f = from[Math.floor(Math.random() * from.length)];
+    var toNodes = nodes.filter(function(n) { return n.l === f.l + 1; });
+    var t = toNodes[Math.floor(Math.random() * toNodes.length)];
+    particles.push({ x: f.x, y: f.y, tx: t.x, ty: t.y, p: 0, spd: 0.02 + Math.random() * 0.02 });
+  }
+  var count = [0];
+  var target = 847;
+  function drawNeural() {
+    ctx.clearRect(0, 0, W, H);
+    // Connections
+    for (var i = 0; i < nodes.length; i++) {
+      for (var j = 0; j < nodes.length; j++) {
+        if (nodes[j].l === nodes[i].l + 1) {
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = 'rgba(91,159,208,.12)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+    // Particles
+    for (var p = particles.length - 1; p >= 0; p--) {
+      var par = particles[p];
+      par.p += par.spd;
+      par.x = par.x + (par.tx - par.x) * par.spd * 1.5;
+      par.y = par.y + (par.ty - par.y) * par.spd * 1.5;
+      ctx.beginPath();
+      ctx.arc(par.x, par.y, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(91,159,208,' + (1 - par.p) + ')';
+      ctx.fill();
+      if (par.p >= 1) particles.splice(p, 1);
+    }
+    // Nodes
+    nodes.forEach(function(n) {
+      n.pulse += 0.05;
+      var r = 6 + Math.sin(n.pulse) * 2;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+      var colors = ['rgba(200,170,128,.8)', 'rgba(91,159,208,.8)', 'rgba(78,193,122,.8)'];
+      ctx.fillStyle = colors[n.l];
+      ctx.fill();
+    });
+    // Counter
+    if (count[0] < target) { count[0] = Math.min(count[0] + 12, target); }
+    var el = document.getElementById('patternCount');
+    if (el) el.textContent = count[0];
+    if (Math.random() < 0.15) spawnParticle();
+    requestAnimationFrame(drawNeural);
+  }
+  drawNeural();
+
+  // Confidence bars
+  var confs = [94, 89, 97, 82];
+  setTimeout(function() {
+    confs.forEach(function(c, i) {
+      var bar = document.getElementById('bar' + (i+1));
+      var conf = document.getElementById('conf' + (i+1));
+      if (bar) bar.style.width = c + '%';
+      if (conf) {
+        var start = 0;
+        var interval = setInterval(function() {
+          start += 3;
+          if (start >= c) { start = c; clearInterval(interval); }
+          conf.textContent = start + '%';
+        }, 30);
+      }
+    });
+  }, 300);
 }
 
 // ─── CLÍNICA DATA ───
