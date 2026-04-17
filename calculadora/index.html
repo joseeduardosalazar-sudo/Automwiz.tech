@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AUTOMWIZ · Calculadora ROI — ¿Cuánto pierdes sin responder?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#070D16; --surface:#0C1622; --surface2:#11202E;
+  --border:rgba(160,210,255,0.08); --accent:#C8AA80; --accent2:#5B9FD0;
+  --text:#EDE7DC; --muted:#6A8499; --radius:12px;
+  --green:#4EC17A; --red:#E24B4A;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.65;min-height:100vh;overflow-x:hidden;}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(91,159,208,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(91,159,208,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rgba(7,13,22,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Exo 2',sans-serif;font-size:22px;font-weight:800;letter-spacing:.04em;color:var(--text);text-decoration:none;}
+.nav-back{font-size:14px;color:var(--muted);display:flex;align-items:center;gap:6px;transition:color .2s;text-decoration:none;}
+.nav-back:hover{color:var(--text);}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#0A1220;font-size:14px;font-weight:600;padding:10px 22px;border-radius:100px;border:none;cursor:pointer;transition:opacity .2s;text-decoration:none;}
+.btn-primary:hover{opacity:.85;}
+
+/* WRAP */
+.wrap{max-width:1140px;margin:0 auto;padding:100px 24px 80px;position:relative;z-index:1;}
+
+/* HERO */
+.hero{text-align:center;margin-bottom:64px;}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--accent2);font-weight:600;margin-bottom:16px;display:block;}
+h1{font-family:'Exo 2',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:20px;}
+h1 span{color:var(--accent);}
+.hero-sub{font-size:18px;color:var(--muted);max-width:560px;margin:0 auto 12px;line-height:1.7;}
+.hero-note{font-size:13px;color:var(--muted);opacity:.7;}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:360px 1fr;gap:40px;align-items:start;}
+
+/* INPUTS */
+.inputs{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;position:sticky;top:90px;}
+.inputs-title{font-family:'Exo 2',sans-serif;font-size:20px;font-weight:700;margin-bottom:6px;}
+.inputs-sub{font-size:13px;color:var(--muted);margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+
+.field{margin-bottom:24px;}
+.field:last-child{margin-bottom:0;}
+.field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:600;margin-bottom:10px;}
+.field .hint{font-size:12px;color:var(--muted);margin-top:6px;opacity:.8;}
+
+.input-row{display:flex;align-items:center;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;transition:border-color .2s;}
+.input-row:focus-within{border-color:rgba(200,170,128,.4);}
+.input-row .prefix,.input-row .suffix{font-family:'Exo 2',sans-serif;font-size:16px;color:var(--muted);flex-shrink:0;}
+.input-row input{flex:1;border:none;outline:none;background:transparent;font-family:'Exo 2',sans-serif;font-size:26px;font-weight:700;color:var(--text);padding:0 8px;width:100%;}
+.input-row input::-webkit-outer-spin-button,
+.input-row input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.input-row input[type=number]{-moz-appearance:textfield;}
+
+/* NICHO SELECTOR */
+.nicho-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px;}
+.nicho-btn{padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;text-align:center;font-family:'DM Sans',sans-serif;}
+.nicho-btn.active{border-color:rgba(200,170,128,.4);background:rgba(200,170,128,.1);color:var(--accent);}
+
+/* OUTPUTS */
+.outputs{display:flex;flex-direction:column;gap:20px;}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;position:relative;overflow:hidden;}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;}
+.card.pain::before{background:linear-gradient(90deg,var(--red),transparent);}
+.card.gain::before{background:linear-gradient(90deg,var(--green),transparent);}
+.card.recommend::before{background:linear-gradient(90deg,var(--accent),transparent);}
+
+.card-eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);font-weight:600;margin-bottom:12px;}
+.card h2{font-family:'Exo 2',sans-serif;font-size:24px;font-weight:700;margin-bottom:6px;letter-spacing:-.01em;}
+.card-sub{font-size:14px;color:var(--muted);margin-bottom:24px;}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;}
+.stat{background:var(--surface2);border-radius:8px;padding:16px;}
+.stat-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px;font-weight:500;}
+.stat-val{font-family:'Exo 2',sans-serif;font-size:28px;font-weight:800;line-height:1;margin-bottom:4px;}
+.card.pain .stat-val{color:var(--red);}
+.card.gain .stat-val{color:var(--green);}
+.stat-suffix{font-size:12px;color:var(--muted);}
+
+.big-number{background:var(--surface2);border-radius:8px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.big-number-label{font-size:13px;color:var(--muted);max-width:200px;line-height:1.4;}
+.stat-big{font-family:'Exo 2',sans-serif;font-size:40px;font-weight:800;flex-shrink:0;}
+.card.pain .stat-big{color:var(--red);}
+.card.gain .stat-big{color:var(--green);}
+
+/* RECOMMEND */
+.recommend{background:var(--surface);border:1px solid rgba(200,170,128,.2);border-radius:var(--radius);padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;position:relative;overflow:hidden;}
+.recommend::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);}
+.recommend::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at top left,rgba(200,170,128,.04),transparent 60%);pointer-events:none;}
+
+.payback-title{font-family:'Exo 2',sans-serif;font-size:28px;font-weight:800;margin-bottom:8px;letter-spacing:-.01em;}
+.payback-sub{font-size:14px;color:var(--muted);margin-bottom:16px;}
+.payback-line{font-size:15px;color:var(--text);line-height:1.6;margin-bottom:20px;}
+.payback-line strong{color:var(--accent);}
+
+.payback-math{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.math-item{background:var(--surface2);border-radius:8px;padding:14px;}
+.math-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:6px;}
+.math-val{font-family:'Exo 2',sans-serif;font-size:20px;font-weight:800;color:var(--accent);}
+
+.rec-eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:10px;font-weight:500;}
+.rec-plan{font-family:'Exo 2',sans-serif;font-size:32px;font-weight:800;color:var(--accent);margin-bottom:4px;}
+.rec-price{font-size:15px;color:var(--muted);margin-bottom:16px;}
+.rec-feats{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.rec-feats li{font-size:14px;color:var(--text);display:flex;align-items:center;gap:8px;}
+.rec-feats li::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0;}
+
+/* CTA BLOCK */
+.cta-block{background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border:1px solid rgba(200,170,128,.2);border-radius:var(--radius);padding:48px;text-align:center;margin-top:20px;position:relative;overflow:hidden;}
+.cta-block::before{content:"";position:absolute;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(200,170,128,.08),transparent 70%);pointer-events:none;}
+.cta-block h2{font-family:'Exo 2',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:800;margin-bottom:12px;letter-spacing:-.01em;}
+.cta-block h2 span{color:var(--accent);}
+.cta-block p{font-size:16px;color:var(--muted);max-width:460px;margin:0 auto 28px;line-height:1.7;}
+.cta-block small{display:block;font-size:12px;color:var(--muted);margin-top:12px;opacity:.7;}
+
+/* QUOTE */
+.quote-block{border-top:1px solid var(--border);padding-top:32px;margin-top:32px;text-align:center;}
+.quote-block p{font-size:15px;color:var(--muted);font-style:italic;margin-bottom:8px;}
+.quote-cite{font-size:12px;color:var(--muted);opacity:.6;letter-spacing:.08em;text-transform:uppercase;}
+
+.disclaimer{font-size:12px;color:var(--muted);opacity:.5;text-align:center;margin-top:16px;line-height:1.6;}
+
+/* MOBILE */
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr;}
+  .inputs{position:static;}
+  .hero{margin-bottom:40px;}
+  .stats{grid-template-columns:1fr 1fr;}
+  .big-number{flex-direction:column;text-align:center;}
+  .big-number-label{max-width:100%;}
+  .recommend{grid-template-columns:1fr;}
+  .payback-math{grid-template-columns:1fr 1fr 1fr;}
+}
+@media(max-width:600px){
+  .wrap{padding:90px 16px 60px;}
+  .stats{grid-template-columns:1fr;}
+  .payback-math{grid-template-columns:1fr;}
+  .nicho-grid{grid-template-columns:1fr 1fr;}
+  .card{padding:20px;}
+  .recommend{padding:20px;}
+  .cta-block{padding:28px 20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">AUTOMWIZ</a>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <a href="/" class="nav-back">← Inicio</a>
+      <a href="/#diagnostico" class="btn-primary">Hablar con un asesor →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="eyebrow">Calculadora gratuita · 2 minutos</span>
+    <h1>¿Cuánto pierdes<br><span>sin contestar?</span></h1>
+    <p class="hero-sub">Calcula el dinero que se va con la competencia cada mes — y cuánto recuperarías con un agente IA.</p>
+    <p class="hero-note">Cálculo conservador. Sin promesas infladas.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- INPUTS -->
+    <aside class="inputs">
+      <div class="inputs-title">Tu negocio, hoy</div>
+      <div class="inputs-sub">4 datos reales. Ajústalos a tu operación.</div>
+
+      <div class="field">
+        <label>Tipo de negocio</label>
+        <div class="nicho-grid">
+          <button class="nicho-btn active" onclick="setNicho('gym',this)">💪 Gym / Pilates</button>
+          <button class="nicho-btn" onclick="setNicho('clinica',this)">🏥 Clínica</button>
+          <button class="nicho-btn" onclick="setNicho('restaurante',this)">🍽️ Restaurante</button>
+          <button class="nicho-btn" onclick="setNicho('otro',this)">🏢 Otro</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Precio mensual por cliente</label>
+        <div class="input-row">
+          <span class="prefix">$</span>
+          <input type="number" id="precio" value="2000" min="0">
+          <span class="suffix">MXN</span>
+        </div>
+        <div class="hint">El paquete o mensualidad más vendido.</div>
+      </div>
+
+      <div class="field">
+        <label>Mensajes / leads al mes</label>
+        <div class="input-row">
+          <input type="number" id="convos" value="150" min="0">
+          <span class="suffix">mensajes</span>
+        </div>
+        <div class="hint">WhatsApp + Instagram + Facebook.</div>
+      </div>
+
+      <div class="field">
+        <label>% que alcanzas a contestar</label>
+        <div class="input-row">
+          <input type="number" id="pctContesta" value="60" min="0" max="100">
+          <span class="suffix">%</span>
+        </div>
+        <div class="hint">Sé honesto — nadie responde el 100%.</div>
+      </div>
+
+      <div class="field">
+        <label>% que se convierten en clientes</label>
+        <div class="input-row">
+          <input type="number" id="pctCierre" value="25" min="0" max="100">
+          <span class="suffix">%</span>
+        </div>
+        <div class="hint">De los que contestas, cuántos compran.</div>
+      </div>
+    </aside>
+
+    <!-- OUTPUTS -->
+    <main class="outputs">
+
+      <!-- CARD 1: Dolor -->
+      <div class="card pain">
+        <div class="card-eyebrow">01 · Lo que pasa hoy</div>
+        <h2>Lo que se queda en visto.</h2>
+        <p class="card-sub">Cada mes, así se ve tu embudo real.</p>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-label">Sin contestar</div>
+            <div class="stat-val" id="outNoResp">60</div>
+            <div class="stat-suffix">leads al vacío</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Clientes perdidos</div>
+            <div class="stat-val" id="outClientesPerdidos">15</div>
+            <div class="stat-suffix">al mes, silenciosamente</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Valor por cliente</div>
+            <div class="stat-val" id="outLtv">$6,000</div>
+            <div class="stat-suffix">3 meses promedio</div>
+          </div>
+        </div>
+        <div class="big-number">
+          <div class="big-number-label">Oportunidad que se va con la competencia en 3 meses</div>
+          <div class="stat-big" id="outDineroPerdido">$90,000</div>
+        </div>
+      </div>
+
+      <!-- CARD 2: Ganancia -->
+      <div class="card gain">
+        <div class="card-eyebrow">02 · Con un agente que sí contesta</div>
+        <h2>Lo mismo, pero sin fugas.</h2>
+        <p class="card-sub">Escenario conservador: el agente responde el 90%, no el 100%.</p>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-label">Respondidas/mes</div>
+            <div class="stat-val" id="outConversAgente">135</div>
+            <div class="stat-suffix">misma tasa de cierre</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Clientes extra</div>
+            <div class="stat-val" id="outExtraClientes">12</div>
+            <div class="stat-suffix">al mes, nuevos</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Ingreso extra/mes</div>
+            <div class="stat-val" id="outExtraMes">$24,000</div>
+            <div class="stat-suffix">con precios actuales</div>
+          </div>
+        </div>
+        <div class="big-number">
+          <div class="big-number-label">Ingreso extra proyectado a 3 meses</div>
+          <div class="stat-big" id="outExtraLtv">$72,000</div>
+        </div>
+      </div>
+
+      <!-- CARD 3: Plan -->
+      <div class="recommend">
+        <div>
+          <div class="card-eyebrow">03 · Cuándo se paga</div>
+          <div class="payback-title">Punto de equilibrio</div>
+          <p class="payback-sub">El momento en que la inversión deja de serlo.</p>
+          <p class="payback-line">
+            Con solo <strong id="outSociosNec">2 clientes nuevos</strong> al mes, el sistema ya se pagó.<br>
+            Conservadoramente, te trae <strong id="outSociosGain">12</strong>.
+          </p>
+          <div class="payback-math">
+            <div class="math-item">
+              <div class="math-label">Costo del plan</div>
+              <div class="math-val" id="outPlanPrecio">$3,000</div>
+            </div>
+            <div class="math-item">
+              <div class="math-label">Ingreso extra/mes</div>
+              <div class="math-val" id="outIngresoMes">$24,000</div>
+            </div>
+            <div class="math-item">
+              <div class="math-label">Multiplicador</div>
+              <div class="math-val" id="outMultiplicador">8×</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="rec-eyebrow">Plan recomendado</div>
+          <div class="rec-plan" id="outPlanNombre">Starter</div>
+          <div class="rec-price" id="outPlanPrecioTag">$3,000 MXN / mes</div>
+          <ul class="rec-feats" id="outPlanFeats">
+            <li>1 agente IA de texto</li>
+            <li>1 canal (WhatsApp o Instagram)</li>
+            <li>Flujo conversacional a la medida</li>
+            <li>Reporte mensual</li>
+            <li>Listo en 5 días</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-block">
+        <h2>¿Listo para <span>recuperar esos clientes?</span></h2>
+        <p>En 30 minutos te mostramos exactamente cómo funcionaría el agente para tu negocio y cuánto costaría.</p>
+        <a href="https://calendly.com/automwiz-info/automwiz" target="_blank" class="btn-primary" style="font-size:16px;padding:14px 32px;">Agendar llamada gratuita →</a>
+        <small>Sin compromiso · Respuesta en menos de 24 horas</small>
+      </div>
+
+      <!-- QUOTE -->
+      <div class="quote-block">
+        <p>"El 78% de los leads se pierde cuando nadie responde en los primeros 5 minutos."</p>
+        <div class="quote-cite">Estudio MIT / Harvard Business Review</div>
+      </div>
+
+      <div class="disclaimer">
+        Estimaciones con supuestos conservadores — 3 meses de permanencia, 90% de respuesta del agente, misma tasa de cierre que hoy. Los resultados reales dependen de la operación de cada negocio.
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+const LTV_MESES = 3;
+const PCT_AGENTE = 0.90;
+const PLANES = {
+  starter:{nombre:"Starter",precio:3000,precioTag:"$3,000 MXN / mes",limite:200,feats:["1 agente IA de texto","1 canal (WhatsApp o Instagram)","Flujo conversacional a la medida","Reporte mensual","Listo en 5 días"]},
+  pro:{nombre:"Pro",precio:5500,precioTag:"$5,500 MXN / mes",limite:Infinity,feats:["2 agentes IA de texto","Multicanal (WhatsApp + Instagram + Web)","Integración con CRM","Reportes de conversión","Optimización continua"]}
+};
+
+const NICHOS = {
+  gym:   {precio:2000, convos:150, contesta:60, cierre:25},
+  clinica:{precio:800,  convos:80,  contesta:65, cierre:40},
+  restaurante:{precio:500, convos:200, contesta:50, cierre:30},
+  otro:  {precio:2000, convos:100, contesta:60, cierre:25}
+};
+
+const fmtMoney = n => "$" + Math.round(n).toLocaleString("es-MX");
+const fmtNum = n => Math.round(n).toLocaleString("es-MX");
+const $id = id => document.getElementById(id);
+
+function setNicho(nicho, el) {
+  document.querySelectorAll('.nicho-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  const d = NICHOS[nicho];
+  $id('precio').value = d.precio;
+  $id('convos').value = d.convos;
+  $id('pctContesta').value = d.contesta;
+  $id('pctCierre').value = d.cierre;
+  calc();
+}
+
+function calc() {
+  const precio = Math.max(0, +$id("precio").value || 0);
+  const convos = Math.max(0, +$id("convos").value || 0);
+  const pctCont = Math.min(100, Math.max(0, +$id("pctContesta").value || 0)) / 100;
+  const pctCierre = Math.min(100, Math.max(0, +$id("pctCierre").value || 0)) / 100;
+
+  const ltv = precio * LTV_MESES;
+  const noResp = convos * (1 - pctCont);
+  const clientesHoy = convos * pctCont * pctCierre;
+  const clientesPerdidos = noResp * pctCierre;
+  const dineroPerdido3m = clientesPerdidos * ltv;
+
+  const convosAgente = convos * PCT_AGENTE;
+  const clientesAgente = convosAgente * pctCierre;
+  const extraClientes = Math.max(0, clientesAgente - clientesHoy);
+  const extraMes = extraClientes * precio;
+  const extraLtv = extraClientes * ltv;
+
+  const plan = convos <= PLANES.starter.limite ? PLANES.starter : PLANES.pro;
+  const sociosNec = precio > 0 ? Math.ceil(plan.precio / precio) : 0;
+  const multiplicador = plan.precio > 0 ? extraMes / plan.precio : 0;
+
+  $id("outNoResp").textContent = fmtNum(noResp);
+  $id("outClientesPerdidos").textContent = fmtNum(clientesPerdidos);
+  $id("outLtv").textContent = fmtMoney(ltv);
+  $id("outDineroPerdido").textContent = fmtMoney(dineroPerdido3m);
+  $id("outConversAgente").textContent = fmtNum(convosAgente);
+  $id("outExtraClientes").textContent = fmtNum(extraClientes);
+  $id("outExtraMes").textContent = fmtMoney(extraMes);
+  $id("outExtraLtv").textContent = fmtMoney(extraLtv);
+  $id("outSociosNec").textContent = sociosNec + (sociosNec === 1 ? " cliente nuevo" : " clientes nuevos");
+  $id("outSociosGain").textContent = fmtNum(extraClientes);
+  $id("outPlanPrecio").textContent = fmtMoney(plan.precio);
+  $id("outIngresoMes").textContent = fmtMoney(extraMes);
+  $id("outMultiplicador").textContent = multiplicador >= 1 ? multiplicador.toFixed(1).replace(/\.0$/,"") + "×" : "—";
+  $id("outPlanNombre").textContent = plan.nombre;
+  $id("outPlanPrecioTag").textContent = plan.precioTag;
+  $id("outPlanFeats").innerHTML = plan.feats.map(f => `<li>${f}</li>`).join("");
+}
+
+["precio","convos","pctContesta","pctCierre"].forEach(id => {
+  $id(id).addEventListener("input", calc);
+});
+calc();
+</script>
+</body>
+</html>
