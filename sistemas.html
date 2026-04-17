@@ -181,8 +181,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
   /* Nav */
   .nav-back{display:none;}
 
-  /* Hero */
-  #hero{min-height:0!important;padding:80px 0 40px!important;}
+  /* Hero - SAFARI FIX */
+  #hero{display:block!important;min-height:0!important;padding:80px 0 40px!important;}
 
   /* Sections padding - not hero */
   section:not(#hero){padding:60px 0!important;}
@@ -557,7 +557,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;background:rg
 
     <!-- Sub-tabs -->
     <div style="display:flex;gap:0;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:28px;overflow-x:auto;" class="reveal">
-      <button class="rest-subtab active" onclick="showRestTab('ventas',this)" style="flex:1;min-width:150px;padding:12px 16px;background:rgba(200,170,128,.1);border:none;border-right:1px solid var(--border);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-align:center;white-space:nowrap;">
+      <button class="rest-subtab active" onclick="showRestTab('ventas',this)" style="flex:1;min-width:140px;padding:12px 14px;background:rgba(200,170,128,.1);border:none;border-right:1px solid var(--border);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;text-align:center;white-space:nowrap;">
         🍽️ Ventas
       </button>
       <button class="rest-subtab" onclick="showRestTab('inventario',this)" style="flex:1;min-width:150px;padding:12px 16px;background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;text-align:center;white-space:nowrap;">
